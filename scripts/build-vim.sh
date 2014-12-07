@@ -1,7 +1,7 @@
 #!/bin/sh
 REV=$1
-PYTHON1=$1
-PYTHON2=$2
+PYTHON1=$2
+PYTHON2=$3
 . scripts/common/main.sh
 if test -z "$PYTHON1" ; then
 	SUBDIR="${REV}-$PYTHON_VERSION"
