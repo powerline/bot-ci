@@ -14,6 +14,10 @@ tar czvf cpython-ucs2/cpython-ucs2-${REV}.tar.gz -C /opt cpython-ucs2-$REV
 git add cpython-ucs2/cpython-ucs2-${REV}.tar.gz
 git commit -m "Add ucs2 cpython build
 
+python --version:
+
+$(env LD_LIBRARY_PATH=/opt/cpython-ucs2-$REV/lib /opt/cpython-ucs2-$REV/bin/python --version)
+
 hg tip:
 
-$(hg tip -R $ROOT/deps/cpython-ucs2 | sed 's/^/    /')"
+$(hg tip -R $ROOT/build/cpython-ucs2/$REV | sed 's/^/    /')"
