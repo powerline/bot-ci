@@ -7,6 +7,7 @@ SUBDIR="${REV}-$PYTHON_VERSION"
 if ! test -d build/vim-repo ; then
 	hg clone https://vim.googlecode.com/hg --noupdate build/vim-repo
 fi
+unset CFLAGS PROFILE_CFLAGS POST_DEFS CCC
 mkdir -p build/vim/$SUBDIR
 mkdir -p deps/vim/$SUBDIR
 cd build/vim/$SUBDIR
