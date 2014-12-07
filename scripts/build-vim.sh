@@ -3,7 +3,11 @@ REV=$1
 PYTHON1=$1
 PYTHON2=$2
 . scripts/common/main.sh
-SUBDIR="${REV}-$PYTHON_VERSION"
+if test -z "$PYTHON1" ; then
+	SUBDIR="${REV}-$PYTHON_VERSION"
+else
+	SUBDIR="${REV}-$PYTHON1-$PYTHON2"
+fi
 if ! test -d build/vim-repo ; then
 	hg clone https://vim.googlecode.com/hg --noupdate build/vim-repo
 fi
