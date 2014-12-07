@@ -1,5 +1,7 @@
 #!/bin/sh
 REV=$1
+PYTHON1=$1
+PYTHON2=$2
 . scripts/common/main.sh
 SUBDIR="${REV}-$PYTHON_VERSION"
 if ! test -d build/vim-repo ; then
@@ -11,10 +13,19 @@ cd build/vim/$SUBDIR
 hg clone $ROOT/build/vim-repo -r $REV -u $REV vim
 cd vim
 CFGARGS="--with-features=NORMAL --disable-gui"
-if test "$PYTHON_VERSION_MAJOR" -ge 3 ; then
-	CFGARGS="$CFGARGS --enable-python3interp"
+if test -z "$PYTHON1" ; then
+	if test "$PYTHON_VERSION_MAJOR" -ge 3 ; then
+		CFGARGS="$CFGARGS --enable-python3interp"
+	else
+		CFGARGS="$CFGARGS --enable-pythoninterp"
+	fi
 else
-	CFGARGS="$CFGARGS --enable-pythoninterp"
+	PY1PATH=/opt/cpython-ucs2-$PYTHON1
+	PY2PATH=/opt/cpython-ucs2-$PYTHON2
+	export LD_LIBRARY_PATH=$PY1PATH/lib:$PY2PATH/lib
+	export PATH="$PY1PATH/bin:$PY2PATH/bin:$PATH"
+	CFGARGS="$CFGARGS --enable-python3interp=dynamic"
+	CFGARGS="$CFGARGS --enable-pythoninterp=dynamic"
 fi
 ./configure $CFGARGS
 make

@@ -41,4 +41,5 @@ matrix:
               SCRIPT1="./scripts/build-ucs2-cpython.sh 2.6"
               SCRIPT2="./scripts/build-ucs2-cpython.sh 2.7"
               SCRIPT3="./scripts/build-ucs2-cpython.sh 3.2"
+              SCRIPT4="./scritps/build-vim.sh tip 2.6 3.2"
 # vim: noet ts=4 sts=4 sw=4 ft=yaml
