@@ -17,23 +17,28 @@ matrix:
               SCRIPT1="./scripts/create-wheels.sh"
               SCRIPT2="./scripts/build-vim.sh v7-0-112"
               SCRIPT3="./scripts/build-vim.sh tip"
+              SCRIPT4="./scripts/build-zsh-and-zpython.sh"
         - python: "2.7"
           env: >-
               SCRIPT1="./scripts/create-wheels.sh"
               SCRIPT2="./scripts/build-vim.sh v7-0-112"
               SCRIPT3="./scripts/build-vim.sh tip"
+              SCRIPT4="./scripts/build-zsh-and-zpython.sh"
         - python: "3.2"
           env: >-
               SCRIPT1="./scripts/create-wheels.sh"
               SCRIPT2="./scripts/build-vim.sh tip"
+              SCRIPT3="./scripts/build-zsh-and-zpython.sh"
         - python: "3.3"
           env: >-
               SCRIPT1="./scripts/create-wheels.sh"
               SCRIPT2="./scripts/build-vim.sh tip"
+              SCRIPT3="./scripts/build-zsh-and-zpython.sh"
         - python: "3.4"
           env: >-
               SCRIPT1="./scripts/create-wheels.sh"
               SCRIPT2="./scripts/build-vim.sh tip"
+              SCRIPT3="./scripts/build-zsh-and-zpython.sh"
         - python: "pypy"
           env: >-
               SCRIPT1="./scripts/create-wheels.sh"
