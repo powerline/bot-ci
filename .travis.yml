@@ -2,11 +2,49 @@ os:
     - linux
 language:
     - python
-python:
-    - "3.4"
-    - "3.3"
-    - "3.2"
-    - "2.7"
-    - "2.6"
-script: ./check.sh
+before_install:
+    - openssl aes-256-cbc -K $encrypted_9875d026deea_key -iv $encrypted_9875d026deea_iv -in keys/id_rsa.enc -out keys/id_rsa -d
+install:
+    - ./scripts/install.sh
+script:
+    - ./scripts/build.sh
+after_success:
+    - ./scripts/deploy.sh
+matrix:
+    include:
+        - python: "2.6"
+          env: >-
+              SCRIPT1="./scripts/create-wheels.sh"
+              SCRIPT2="./scripts/build-vim.sh v7-0-112"
+              SCRIPT3="./scripts/build-vim.sh tip"
+              SCRIPT4="./scripts/build-zsh-and-zpython.sh"
+        - python: "2.7"
+          env: >-
+              SCRIPT1="./scripts/create-wheels.sh"
+              SCRIPT2="./scripts/build-vim.sh v7-0-112"
+              SCRIPT3="./scripts/build-vim.sh tip"
+              SCRIPT4="./scripts/build-zsh-and-zpython.sh"
+        - python: "3.2"
+          env: >-
+              SCRIPT1="./scripts/create-wheels.sh"
+              SCRIPT2="./scripts/build-vim.sh tip"
+              SCRIPT3="./scripts/build-zsh-and-zpython.sh"
+        - python: "3.3"
+          env: >-
+              SCRIPT1="./scripts/create-wheels.sh"
+              SCRIPT2="./scripts/build-vim.sh tip"
+              SCRIPT3="./scripts/build-zsh-and-zpython.sh"
+        - python: "3.4"
+          env: >-
+              SCRIPT1="./scripts/create-wheels.sh"
+              SCRIPT2="./scripts/build-vim.sh tip"
+              SCRIPT3="./scripts/build-zsh-and-zpython.sh"
+        - python: "pypy"
+          env: >-
+              SCRIPT1="./scripts/create-wheels.sh"
+        - env: >-
+              SCRIPT1="./scripts/build-ucs2-cpython.sh 2.6"
+              SCRIPT2="./scripts/build-ucs2-cpython.sh 2.7"
+              SCRIPT3="./scripts/build-ucs2-cpython.sh 3.2"
+              SCRIPT4="./scritps/build-vim.sh tip 2.6 3.2"
 # vim: noet ts=4 sts=4 sw=4 ft=yaml
