@@ -4,7 +4,7 @@ mkdir -p build/zpython
 mkdir -p deps/zpython
 cd build/zpython
 hg clone https://bitbucket.org/ZyX_I/zpython
-git clone git://git.code.sf.net/p/zsh/code zsh
+git clone --depth=1 git://git.code.sf.net/p/zsh/code zsh
 cd zsh
 ./.preconfig
 ./configure --prefix=/opt/zsh-${PYTHON_VERSION}
