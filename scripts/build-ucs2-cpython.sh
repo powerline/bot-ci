@@ -16,7 +16,7 @@ git commit -m "Add ucs2 cpython build
 
 python --version:
 
-$(env LD_LIBRARY_PATH=/opt/cpython-ucs2-$REV/lib /opt/cpython-ucs2-$REV/bin/python --version)
+$(env LD_LIBRARY_PATH=/opt/cpython-ucs2-$REV/lib /opt/cpython-ucs2-$REV/bin/python --version 2>&1)
 
 hg tip:
 
