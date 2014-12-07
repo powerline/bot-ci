@@ -18,17 +18,20 @@ cd ../zpython
 mkdir build
 cd build
 LIBRARY_PATH="$(ldd "$(which python)" | grep libpython | sed 's/^.* => //;s/ .*$//')"
+LIBRARY_DIR="$(dirname "${LIBRARY_PATH}")"
 LIBPYTHON_NAME="$(basename "${LIBRARY_PATH}")"
 PYTHON_SUFFIX="$(echo "${LIBPYTHON_NAME}" | sed -r 's/^libpython(.*)\.so.*$/\1/')"
-PYTHON_INCLUDE_DIR="$(dirname "$(dirname "${LIBRARY_PATH}")")/include/python$PYTHON_SUFFIX"
+PYTHON_INCLUDE_DIR="$(dirname "${LIBRARY_DIR}")/include/python$PYTHON_SUFFIX"
+
+export LD_LIBRARY_PATH="${LIBRARY_DIR}:$LD_LIBRARY_PATH"
+
 cmake .. -DZSH_REPOSITORY="${ROOT}/build/zpython/zsh" \
          -DPYTHON_LIBRARY="$LIBRARY_PATH" \
          -DPYTHON_INCLUDE_DIR="${PYTHON_INCLUDE_DIR}"
 make
-ls -lA .
 ldd libzpython.so
-sudo make install
 ctest -VV
+sudo make install
 tar czvf ${ROOT}/deps/zpython/zsh-${PYTHON_VERSION}.tar.gz -C /opt zsh-${PYTHON_VERSION}
 cd ${ROOT}/deps
 git add zpython/zsh-${PYTHON_VERSION}.tar.gz
