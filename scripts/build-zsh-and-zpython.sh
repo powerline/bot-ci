@@ -25,7 +25,7 @@ cmake .. -DZSH_REPOSITORY="${ROOT}/build/zpython/zsh" \
          -DPYTHON_LIBRARY="$LIBRARY_PATH" \
          -DPYTHON_INCLUDE_DIR="${PYTHON_INCLUDE_DIR}"
 make
-make test
+ctest -VV
 sudo make install
 tar czvf ${ROOT}/deps/zpython/zsh-${PYTHON_VERSION}.tar.gz -C /opt zsh-${PYTHON_VERSION}
 cd ${ROOT}/deps
