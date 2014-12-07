@@ -29,7 +29,7 @@ else
 	CFGARGS="$CFGARGS --enable-pythoninterp=dynamic"
 fi
 ./configure $CFGARGS
-make --no-builtin-rules --no-builtin-variables
+make EXTRA_DEFS=-Wno-error=format-security --no-builtin-rules --no-builtin-variables
 cp src/vim $ROOT/deps/vim/$SUBDIR/vim
 cd $ROOT/deps
 git add vim/$SUBDIR/vim
