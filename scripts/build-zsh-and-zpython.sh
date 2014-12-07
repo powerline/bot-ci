@@ -42,7 +42,7 @@ $(/opt/zsh-${PYTHON_VERSION}/bin/zsh -c 'zmodload libzpython; zpython "import sy
 
 (zsh) git head:
 
-$(cd "${ROOT}/build/zpython/zsh" && git show HEAD)
+$(cd "${ROOT}/build/zpython/zsh" && git show --no-patch HEAD)
 
 (zpython) hg tip:
 
