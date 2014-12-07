@@ -21,9 +21,9 @@ cmake .. -DZSH_REPOSITORY="${ROOT}/build/zpython/zsh"
 make
 make test
 sudo make install
-tar czvf ${ROOT}/deps/zpython/zsh-${REV}.tar.gz -C /opt zsh-${PYTHON_VERSION}
+tar czvf ${ROOT}/deps/zpython/zsh-${PYTHON_VERSION}.tar.gz -C /opt zsh-${PYTHON_VERSION}
 cd ${ROOT}/deps
-git add zpython/zsh-${REV}.tar.gz
+git add zpython/zsh-${PYTHON_VERSION}.tar.gz
 git commit -m "Add zsh
 
 zsh --version:
