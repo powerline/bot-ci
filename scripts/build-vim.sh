@@ -10,7 +10,13 @@ mkdir -p deps/vim/$SUBDIR
 cd build/vim/$SUBDIR
 hg clone $ROOT/build/vim-repo -r $REV -u $REV vim
 cd vim
-./configure --with-features=NORMAL --enable-pythoninterp --disable-gui
+CFGARGS="--with-features=NORMAL --disable-gui"
+if test "$PYTHON_VERSION_MAJOR" -ge 3 ; then
+	CFGARGS="$CFGARGS --enable-python3interp"
+else
+	CFGARGS="$CFGARGS --enable-pythoninterp"
+fi
+./configure $CFGARGS
 make
 cp src/vim $ROOT/deps/vim/$SUBDIR/vim
 cd $ROOT/deps
