@@ -2,18 +2,13 @@ os:
     - linux
 language:
     - python
-before_install:
-    - openssl aes-256-cbc -K $encrypted_9875d026deea_key -iv $encrypted_9875d026deea_iv -in keys/id_rsa.enc -out keys/id_rsa -d
-install:
-    - ./scripts/install.sh
 script:
     - ./scripts/build.sh
-after_success:
-    - ./scripts/deploy.sh
 matrix:
     include:
         - python: "3.4"
           env: >-
-              SCRIPT1="ldd $(which python)"
-              SCRIPT2="env"
+              SCRIPT1="ls -lA /opt/python/*/lib"
+              SCRIPT2="ls -lA /opt/python/*/include"
+              SCRIPT3="ls -lAR /opt/python/*/include"
 # vim: noet ts=4 sts=4 sw=4 ft=yaml
