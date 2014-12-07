@@ -17,7 +17,9 @@ sudo make install || true
 cd ../zpython
 mkdir build
 cd build
-cmake .. -DZSH_REPOSITORY="${ROOT}/build/zpython/zsh" -DPYTHON_EXECUTABLE:FILEPATH="$(which python)"
+cmake .. -DZSH_REPOSITORY="${ROOT}/build/zpython/zsh" \
+         -DPYTHON_LIBRARY="$(dirname "$(which python)")/../lib/libpython${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}.so" \
+         -DPYTHON_INCLUDE_DIR="$(dirname "$(which python)")/../include/python${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}"
 make
 make test
 sudo make install
