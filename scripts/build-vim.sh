@@ -10,7 +10,7 @@ mkdir -p deps/vim/$SUBDIR
 cd build/vim/$SUBDIR
 hg clone $ROOT/build/vim-repo -r $REV -u $REV vim
 cd vim
-./configure --with-features=NORMAL --enable-pythoninterp
+./configure --with-features=NORMAL --enable-pythoninterp --disable-gui
 make
 cp src/vim $ROOT/deps/vim/$SUBDIR/vim
 cd $ROOT/deps
