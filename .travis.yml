@@ -30,7 +30,7 @@ matrix:
           env: >-
               SCRIPT1="./scripts/create-wheels.sh"
               SCRIPT2="./scripts/build-vim.sh tip"
-        - python: "3.3"
+        - python: "3.4"
           env: >-
               SCRIPT1="./scripts/create-wheels.sh"
               SCRIPT2="./scripts/build-vim.sh tip"
