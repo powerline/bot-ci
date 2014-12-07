@@ -17,9 +17,13 @@ sudo make install || true
 cd ../zpython
 mkdir build
 cd build
+LIBRARY_PATH="$(ldd "$(which python)" | grep libpython | sed 's/^.* => //;s/ .*$//')"
+LIBPYTHON_NAME="$(basename "${LIBRARY_PATH}")"
+PYTHON_SUFFIX="$(echo "${LIBPYTHON_NAME}" | sed -r 's/^libpython(.*)\.so.*$/\1/')"
+PYTHON_INCLUDE_DIR="$(dirname "$(dirname "${LIBRARY_PATH}")")/include/python$PYTHON_SUFFIX"
 cmake .. -DZSH_REPOSITORY="${ROOT}/build/zpython/zsh" \
-         -DPYTHON_LIBRARY="/opt/python/${PYTHON_VERSION}/libpython${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}.so" \
-         -DPYTHON_INCLUDE_DIR="/opt/python/${PYTHON_VERSION}/include/python${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}"
+         -DPYTHON_LIBRARY="$LIBRARY_PATH" \
+         -DPYTHON_INCLUDE_DIR="${PYTHON_INCLUDE_DIR}"
 make
 make test
 sudo make install
