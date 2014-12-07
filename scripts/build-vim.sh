@@ -37,7 +37,7 @@ make EXTRA_DEFS=-Wno-error=format-security --no-builtin-rules --no-builtin-varia
 cp src/vim $ROOT/deps/vim/$SUBDIR/vim
 cd $ROOT/deps
 git add vim/$SUBDIR/vim
-git commit -m "Built vim
+git commit -m "Update vim for $SUBDIR
 
 hg tip:
 

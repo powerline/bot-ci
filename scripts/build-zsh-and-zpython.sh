@@ -35,7 +35,7 @@ sudo make install
 tar czvf ${ROOT}/deps/zpython/zsh-${PYTHON_VERSION}.tar.gz -C /opt zsh-${PYTHON_VERSION}
 cd ${ROOT}/deps
 git add zpython/zsh-${PYTHON_VERSION}.tar.gz
-git commit -m "Add zsh
+git commit -m "Update zsh and zpython for $LIBPYTHON_NAME
 
 zsh --version:
 

@@ -12,7 +12,7 @@ sudo make install
 cd $ROOT/deps
 tar czvf cpython-ucs2/cpython-ucs2-${REV}.tar.gz -C /opt cpython-ucs2-$REV
 git add cpython-ucs2/cpython-ucs2-${REV}.tar.gz
-git commit -m "Add ucs2 cpython build
+git commit -m "Update ucs2 cpython-$REV build
 
 python --version:
 

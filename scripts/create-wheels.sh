@@ -24,6 +24,6 @@ else
 fi
 pip wheel --wheel-dir . $WHEEL_ARGS
 git add .
-git commit . -m "Create Python wheels for $PYTHON_IMPLEMENTATION version $PYTHON_VERSION
+git commit . -m "Update Python wheels for $PYTHON_IMPLEMENTATION version $PYTHON_VERSION
 
 WHEEL_ARGS='$WHEEL_ARGS'"
