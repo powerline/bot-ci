@@ -2,7 +2,7 @@
 . scripts/common/main.sh
 PYTHON_SUFFIX="${PYTHON_IMPLEMENTATION}-${PYTHON_VERSION}"
 if test -d deps/wheels/$PYTHON_SUFFIX ; then
-	git rm -r deps/wheels/$PYTHON_SUFFIX
+	(cd deps && git rm -r wheels/$PYTHON_SUFFIX)
 fi
 mkdir -p deps/wheels/$PYTHON_SUFFIX
 cd deps/wheels/$PYTHON_SUFFIX
