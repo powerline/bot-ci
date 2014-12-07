@@ -12,33 +12,13 @@ after_success:
     - ./scripts/deploy.sh
 matrix:
     include:
-        - python: "2.6"
-          env: >-
-              SCRIPT1="./scripts/create-wheels.sh"
-              SCRIPT2="./scripts/build-vim.sh v7-0-112"
-              SCRIPT3="./scripts/build-vim.sh tip"
-        - python: "2.7"
-          env: >-
-              SCRIPT1="./scripts/create-wheels.sh"
-              SCRIPT2="./scripts/build-vim.sh v7-0-112"
-              SCRIPT3="./scripts/build-vim.sh tip"
         - python: "3.2"
           env: >-
-              SCRIPT1="./scripts/create-wheels.sh"
-              SCRIPT2="./scripts/build-vim.sh tip"
+              SCRIPT1="./scripts/build-vim.sh tip"
         - python: "3.3"
           env: >-
-              SCRIPT1="./scripts/create-wheels.sh"
-              SCRIPT2="./scripts/build-vim.sh tip"
+              SCRIPT1="./scripts/build-vim.sh tip"
         - python: "3.4"
           env: >-
-              SCRIPT1="./scripts/create-wheels.sh"
-              SCRIPT2="./scripts/build-vim.sh tip"
-        - python: "pypy"
-          env: >-
-              SCRIPT1="./scripts/create-wheels.sh"
-        - env: >-
-              SCRIPT1="./scripts/build-ucs2-cpython.sh 2.6"
-              SCRIPT2="./scripts/build-ucs2-cpython.sh 2.7"
-              SCRIPT3="./scripts/build-ucs2-cpython.sh 3.2"
+              SCRIPT1="./scripts/build-vim.sh tip"
 # vim: noet ts=4 sts=4 sw=4 ft=yaml
