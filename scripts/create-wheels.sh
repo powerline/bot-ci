@@ -1,11 +1,11 @@
 #!/bin/sh
 . scripts/common/main.sh
 PYTHON_SUFFIX="${PYTHON_IMPLEMENTATION}-${PYTHON_VERSION}"
-if test -d deps/wheels-$PYTHON_SUFFIX ; then
-	git rm -r deps/wheels-$PYTHON_SUFFIX
+if test -d deps/wheels/$PYTHON_SUFFIX ; then
+	git rm -r deps/wheels/$PYTHON_SUFFIX
 fi
-mkdir -p deps/wheels-$PYTHON_SUFFIX
-cd deps/wheels-$PYTHON_SUFFIX
+mkdir -p deps/wheels/$PYTHON_SUFFIX
+cd deps/wheels/$PYTHON_SUFFIX
 sudo pip install wheel
 WHEEL_ARGS="psutil netifaces"
 if test "$PYTHON_VERSION_MAJOR" -eq 2 ; then
@@ -22,8 +22,8 @@ else
 		WHEEL_ARGS="${WHEEL_ARGS} ipython"
 	fi
 fi
-pip wheel $WHEEL_ARGS
-git add wheelhouse
-git commit wheelhouse -m "Create Python wheels for $PYTHON_IMPLEMENTATION version $PYTHON_VERSION
+pip wheel --wheel-dir . $WHEEL_ARGS
+git add .
+git commit . -m "Create Python wheels for $PYTHON_IMPLEMENTATION version $PYTHON_VERSION
 
 WHEEL_ARGS='$WHEEL_ARGS'"
