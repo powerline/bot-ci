@@ -1,6 +1,6 @@
 #!/bin/sh
-. scripts/common/main.sh
 REV=$1
+. scripts/common/main.sh
 mkdir -p build/cpython-ucs2
 mkdir -p deps/cpython-ucs2
 cd build/cpython-ucs2

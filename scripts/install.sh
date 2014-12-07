@@ -8,3 +8,4 @@ git clone ssh://git@github.com/powerline/deps
 
 git config --global user.name 'Travis CI bot'
 git config --global user.email 'bot@example.com'
+git config --global push.default simple

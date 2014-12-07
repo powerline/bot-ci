@@ -1,6 +1,6 @@
 #!/bin/sh
-. scripts/common/main.sh
 REV=$1
+. scripts/common/main.sh
 SUBDIR="${REV}-$PYTHON_VERSION"
 if ! test -d build/vim-repo ; then
 	hg clone https://vim.googlecode.com/hg --noupdate build/vim-repo
