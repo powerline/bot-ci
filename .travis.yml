@@ -14,5 +14,6 @@ matrix:
     include:
         - python: "3.4"
           env: >-
-              SCRIPT1="ls -lAR $HOME/virtualenv"
+              SCRIPT1="ldd $(which python)"
+              SCRIPT2="env"
 # vim: noet ts=4 sts=4 sw=4 ft=yaml
