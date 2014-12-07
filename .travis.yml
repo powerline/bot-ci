@@ -36,9 +36,9 @@ matrix:
               SCRIPT3="./scripts/create-wheels.sh"
         - python: "3.4"
           env: >-
-              SCRIPT1="./scripts/create-wheels.sh"
+              SCRIPT1="./scripts/build-zsh-and-zpython.sh"
               SCRIPT2="./scripts/build-vim.sh tip"
-              SCRIPT3="./scripts/build-zsh-and-zpython.sh"
+              SCRIPT3="./scripts/create-wheels.sh"
         - python: "pypy"
           env: >-
               SCRIPT1="./scripts/create-wheels.sh"
