@@ -2,13 +2,11 @@ os:
     - linux
 language:
     - python
-script:
-    - ./scripts/build.sh
-matrix:
-    include:
-        - python: "3.4"
-          env: >-
-              SCRIPT1="ls -lA /opt/python/*/lib"
-              SCRIPT2="ls -lA /opt/python/*/include"
-              SCRIPT3="ls -lAR /opt/python/*/include"
+python:
+    - "3.4"
+    - "3.3"
+    - "3.2"
+    - "2.7"
+    - "2.6"
+script: ./check.sh
 # vim: noet ts=4 sts=4 sw=4 ft=yaml
