@@ -18,7 +18,7 @@ git commit -m "Update ucs2 cpython-$REV build
 
 python --version:
 
-$(env LD_LIBRARY_PATH=/opt/cpython-ucs2-$REV/lib /opt/cpython-ucs2-$REV/bin/python$REV --version 2>&1)
+$(env LD_LIBRARY_PATH=/opt/cpython-ucs2-$REV/lib /opt/cpython-ucs2-$REV/bin/python$REV --version 2>&1 | indent)
 
 hg tip:
 
