@@ -35,6 +35,8 @@ fi
 if echo "$REV" | grep -q v7-0 ; then
 	# With -O2 Vim is crashing
 	export CFLAGS='-O0 -g'
+else
+	CFGARGS="$CFGARGS --enable-rubyinterp"
 fi
 ./configure $CFGARGS
 make EXTRA_DEFS=-Wno-error=format-security --no-builtin-rules --no-builtin-variables
