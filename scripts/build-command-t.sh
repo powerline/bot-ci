@@ -8,7 +8,7 @@ git clone --depth=1 https://github.com/wincent/Command-T command-t
 
 cd command-t
 cd ruby/command-t
-ruby extconfig.rb
+ruby extconf.rb
 make
 
 cd ../..
