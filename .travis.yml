@@ -42,6 +42,9 @@ matrix:
         - python: "pypy"
           env: >-
               SCRIPT1="./scripts/create-wheels.sh"
+        - python: "pypy3"
+          env: >-
+              SCRIPT1="./scripts/create-wheels.sh"
         - env: >-
               SCRIPT1="./scripts/build-vim.sh tip 2.6 3.2"
               SCRIPT2="./scripts/build-ucs2-cpython.sh 2.6"
