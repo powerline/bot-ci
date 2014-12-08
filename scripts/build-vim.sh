@@ -17,7 +17,7 @@ mkdir -p deps/vim/$SUBDIR
 cd build/vim/$SUBDIR
 hg clone $ROOT/build/vim-repo -r $REV -u $REV vim
 cd vim
-CFGARGS="--with-features=normal --disable-gui"
+CFGARGS="--with-features=normal --without-x --disable-gui"
 if test -z "$PYTHON1" ; then
 	if test "$PYTHON_VERSION_MAJOR" -ge 3 ; then
 		CFGARGS="$CFGARGS --enable-python3interp"
