@@ -13,3 +13,7 @@ PYTHON_SUFFIX="${PYTHON_IMPLEMENTATION}-${PYTHON_VERSION}"
 ROOT="${PWD:-$(pwd)}"
 
 BRANCH_NAME="travis-${TRAVIS_JOB_NUMBER}"
+
+indent() {
+	sed 's/^/    /'
+}

@@ -39,16 +39,16 @@ git commit -m "Update zsh and zpython for $LIBPYTHON_NAME
 
 zsh --version:
 
-$(/opt/zsh-${PYTHON_VERSION}/bin/zsh --version | sed 's/^/    /')
+$(/opt/zsh-${PYTHON_VERSION}/bin/zsh --version | indent)
 
 python version:
 
-$(/opt/zsh-${PYTHON_VERSION}/bin/zsh -c 'zmodload libzpython; zpython "import sys; print(sys.version)"' | sed 's/^/    /')
+$(/opt/zsh-${PYTHON_VERSION}/bin/zsh -c 'zmodload libzpython; zpython "import sys; print(sys.version)"' | indent)
 
 (zsh) git head:
 
-$(cd "${ROOT}/build/zpython/zsh" && git show --no-patch HEAD | sed 's/^/    /')
+$(cd "${ROOT}/build/zpython/zsh" && git show --no-patch HEAD | indent)
 
 (zpython) hg tip:
 
-$(hg tip -R "${ROOT}/build/zpython/zpython" | sed 's/^/    /')"
+$(hg tip -R "${ROOT}/build/zpython/zpython" | indent)"

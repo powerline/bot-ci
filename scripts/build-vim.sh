@@ -49,8 +49,8 @@ git commit -m "Update vim for $SUBDIR
 
 hg tip:
 
-$(hg tip -R "$ROOT/build/vim/$SUBDIR/vim" | sed 's/^/    /')
+$(hg tip -R "$ROOT/build/vim/$SUBDIR/vim" | indent)
 
 vim --version:
 
-$("$ROOT/deps/vim/$SUBDIR/vim" --version | sed 's/^/    /')"
+$("$ROOT/deps/vim/$SUBDIR/vim" --version | indent)"

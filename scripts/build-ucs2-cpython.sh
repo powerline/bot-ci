@@ -22,4 +22,4 @@ $(env LD_LIBRARY_PATH=/opt/cpython-ucs2-$REV/lib /opt/cpython-ucs2-$REV/bin/pyth
 
 hg tip:
 
-$(hg tip -R $ROOT/build/cpython-ucs2/$REV | sed 's/^/    /')"
+$(hg tip -R $ROOT/build/cpython-ucs2/$REV | indent)"
