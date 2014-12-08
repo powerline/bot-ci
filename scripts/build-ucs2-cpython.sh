@@ -9,6 +9,8 @@ cd $REV
 ./configure --enable-unicode=ucs2 --prefix=/opt/cpython-ucs2-$REV --enable-shared
 make
 sudo make install
+# Sanity check: run python --version, fail build if it fails
+/opt/cpython-ucs2-$REV/bin/python$REV --version
 cd $ROOT/deps
 tar czvf cpython-ucs2/cpython-ucs2-${REV}.tar.gz -C /opt cpython-ucs2-$REV
 git add cpython-ucs2/cpython-ucs2-${REV}.tar.gz
@@ -16,7 +18,7 @@ git commit -m "Update ucs2 cpython-$REV build
 
 python --version:
 
-$(env LD_LIBRARY_PATH=/opt/cpython-ucs2-$REV/lib /opt/cpython-ucs2-$REV/bin/python --version 2>&1)
+$(env LD_LIBRARY_PATH=/opt/cpython-ucs2-$REV/lib /opt/cpython-ucs2-$REV/bin/python$REV --version 2>&1)
 
 hg tip:
 

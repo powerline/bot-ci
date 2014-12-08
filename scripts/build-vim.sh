@@ -32,10 +32,16 @@ else
 	CFGARGS="$CFGARGS --enable-python3interp=dynamic"
 	CFGARGS="$CFGARGS --enable-pythoninterp=dynamic"
 fi
+if echo "$REV" | grep -q v7-0 ; then
+	# With -O2 Vim is crashing
+	export CFLAGS='-O0 -g'
+fi
 ./configure $CFGARGS
 make EXTRA_DEFS=-Wno-error=format-security --no-builtin-rules --no-builtin-variables
 cp src/vim $ROOT/deps/vim/$SUBDIR/vim
 cd $ROOT/deps
+# Try running vim --version, fail build if it fails
+vim/$SUBDIR/vim --version
 git add vim/$SUBDIR/vim
 git commit -m "Update vim for $SUBDIR
 
