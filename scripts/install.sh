@@ -1,6 +1,5 @@
 #!/bin/sh
 . scripts/common/main.sh
-sudo apt-get install mercurial
 
 chmod 0600 keys/id_rsa
 cp keys/id_rsa ~/.ssh
