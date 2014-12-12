@@ -11,7 +11,9 @@ fi
 if ! test -d build/vim-repo ; then
 	hg clone https://vim.googlecode.com/hg --noupdate build/vim-repo
 fi
-unset CFLAGS PROFILE_CFLAGS POST_DEFS CCC
+# PYTHON_CFLAGS contains -Werror=format-security. Old vim cannot be built with 
+# this.
+unset PYTHON_CFLAGS
 mkdir -p build/vim/$SUBDIR
 mkdir -p deps/vim/$SUBDIR
 cd build/vim/$SUBDIR
@@ -39,7 +41,7 @@ else
 	CFGARGS="$CFGARGS --enable-rubyinterp"
 fi
 ./configure $CFGARGS
-make EXTRA_DEFS=-Wno-error=format-security --no-builtin-rules --no-builtin-variables
+make
 cp src/vim $ROOT/deps/vim/$SUBDIR/vim
 cd $ROOT/deps
 # Try running vim --version, fail build if it fails
