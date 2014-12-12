@@ -1,7 +1,7 @@
 #!/bin/sh
 . scripts/common/main.sh
 
-apt-get install -qq bzr
+sudo apt-get install -qq bzr
 
 chmod 0600 keys/id_rsa
 cp keys/id_rsa ~/.ssh
