@@ -46,10 +46,11 @@ matrix:
           env: >-
               SCRIPT1="./scripts/create-wheels.sh"
         - env: >-
-              SCRIPT1="./scripts/build-command-t.sh"
-              SCRIPT2="./scripts/archive-plugins.sh"
-              SCRIPT3="./scripts/build-vim.sh tip 2.6 3.2"
-              SCRIPT4="./scripts/build-ucs2-cpython.sh 2.6"
-              SCRIPT5="./scripts/build-ucs2-cpython.sh 2.7"
-              SCRIPT6="./scripts/build-ucs2-cpython.sh 3.2"
+              SCRIPT1="./scripts/build-libvterm.sh"
+              SCRIPT2="./scripts/build-command-t.sh"
+              SCRIPT3="./scripts/archive-plugins.sh"
+              SCRIPT4="./scripts/build-vim.sh tip 2.6 3.2"
+              SCRIPT5="./scripts/build-ucs2-cpython.sh 2.6"
+              SCRIPT6="./scripts/build-ucs2-cpython.sh 2.7"
+              SCRIPT7="./scripts/build-ucs2-cpython.sh 3.2"
 # vim: noet ts=4 sts=4 sw=4 ft=yaml
