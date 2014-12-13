@@ -1,7 +1,15 @@
 #!/bin/sh
 . scripts/common/main.sh
-prepare_build zpython/zsh git git://git.code.sf.net/p/zsh/code
-cd zsh
+UPDATES=0
+prepare_build --always zpython/zsh git git://git.code.sf.net/p/zsh/code
+UPDATES="$(( $VERSION_UPDATED + $UPDATES ))"
+prepare_build --always zpython/zpython mercurial https://bitbucket.org/ZyX_I/zpython
+UPDATES="$(( $VERSION_UPDATED + $UPDATES ))"
+if test $UPDATES -eq 0 ; then
+	exit 0
+fi
+
+cd build/zpython/zsh
 ./.preconfig
 ./configure --prefix=/opt/zsh-${PYTHON_VERSION}
 # Zsh make may fail due to missing yodl
@@ -11,7 +19,6 @@ make || true
 make TESTNUM=A01 test
 sudo make install || true
 
-prepare_build zpython/zpython mercurial https://bitbucket.org/ZyX_I/zpython
 cd ../zpython
 mkdir build
 cd build

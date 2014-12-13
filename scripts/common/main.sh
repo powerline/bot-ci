@@ -36,6 +36,11 @@ get_bzr_tip() {
 }
 
 prepare_build() {
+	local always=
+	if test "x$1" = "x--always" ; then
+		always=1
+		shift
+	fi
 	local dir="$1"
 	local vcs="$2"
 	local url="$3"
@@ -65,7 +70,11 @@ prepare_build() {
 			new_version="$(bzr log --limit=1 --show-ids | grep '^revision-id:' | cut -d' ' -f2)"
 			;;
 	esac
+	export VERSION_UPDATED=0
 	if test "$new_version" != "$old_version" ; then
+		export VERSION_UPDATED=1
+	fi
+	if test "$new_version" != "$old_version" || test -n "$always" ; then
 		echo "$new_version" > "$version_file"
 		cd "$ROOT/deps"
 		git add "$version_file"
