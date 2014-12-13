@@ -1,5 +1,6 @@
 #!/bin/sh
 . scripts/common/main.sh
+. scripts/common/build.sh
 
 prepare_build vim-plugins/command-t git https://github.com/wincent/Command-T
 mkdir -p deps/vim-plugins

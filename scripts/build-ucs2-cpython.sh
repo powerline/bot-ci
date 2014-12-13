@@ -1,6 +1,7 @@
 #!/bin/sh
 REV=$1
 . scripts/common/main.sh
+. scripts/common/build.sh
 
 prepare_build cpython-ucs2/$REV mercurial http://hg.python.org/cpython $REV
 cd build/cpython-ucs2/$REV

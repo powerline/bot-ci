@@ -2,21 +2,28 @@
 REV=$1
 PYTHON1=$2
 PYTHON2=$3
+
 . scripts/common/main.sh
+. scripts/common/build.sh
+
 if test -z "$PYTHON1" ; then
 	SUBDIR="${REV}-$PYTHON_VERSION"
 else
 	SUBDIR="${REV}-$PYTHON1-$PYTHON2"
 fi
+
 if ! test -d build/vim-repo ; then
 	hg clone https://vim.googlecode.com/hg --noupdate build/vim-repo
 fi
+
 prepare_build vim/$SUBDIR mercurial "$ROOT/build/vim-repo" "$REV"
+
 # PYTHON_CFLAGS contains -Werror=format-security. Old vim cannot be built with 
 # this.
 unset PYTHON_CFLAGS
 cd build/vim/$SUBDIR
 cd vim
+
 CFGARGS="--with-features=normal --without-x --disable-gui"
 if test -z "$PYTHON1" ; then
 	if test "$PYTHON_VERSION_MAJOR" -ge 3 ; then
@@ -38,8 +45,10 @@ if echo "$REV" | grep -q v7-0 ; then
 else
 	CFGARGS="$CFGARGS --enable-rubyinterp"
 fi
+
 ./configure $CFGARGS
 make
+
 cp src/vim $ROOT/deps/vim/$SUBDIR/vim
 cd $ROOT/deps
 # Try running vim --version, fail build if it fails

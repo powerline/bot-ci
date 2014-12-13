@@ -1,5 +1,7 @@
 #!/bin/sh
 . scripts/common/main.sh
+. scripts/common/build.sh
+
 UPDATES=0
 prepare_build --always zpython/zsh git git://git.code.sf.net/p/zsh/code
 UPDATES="$(( $VERSION_UPDATED + $UPDATES ))"

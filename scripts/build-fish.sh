@@ -1,5 +1,6 @@
 #!/bin/sh
 . scripts/common/main.sh
+. scripts/common/build.sh
 
 prepare_build fish git https://github.com/fish-shell/fish-shell
 

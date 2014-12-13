@@ -1,5 +1,6 @@
 #!/bin/sh
 . scripts/common/main.sh
+. scripts/common/build.sh
 
 mkdir -p build/vim-plugins
 
