@@ -3,11 +3,8 @@
 . scripts/common/build.sh
 
 prepare_build vim-plugins/command-t git https://github.com/wincent/Command-T
-mkdir -p deps/vim-plugins
-mkdir -p build/vim-plugins
 
 cd build/vim-plugins
-git clone --depth=1 https://github.com/wincent/Command-T command-t
 
 cd command-t/ruby/command-t
 ruby extconf.rb

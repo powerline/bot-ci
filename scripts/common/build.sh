@@ -34,9 +34,8 @@ prepare_build() {
 	local version_file="$ROOT/deps/versions/$(echo "$dir" | sed -r 's/[^A-Za-z0-9-]+/-/g')"
 	if test -e $version_file ; then
 		old_version="$(cat "$version_file")"
-	else
-		mkdir -p $ROOT/deps/$dir
 	fi
+	mkdir -p $ROOT/deps/$dir
 	case $vcs in
 		git)
 			new_version="$(git ls-remote "$url" ${rev:-HEAD} | cut -f1)"
