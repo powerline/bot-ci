@@ -46,10 +46,10 @@ prepare_build() {
 				mkdir -p $ROOT/build
 				hg init $ROOT/build/empty_hg_repository
 			fi
-			new_version="$(hg -R "$ROOT/build/empty_hg_repository" incoming --limit=1 --newest-first --template='{node}' --quiet --rev=${rev:-default})"
+			new_version="$(hg -R "$ROOT/build/empty_hg_repository" incoming --limit=1 --newest-first --template='{node}' --quiet --rev=${rev:-default} "$url")"
 			;;
 		bzr)
-			new_version="$(bzr log --limit=1 --show-ids | grep '^revision-id:' | cut -d' ' -f2)"
+			new_version="$(bzr log --limit=1 --show-ids "$url" | grep '^revision-id:' | cut -d' ' -f2)"
 			;;
 	esac
 	export VERSION_UPDATED=0
