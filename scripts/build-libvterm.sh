@@ -9,8 +9,8 @@ make test
 cp -L .libs/libvterm.so $ROOT/deps/libvterm
 cd $ROOT/deps
 git add libvterm/libvterm.so
-git commit libvterm -m "Update libvterm.so
+git commit libvterm/libvterm.so -m "Update libvterm.so
 
 bzr head:
 
-$(cd $ROOT/build/libvterm && bzr log --limit=1 --show-ids| indent)"
+$(cd $ROOT/build/libvterm && bzr log --limit=1 --show-ids| indent)" || true
