@@ -14,7 +14,7 @@ make
 cd ../..
 mv .git ../.git-command-t
 cd ..
-tar czvf $ROOT/deps/vim-plugins/command-t.tar.gz command-t
+tar czf $ROOT/deps/vim-plugins/command-t.tar.gz command-t
 mv .git-command-t command-t/.git
 
 cd $ROOT/deps

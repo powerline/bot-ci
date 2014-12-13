@@ -13,7 +13,7 @@ make
 ./fish --version
 sudo make install
 
-(cd /opt && tar czvf "$ROOT/deps/fish/fish.tar.gz" fish)
+tar czf "$ROOT/deps/fish/fish.tar.gz" -C /opt fish
 cd "$ROOT/deps"
 git add fish/fish.tar.gz
 git commit fish/fish.tar.gz -m "Update fish

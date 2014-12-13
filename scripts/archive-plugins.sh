@@ -19,7 +19,7 @@ ctrlp     https://github.com/kien/ctrlp.vim
 	mv .git "../.git-${name}"
 	cd ..
 	echo ">>> $name"
-	tar czvf "$ROOT/deps/vim-plugins/${name}.tar.gz" "${name}"
+	tar cvf "$ROOT/deps/vim-plugins/${name}.tar.gz" "${name}"
 	mv ".git-${name}" "${name}/.git"
 	(
 		cd $ROOT/deps

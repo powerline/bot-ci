@@ -12,7 +12,7 @@ sudo make install
 # Sanity check: run python --version, fail build if it fails
 /opt/cpython-ucs2-$REV/bin/python$REV --version
 cd $ROOT/deps
-tar czvf cpython-ucs2/cpython-ucs2-${REV}.tar.gz -C /opt cpython-ucs2-$REV
+tar czf cpython-ucs2/cpython-ucs2-${REV}.tar.gz -C /opt cpython-ucs2-$REV
 git add cpython-ucs2/cpython-ucs2-${REV}.tar.gz
 git commit -m "Update ucs2 cpython-$REV build
 
