@@ -78,7 +78,7 @@ prepare_build() {
 					;;
 			esac
 		)
-		COMMIT_MESSAGE_FOOTER="$COMMIT_MESSAGE_FOOTER$NL$dir tip:$NL$(get_${vcs}_tip "$ROOT/build/$dir" | indent)$NL"
+		COMMIT_MESSAGE_FOOTER="$COMMIT_MESSAGE_FOOTER$NL$dir tip:$NL$NL$(get_${vcs}_tip "$ROOT/build/$dir" | indent)$NL"
 	else
 		exit 0
 	fi
