@@ -22,7 +22,6 @@ prepare_build vim/$SUBDIR mercurial "$ROOT/build/vim-repo" "$REV"
 # this.
 unset PYTHON_CFLAGS
 cd build/vim/$SUBDIR
-cd vim
 
 CFGARGS="--with-features=normal --without-x --disable-gui"
 if test -z "$PYTHON1" ; then
