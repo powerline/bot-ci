@@ -43,7 +43,7 @@ fi
 
 cd $ROOT/deps/wheels/$PYTHON_SUFFIX
 export OLD_LIST="$(dir -1 .)"
-git rm *.whl
+git rm *.whl || true
 cp --target=. $ROOT/build/wheels/$PYTHON_SUFFIX/*.whl
 export NEW_LIST="$(dir -1 .)"
 
