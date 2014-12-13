@@ -1,8 +1,5 @@
 #!/bin/sh
 . scripts/common/main.sh
-if test -d deps/wheels/$PYTHON_SUFFIX ; then
-	(cd deps && git rm -r wheels/$PYTHON_SUFFIX)
-fi
 mkdir -p build/wheels/$PYTHON_SUFFIX
 mkdir -p deps/wheels/$PYTHON_SUFFIX
 cd build/wheels/$PYTHON_SUFFIX
