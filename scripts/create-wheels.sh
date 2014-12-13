@@ -26,12 +26,16 @@ pip wheel --wheel-dir . $WHEEL_ARGS
 
 HAS_NEW_FILES=
 
-for file in *.whl ; do
-	if ! test -e "$ROOT/deps/wheels/$PYTHON_SUFFIX/$file" ; then
-		HAS_NEW_FILES=1
-		break
-	fi
-done
+if test -n "$ALWAYS_BUILD" ; then
+	HAS_NEW_FILES=1
+else
+	for file in *.whl ; do
+		if ! test -e "$ROOT/deps/wheels/$PYTHON_SUFFIX/$file" ; then
+			HAS_NEW_FILES=1
+			break
+		fi
+	done
+fi
 
 if test -z "$HAS_NEW_FILES" ; then
 	exit 0

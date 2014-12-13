@@ -18,7 +18,7 @@ get_bzr_tip() {
 }
 
 prepare_build() {
-	local always=
+	local always="$ALWAYS_BUILD"
 	if test "x$1" = "x--always" ; then
 		always=1
 		shift
