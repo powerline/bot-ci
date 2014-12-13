@@ -3,8 +3,10 @@ indent() {
 }
 
 get_git_tip() {
-	cd $1
-	git show --no-patch
+	(
+		cd $1
+		git show --no-patch
+	)
 }
 
 get_mercurial_tip() {
@@ -56,24 +58,26 @@ prepare_build() {
 	fi
 	if test "$new_version" != "$old_version" || test -n "$always" ; then
 		echo "$new_version" > "$version_file"
-		cd "$ROOT/deps"
-		git add "$version_file"
-		mkdir -p "$ROOT/build/$dir"
-		case $vcs in
-			git)
-				local branch_arg=
-				if test -n "$rev" ; then
-					branch_arg="--branch=$rev"
-				fi
-				git clone --depth=1 $branch_arg "$url" "$ROOT/build/$dir"
-				;;
-			mercurial)
-				hg clone --rev=$new_version --updaterev=$new_version "$url" "$ROOT/build/$dir"
-				;;
-			bzr)
-				bzr checkout --lightweight --revision="$new_version" "$url" "$ROOT/build/$dir"
-				;;
-		esac
+		(
+			cd "$ROOT/deps"
+			git add "$version_file"
+			mkdir -p "$ROOT/build/$dir"
+			case $vcs in
+				(git)
+					local branch_arg=
+					if test -n "$rev" ; then
+						branch_arg="--branch=$rev"
+					fi
+					git clone --depth=1 $branch_arg "$url" "$ROOT/build/$dir"
+					;;
+				(mercurial)
+					hg clone --rev=$new_version --updaterev=$new_version "$url" "$ROOT/build/$dir"
+					;;
+				(bzr)
+					bzr checkout --lightweight --revision="$new_version" "$url" "$ROOT/build/$dir"
+					;;
+			esac
+		)
 		COMMIT_MESSAGE_FOOTER="$COMMIT_MESSAGE_FOOTER$NL$dir tip:$NL$(get_${vcs}_tip "$ROOT/build/$dir" | indent)$NL"
 	else
 		exit 0
