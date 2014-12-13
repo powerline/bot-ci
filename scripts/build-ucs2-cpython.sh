@@ -1,11 +1,9 @@
 #!/bin/sh
 REV=$1
 . scripts/common/main.sh
-mkdir -p build/cpython-ucs2
-mkdir -p deps/cpython-ucs2
-cd build/cpython-ucs2
-hg clone http://hg.python.org/cpython -r $REV -u $REV $REV
-cd $REV
+
+prepare_build cpython-ucs2/$REV mercurial http://hg.python.org/cpython $REV
+cd build/cpython-ucs2/$REV
 ./configure --enable-unicode=ucs2 --prefix=/opt/cpython-ucs2-$REV --enable-shared
 make
 sudo make install
@@ -19,7 +17,4 @@ git commit -m "Update ucs2 cpython-$REV build
 python --version:
 
 $(env LD_LIBRARY_PATH=/opt/cpython-ucs2-$REV/lib /opt/cpython-ucs2-$REV/bin/python$REV --version 2>&1 | indent)
-
-hg tip:
-
-$(hg tip -R $ROOT/build/cpython-ucs2/$REV | indent)"
+$COMMIT_MESSAGE_FOOTER"

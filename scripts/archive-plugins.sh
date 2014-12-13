@@ -1,7 +1,6 @@
 #!/bin/sh
 . scripts/common/main.sh
 
-mkdir -p deps/vim-plugins
 mkdir -p build/vim-plugins
 
 cd build/vim-plugins
@@ -13,9 +12,8 @@ tagbar    https://github.com/majutsushi/tagbar
 nerdtree  https://github.com/scrooloose/nerdtree
 ctrlp     https://github.com/kien/ctrlp.vim
 " | while read name url ; do
-	git clone --depth=1 "$url" "$name"
+	prepare_build vim-plugins/"$name" git "$url"
 	cd "$name"
-	HEAD="$(git show --no-patch HEAD)"
 	mv .git "../.git-${name}"
 	cd ..
 	echo ">>> $name"
@@ -24,6 +22,7 @@ ctrlp     https://github.com/kien/ctrlp.vim
 	(
 		cd $ROOT/deps
 		git add "vim-plugins/${name}.tar.gz"
-		git commit -m "Update vim plugin $name$(echo;echo;echo "${HEAD}"|indent)"
+		git commit -m "Update vim plugin $name$NL$COMMIT_MESSAGE_FOOTER"
 	)
+	COMMIT_MESSAGE_FOOTER=
 done

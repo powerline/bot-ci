@@ -1,10 +1,6 @@
 #!/bin/sh
 . scripts/common/main.sh
-mkdir -p build/zpython
-mkdir -p deps/zpython
-cd build/zpython
-hg clone https://bitbucket.org/ZyX_I/zpython
-git clone --depth=1 git://git.code.sf.net/p/zsh/code zsh
+prepare_build zpython/zsh git git://git.code.sf.net/p/zsh/code
 cd zsh
 ./.preconfig
 ./configure --prefix=/opt/zsh-${PYTHON_VERSION}
@@ -14,6 +10,8 @@ make || true
 # not run all tests
 make TESTNUM=A01 test
 sudo make install || true
+
+prepare_build zpython/zpython mercurial https://bitbucket.org/ZyX_I/zpython
 cd ../zpython
 mkdir build
 cd build
@@ -34,6 +32,7 @@ ctest -VV
 sudo make install
 tar czf ${ROOT}/deps/zpython/zsh-${PYTHON_VERSION}.tar.gz -C /opt zsh-${PYTHON_VERSION}
 cd ${ROOT}/deps
+
 git add zpython/zsh-${PYTHON_VERSION}.tar.gz
 git commit -m "Update zsh and zpython for $LIBPYTHON_NAME
 
@@ -44,11 +43,4 @@ $(/opt/zsh-${PYTHON_VERSION}/bin/zsh --version | indent)
 python version:
 
 $(/opt/zsh-${PYTHON_VERSION}/bin/zsh -c 'zmodload libzpython; zpython "import sys; print(sys.version)"' | indent)
-
-(zsh) git head:
-
-$(cd "${ROOT}/build/zpython/zsh" && git show --no-patch HEAD | indent)
-
-(zpython) hg tip:
-
-$(hg tip -R "${ROOT}/build/zpython/zpython" | indent)"
+$COMMIT_MESSAGE_FOOTER"

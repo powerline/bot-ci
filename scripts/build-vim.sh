@@ -11,13 +11,11 @@ fi
 if ! test -d build/vim-repo ; then
 	hg clone https://vim.googlecode.com/hg --noupdate build/vim-repo
 fi
+prepare_build vim/$SUBDIR mercurial "$ROOT/build/vim-repo" "$REV"
 # PYTHON_CFLAGS contains -Werror=format-security. Old vim cannot be built with 
 # this.
 unset PYTHON_CFLAGS
-mkdir -p build/vim/$SUBDIR
-mkdir -p deps/vim/$SUBDIR
 cd build/vim/$SUBDIR
-hg clone $ROOT/build/vim-repo -r $REV -u $REV vim
 cd vim
 CFGARGS="--with-features=normal --without-x --disable-gui"
 if test -z "$PYTHON1" ; then
@@ -49,10 +47,7 @@ vim/$SUBDIR/vim --version
 git add vim/$SUBDIR/vim
 git commit -m "Update vim for $SUBDIR
 
-hg tip:
-
-$(hg tip -R "$ROOT/build/vim/$SUBDIR/vim" | indent)
-
 vim --version:
 
-$("$ROOT/deps/vim/$SUBDIR/vim" --version | indent)"
+$("$ROOT/deps/vim/$SUBDIR/vim" --version | indent)
+$COMMIT_MESSAGE_FOOTER"

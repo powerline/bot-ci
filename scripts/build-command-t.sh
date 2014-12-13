@@ -1,6 +1,7 @@
 #!/bin/sh
 . scripts/common/main.sh
 
+prepare_build vim-plugins/command-t git https://github.com/wincent/Command-T
 mkdir -p deps/vim-plugins
 mkdir -p build/vim-plugins
 
@@ -20,7 +21,4 @@ mv .git-command-t command-t/.git
 cd $ROOT/deps
 git add vim-plugins/command-t.tar.gz
 git commit -m "Update Command-T
-
-git head:
-
-$(cd "${ROOT}/build/vim-plugins/command-t" && git show --no-patch HEAD | indent)"
+$COMMIT_MESSAGE_FOOTER"
