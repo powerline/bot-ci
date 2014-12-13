@@ -3,8 +3,9 @@
 if test -d deps/wheels/$PYTHON_SUFFIX ; then
 	(cd deps && git rm -r wheels/$PYTHON_SUFFIX)
 fi
+mkdir -p build/wheels/$PYTHON_SUFFIX
 mkdir -p deps/wheels/$PYTHON_SUFFIX
-cd deps/wheels/$PYTHON_SUFFIX
+cd build/wheels/$PYTHON_SUFFIX
 sudo pip install wheel
 WHEEL_ARGS="psutil netifaces"
 if test "$PYTHON_VERSION_MAJOR" -eq 2 ; then
@@ -22,7 +23,33 @@ else
 	fi
 fi
 pip wheel --wheel-dir . $WHEEL_ARGS
+
+HAS_NEW_FILES=
+
+for file in *.whl ; do
+	if ! test -e "$ROOT/deps/wheels/$PYTHON_SUFFIX/$file" ; then
+		HAS_NEW_FILES=1
+		break
+	fi
+done
+
+if test -z "$HAS_NEW_FILES" ; then
+	exit 0
+fi
+
+cd $ROOT/deps/wheels/$PYTHON_SUFFIX
+export OLD_LIST="$(dir -1 .)"
+git rm *.whl
+cp --target=. $ROOT/build/wheels/$PYTHON_SUFFIX/*.whl
+export NEW_LIST="$(dir -1 .)"
+
+DIFF="$(python -c 'from difflib import ndiff; from os import environ; print(ndiff(environ["OLD_LIST"].splitlines(1), environ["NEW_LIST"].splitlines(1)))' | indent)"
+
 git add .
 git commit -m "Update Python wheels for $PYTHON_IMPLEMENTATION version $PYTHON_VERSION
 
-WHEEL_ARGS='$WHEEL_ARGS'"
+WHEEL_ARGS='$WHEEL_ARGS'
+
+diff:
+
+$DIFF"
