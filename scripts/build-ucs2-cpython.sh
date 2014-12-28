@@ -3,7 +3,7 @@ REV=$1
 . scripts/common/main.sh
 . scripts/common/build.sh
 
-sudo apt-get install libsasl2-dev libssl-dev
+sudo apt-get install libsasl2-dev libssl-dev zlib1g-dev
 
 prepare_build --always cpython-ucs2/$REV mercurial http://hg.python.org/cpython $REV
 cd build/cpython-ucs2/$REV
