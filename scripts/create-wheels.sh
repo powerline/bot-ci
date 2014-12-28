@@ -1,5 +1,7 @@
 #!/bin/sh
 . scripts/common/main.sh
+. scripts/common/build.sh
+
 mkdir -p build/wheels/$PYTHON_SUFFIX
 mkdir -p deps/wheels/$PYTHON_SUFFIX
 cd build/wheels/$PYTHON_SUFFIX
