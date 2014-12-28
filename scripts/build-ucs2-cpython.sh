@@ -3,6 +3,8 @@ REV=$1
 . scripts/common/main.sh
 . scripts/common/build.sh
 
+sudo apt-get install libsasl2-dev libssl-dev
+
 prepare_build cpython-ucs2/$REV mercurial http://hg.python.org/cpython $REV
 cd build/cpython-ucs2/$REV
 ./configure --enable-unicode=ucs2 --prefix=/opt/cpython-ucs2-$REV --enable-shared
