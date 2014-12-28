@@ -4,7 +4,7 @@ mkdir -p build/wheels/$PYTHON_SUFFIX
 mkdir -p deps/wheels/$PYTHON_SUFFIX
 cd build/wheels/$PYTHON_SUFFIX
 sudo pip install wheel
-WHEEL_ARGS="psutil netifaces"
+WHEEL_ARGS="psutil netifaces pyuv"
 if test "$PYTHON_VERSION_MAJOR" -eq 2 ; then
 	if test "$PYTHON_IMPLEMENTATION" = "CPython" ; then
 		WHEEL_ARGS="${WHEEL_ARGS} mercurial --allow-external bzr --allow-unverified bzr bzr"
