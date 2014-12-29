@@ -40,10 +40,11 @@ if test -z "$HAS_NEW_FILES" ; then
 	exit 0
 fi
 
-cd $ROOT/deps/wheels/$PYTHON_SUFFIX
+cd $ROOT/deps/wheels
+git rm -r ${PYTHON_IMPLEMENTATION}-${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}{,.*} || true
+mkdir $PYTHON_SUFFIX
+cd $PYTHON_SUFFIX
 export OLD_LIST="$(dir -1 .)"
-touch .keep
-git rm *.whl || true
 cp --target=. $ROOT/build/wheels/$PYTHON_SUFFIX/*.whl
 export NEW_LIST="$(dir -1 .)"
 
