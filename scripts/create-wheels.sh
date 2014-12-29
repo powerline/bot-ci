@@ -41,7 +41,8 @@ if test -z "$HAS_NEW_FILES" ; then
 fi
 
 cd $ROOT/deps/wheels
-for dir in ${PYTHON_IMPLEMENTATION}-${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}{,.*} ; do
+PY_SUF_PART="${PYTHON_IMPLEMENTATION}-${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}"
+for dir in $PY_SUF_PART $PY_SUF_PART* ; do
 	git rm -r "$dir" || true
 done
 mkdir $PYTHON_SUFFIX
