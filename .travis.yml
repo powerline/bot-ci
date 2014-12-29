@@ -50,8 +50,8 @@ matrix:
               SCRIPT2="./scripts/build-libvterm.sh"
               SCRIPT3="./scripts/build-command-t.sh"
               SCRIPT4="./scripts/archive-plugins.sh"
-              SCRIPT5="./scripts/build-vim.sh tip 2.6 3.2"
-              SCRIPT6="./scripts/build-ucs2-cpython.sh 2.6"
-              SCRIPT7="./scripts/build-ucs2-cpython.sh 2.7"
-              SCRIPT8="./scripts/build-ucs2-cpython.sh 3.2"
+              SCRIPT5="./scripts/build-ucs2-cpython.sh 2.6"
+              SCRIPT6="./scripts/build-ucs2-cpython.sh 2.7"
+              SCRIPT7="./scripts/build-ucs2-cpython.sh 3.2"
+              SCRIPT8="./scripts/build-vim.sh tip 2.6 3.2"
 # vim: noet ts=4 sts=4 sw=4 ft=yaml
