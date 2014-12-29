@@ -47,7 +47,7 @@ git rm *.whl || true
 cp --target=. $ROOT/build/wheels/$PYTHON_SUFFIX/*.whl
 export NEW_LIST="$(dir -1 .)"
 
-DIFF="$(python -c 'from difflib import ndiff; from os import environ; print(ndiff(environ["OLD_LIST"].splitlines(1), environ["NEW_LIST"].splitlines(1)))' | indent)"
+DIFF="$(python "$ROOT"/scripts/ndiff-strings.py "$OLD_LIST" "$NEW_LIST" | indent)"
 
 git add .
 git commit -m "Update Python wheels for $PYTHON_IMPLEMENTATION version $PYTHON_VERSION
