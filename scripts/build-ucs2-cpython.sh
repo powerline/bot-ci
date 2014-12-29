@@ -3,6 +3,8 @@ REV=$1
 . scripts/common/main.sh
 . scripts/common/build.sh
 
+prepare_build cpython-ucs2/$REV mercurial http://hg.python.org/cpython $REV
+
 # List from http://askubuntu.com/questions/21547:
 # sudo apt-get install -qq build-essential libz-dev libreadline-dev \
 #                      libncursesw5-dev libssl-dev libgdbm-dev libsqlite3-dev \
@@ -11,7 +13,6 @@ sudo apt-get install -qq build-essential zlib1g-dev libreadline-dev \
                          libncursesw5-dev libssl-dev libgdbm-dev \
                          libsqlite3-dev liblzma-dev libc6-dev tk-dev libdb-dev
 
-prepare_build cpython-ucs2/$REV mercurial http://hg.python.org/cpython $REV
 cd build/cpython-ucs2/$REV
 ./configure --enable-unicode=ucs2 --prefix=/opt/cpython-ucs2-$REV --enable-shared
 make
