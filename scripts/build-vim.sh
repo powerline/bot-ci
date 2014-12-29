@@ -16,7 +16,20 @@ if ! test -d build/vim-repo ; then
 	hg clone https://vim.googlecode.com/hg --noupdate build/vim-repo
 fi
 
-prepare_build vim/$SUBDIR mercurial "$ROOT/build/vim-repo" "$REV"
+if test -z "$PYTHON1" ; then
+	prepare_build vim/$SUBDIR mercurial "$ROOT/build/vim-repo" "$REV"
+else
+	UPDATES=0
+	prepare_build --always cpython-ucs2/$REV mercurial http://hg.python.org/cpython $PYTHON1
+	UPDATES="$(( $VERSION_UPDATED + $UPDATES ))"
+	prepare_build --always cpython-ucs2/$REV mercurial http://hg.python.org/cpython $PYTHON2
+	UPDATES="$(( $VERSION_UPDATED + $UPDATES ))"
+	prepare_build --always vim/$SUBDIR mercurial "$ROOT/build/vim-repo" "$REV"
+	UPDATES="$(( $VERSION_UPDATED + $UPDATES ))"
+	if test $UPDATES -eq 0 ; then
+		exit 0
+	fi
+fi
 
 # PYTHON_CFLAGS contains -Werror=format-security. Old vim cannot be built with 
 # this.
