@@ -41,7 +41,9 @@ if test -z "$HAS_NEW_FILES" ; then
 fi
 
 cd $ROOT/deps/wheels
-git rm -r ${PYTHON_IMPLEMENTATION}-${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}{,.*} || true
+for dir in ${PYTHON_IMPLEMENTATION}-${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}{,.*} ; do
+	git rm -r "$dir" || true
+done
 mkdir $PYTHON_SUFFIX
 cd $PYTHON_SUFFIX
 export OLD_LIST="$(dir -1 .)"
