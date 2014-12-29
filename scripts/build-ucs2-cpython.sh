@@ -5,7 +5,7 @@ REV=$1
 
 sudo apt-get install libsasl2-dev libssl-dev zlib1g-dev
 
-prepare_build --always cpython-ucs2/$REV mercurial http://hg.python.org/cpython $REV
+prepare_build cpython-ucs2/$REV mercurial http://hg.python.org/cpython $REV
 cd build/cpython-ucs2/$REV
 ./configure --enable-unicode=ucs2 --prefix=/opt/cpython-ucs2-$REV --enable-shared
 make
