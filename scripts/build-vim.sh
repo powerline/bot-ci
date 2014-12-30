@@ -29,20 +29,8 @@ else
 	if test $UPDATES -eq 0 ; then
 		exit 0
 	fi
-	PY1PATH=/opt/cpython-ucs2-$PYTHON1
-	PY2PATH=/opt/cpython-ucs2-$PYTHON2
-	if ! test -d "$PY1PATH" ; then
-		(
-			cd /opt
-			tar xzf "$ROOT"/deps/cpython-ucs2/cpython-ucs2-${PYTHON1}.tar.gz
-		)
-	fi
-	if ! test -d "$PY2PATH" ; then
-		(
-			cd /opt
-			tar xzf "$ROOT"/deps/cpython-ucs2/cpython-ucs2-${PYTHON2}.tar.gz
-		)
-	fi
+	ensure_opt cpython-ucs2 cpython-ucs2-$PYTHON1
+	ensure_opt cpython-ucs2 cpython-ucs2-$PYTHON2
 fi
 
 # PYTHON_CFLAGS contains -Werror=format-security. Old vim cannot be built with 
@@ -58,6 +46,8 @@ if test -z "$PYTHON1" ; then
 		CFGARGS="$CFGARGS --enable-pythoninterp"
 	fi
 else
+	PY1PATH=/opt/cpython-ucs2-$PYTHON1
+	PY2PATH=/opt/cpython-ucs2-$PYTHON2
 	export LD_LIBRARY_PATH=$PY1PATH/lib:$PY2PATH/lib
 	export PATH="$PY1PATH/bin:$PY2PATH/bin:$PATH"
 	CFGARGS="$CFGARGS --enable-python3interp=dynamic"

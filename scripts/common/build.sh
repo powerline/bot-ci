@@ -82,3 +82,14 @@ prepare_build() {
 		exit 0
 	fi
 }
+
+ensure_opt() {
+	local ddir="$1"
+	local name="$2"
+	if ! test -d /opt/$name ; then
+		(
+			cd /opt
+			tar xzf "$ROOT"/deps/$ddir/${name}.tar.gz
+		)
+	fi
+}
