@@ -20,9 +20,9 @@ if test -z "$PYTHON1" ; then
 	prepare_build vim/$SUBDIR mercurial "$ROOT/build/vim-repo" "$REV"
 else
 	UPDATES=0
-	prepare_build --always cpython-ucs2/$REV mercurial http://hg.python.org/cpython $PYTHON1
+	prepare_build --onlycheck cpython-ucs2/$REV mercurial http://hg.python.org/cpython $PYTHON1
 	UPDATES="$(( $VERSION_UPDATED + $UPDATES ))"
-	prepare_build --always cpython-ucs2/$REV mercurial http://hg.python.org/cpython $PYTHON2
+	prepare_build --onlycheck cpython-ucs2/$REV mercurial http://hg.python.org/cpython $PYTHON2
 	UPDATES="$(( $VERSION_UPDATED + $UPDATES ))"
 	prepare_build --always vim/$SUBDIR mercurial "$ROOT/build/vim-repo" "$REV"
 	UPDATES="$(( $VERSION_UPDATED + $UPDATES ))"

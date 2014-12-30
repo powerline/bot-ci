@@ -23,6 +23,10 @@ prepare_build() {
 		always=1
 		shift
 	fi
+	if test "x$1" = "x--onlycheck" ; then
+		onlycheck=1
+		shift
+	fi
 	local dir="$1"
 	local vcs="$2"
 	local url="$3"
@@ -54,6 +58,9 @@ prepare_build() {
 	export VERSION_UPDATED=0
 	if test "$new_version" != "$old_version" ; then
 		export VERSION_UPDATED=1
+	fi
+	if test -n "$onlycheck" ; then
+		return 0
 	fi
 	if test "$new_version" != "$old_version" || test -n "$always" ; then
 		echo "$new_version" > "$version_file"
