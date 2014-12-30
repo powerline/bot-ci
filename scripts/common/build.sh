@@ -23,6 +23,7 @@ prepare_build() {
 		always=1
 		shift
 	fi
+	local onlycheck=""
 	if test "x$1" = "x--onlycheck" ; then
 		onlycheck=1
 		shift
