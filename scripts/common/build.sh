@@ -96,7 +96,7 @@ ensure_opt() {
 	if ! test -d /opt/$name ; then
 		(
 			cd /opt
-			tar xzf "$ROOT"/deps/$ddir/${name}.tar.gz
+			sudo tar xzf "$ROOT"/deps/$ddir/${name}.tar.gz
 		)
 	fi
 }
