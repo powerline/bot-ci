@@ -26,7 +26,7 @@ else
 	UPDATES="$(( $VERSION_UPDATED + $UPDATES ))"
 	prepare_build --always vim/$SUBDIR mercurial "$ROOT/build/vim-repo" "$REV"
 	UPDATES="$(( $VERSION_UPDATED + $UPDATES ))"
-	if false && test $UPDATES -eq 0 ; then
+	if test $UPDATES -eq 0 ; then
 		exit 0
 	fi
 	ensure_opt cpython-ucs2 cpython-ucs2-$PYTHON1
