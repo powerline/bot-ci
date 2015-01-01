@@ -12,19 +12,15 @@ else
 	SUBDIR="${REV}-$PYTHON1-$PYTHON2"
 fi
 
-if ! test -d build/vim-repo ; then
-	hg clone https://vim.googlecode.com/hg --noupdate build/vim-repo
-fi
-
 if test -z "$PYTHON1" ; then
-	prepare_build vim/$SUBDIR mercurial "$ROOT/build/vim-repo" "$REV"
+	prepare_build vim/$SUBDIR mercurial https://vim.googlecode.com/hg "$REV"
 else
 	UPDATES=0
 	prepare_build --onlycheck cpython-ucs2/$REV mercurial http://hg.python.org/cpython $PYTHON1
 	UPDATES="$(( $VERSION_UPDATED + $UPDATES ))"
 	prepare_build --onlycheck cpython-ucs2/$REV mercurial http://hg.python.org/cpython $PYTHON2
 	UPDATES="$(( $VERSION_UPDATED + $UPDATES ))"
-	prepare_build --always vim/$SUBDIR mercurial "$ROOT/build/vim-repo" "$REV"
+	prepare_build --always vim/$SUBDIR mercurial https://vim.googlecode.com/hg "$REV"
 	UPDATES="$(( $VERSION_UPDATED + $UPDATES ))"
 	if test $UPDATES -eq 0 ; then
 		exit 0
