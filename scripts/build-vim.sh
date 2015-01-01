@@ -1,7 +1,6 @@
 #!/bin/sh
 REV=$1
 PYTHON1=$2
-PYTHON2=$3
 
 . scripts/common/main.sh
 . scripts/common/build.sh
@@ -9,7 +8,7 @@ PYTHON2=$3
 if test -z "$PYTHON1" ; then
 	SUBDIR="${REV}-$PYTHON_VERSION"
 else
-	SUBDIR="${REV}-$PYTHON1-$PYTHON2"
+	SUBDIR="${REV}-$PYTHON1-double"
 fi
 
 if test -z "$PYTHON1" ; then
@@ -18,15 +17,12 @@ else
 	UPDATES=0
 	prepare_build --onlycheck cpython-ucs2/$REV mercurial http://hg.python.org/cpython $PYTHON1
 	UPDATES="$(( $VERSION_UPDATED + $UPDATES ))"
-	prepare_build --onlycheck cpython-ucs2/$REV mercurial http://hg.python.org/cpython $PYTHON2
-	UPDATES="$(( $VERSION_UPDATED + $UPDATES ))"
 	prepare_build --always vim/$SUBDIR mercurial https://vim.googlecode.com/hg "$REV"
 	UPDATES="$(( $VERSION_UPDATED + $UPDATES ))"
 	if test $UPDATES -eq 0 ; then
 		exit 0
 	fi
 	ensure_opt cpython-ucs2 cpython-ucs2-$PYTHON1
-	ensure_opt cpython-ucs2 cpython-ucs2-$PYTHON2
 fi
 
 # PYTHON_CFLAGS contains -Werror=format-security. Old vim cannot be built with 
@@ -43,9 +39,8 @@ if test -z "$PYTHON1" ; then
 	fi
 else
 	PY1PATH=/opt/cpython-ucs2-$PYTHON1
-	PY2PATH=/opt/cpython-ucs2-$PYTHON2
-	export LD_LIBRARY_PATH=$PY1PATH/lib:$PY2PATH/lib
-	export PATH="$PY1PATH/bin:$PY2PATH/bin:$PATH"
+	export LD_LIBRARY_PATH=$PY1PATH/lib:$LD_LIBRARY_PATH
+	export PATH="$PY1PATH/bin:$PATH"
 	CFGARGS="$CFGARGS --enable-python3interp=dynamic"
 	CFGARGS="$CFGARGS --enable-pythoninterp=dynamic"
 fi
