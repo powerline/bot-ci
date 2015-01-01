@@ -14,7 +14,7 @@ sudo apt-get install -qq build-essential zlib1g-dev libreadline-dev \
                          libsqlite3-dev liblzma-dev libc6-dev tk-dev libdb-dev
 
 cd build/cpython-ucs2/$REV
-sed -r -i -e 's@^(\s*lib_dirs\s*=.*\[\s*($|['\''"]))@\1"/usr/lib/x86_64-linux-gnu",@' setup.py
+sed -r -i -e 's@^(\s*)('\''/lib64)@\1"/usr/lib/x86_64-linux-gnu",\2@' setup.py
 hg diff
 ./configure --enable-unicode=ucs2 --prefix=/opt/cpython-ucs2-$REV --enable-shared
 make
