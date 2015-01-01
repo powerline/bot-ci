@@ -1,6 +1,9 @@
 #!/bin/sh
+PREF=${1}${1+-}
 . scripts/common/main.sh
 . scripts/common/build.sh
+
+PYTHON_SUFFIX=${PREF}${PYTHON_SUFFIX}
 
 mkdir -p build/wheels/$PYTHON_SUFFIX
 mkdir -p deps/wheels/$PYTHON_SUFFIX
@@ -41,7 +44,7 @@ if test -z "$HAS_NEW_FILES" ; then
 fi
 
 cd $ROOT/deps/wheels
-PY_SUF_PART="${PYTHON_IMPLEMENTATION}-${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}"
+PY_SUF_PART="${PREF}${PYTHON_IMPLEMENTATION}-${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}"
 for dir in $PY_SUF_PART $PY_SUF_PART* ; do
 	git rm -r "$dir" || true
 done
@@ -54,7 +57,7 @@ export NEW_LIST="$(dir -1 .)"
 DIFF="$(python "$ROOT"/scripts/ndiff-strings.py "$OLD_LIST" "$NEW_LIST" | indent)"
 
 git add .
-git commit -m "Update Python wheels for $PYTHON_IMPLEMENTATION version $PYTHON_VERSION
+git commit -m "Update Python wheels for ${PREF}$PYTHON_IMPLEMENTATION version $PYTHON_VERSION
 
 WHEEL_ARGS='$WHEEL_ARGS'
 
