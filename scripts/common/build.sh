@@ -33,6 +33,10 @@ prepare_build() {
 	local url="$3"
 	local rev="$4"
 
+	if echo "$ALWAYS_BUILD_DEP" | grep -q ":${dir}:" ; then
+		always=1
+	fi
+
 	local old_version=
 	local new_version=
 	mkdir -p $ROOT/deps/versions
