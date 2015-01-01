@@ -15,6 +15,7 @@ sudo apt-get install -qq build-essential zlib1g-dev libreadline-dev \
 
 cd build/cpython-ucs2/$REV
 sed -r -i -e 's@^(\s*lib_dirs\s*=.*\[)@\1"/usr/lib/x86_64-linux-gnu",@' setup.py
+hg diff
 ./configure --enable-unicode=ucs2 --prefix=/opt/cpython-ucs2-$REV --enable-shared
 make
 sudo make install
