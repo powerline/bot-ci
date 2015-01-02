@@ -14,11 +14,11 @@ PREFIX=/opt/cpython-ucs2-$REV
 
 sudo apt-get install -qq zlib1g libssl1.0.0
 
-export PATH=$PREFIX/bin:$PATH
-export LD_LIBRARY_PATH=$PREFIX/lib:$LD_LIBRARY_PATH
+export PATH="$PREFIX/bin:$PATH"
+export LD_LIBRARY_PATH="$PREFIX/lib:$LD_LIBRARY_PATH"
 set +e
 mkvirtualenv -p $PREFIX/bin/python$REV python-ucs2-$REV || exit 1
 set -e
 
 pip install wheel
-$ROOT/scripts/create-wheels.sh ucs2
+"$ROOT"/scripts/create-wheels.sh ucs2
