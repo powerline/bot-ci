@@ -6,7 +6,9 @@ REV=$1
 ensure_opt cpython-ucs2 cpython-ucs2-$REV
 
 pip install virtualenvwrapper
-. virtualenvwrapper.sh
+set +e
+. virtualenvwrapper.sh || exit 1
+set -e
 
 PREFIX=/opt/cpython-ucs2-$REV
 
@@ -14,7 +16,9 @@ sudo apt-get install -qq zlib1g libssl1.0.0
 
 export PATH=$PREFIX/bin:$PATH
 export LD_LIBRARY_PATH=$PREFIX/lib:$LD_LIBRARY_PATH
-mkvirtualenv -p $PREFIX/bin/python$REV python-ucs2-$REV
+set +e
+mkvirtualenv -p $PREFIX/bin/python$REV python-ucs2-$REV || exit 1
+set -e
 
 pip install wheel
 $ROOT/scripts/create-wheels.sh ucs2
