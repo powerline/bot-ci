@@ -32,7 +32,7 @@ if test -n "$ALWAYS_BUILD" ; then
 	HAS_NEW_FILES=1
 else
 	for file in *.whl ; do
-		if ! test -e "$ROOT/deps/wheels/$PYTHON_SUFFIX/$file" ; then
+		if ! test -e "$DEPS/wheels/$PYTHON_SUFFIX/$file" ; then
 			HAS_NEW_FILES=1
 			break
 		fi
@@ -43,7 +43,7 @@ if test -z "$HAS_NEW_FILES" ; then
 	exit 0
 fi
 
-cd $ROOT/deps/wheels
+cd "$DEPS/wheels"
 PY_SUF_PART="${PREF}${PYTHON_IMPLEMENTATION}-${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}"
 for dir in $PY_SUF_PART $PY_SUF_PART* ; do
 	git rm -r --ignore-unmatch --cached "$dir"

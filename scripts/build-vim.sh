@@ -54,8 +54,8 @@ fi
 ./configure $CFGARGS
 make
 
-cp src/vim $ROOT/deps/${TARGET}/vim
-cd $ROOT/deps
+cp src/vim "$DEPS/${TARGET}/vim"
+cd "$DEPS"
 # Try running vim --version, fail build if it fails
 $TARGET/vim --version
 git add $TARGET/vim
@@ -63,5 +63,5 @@ git commit -m "Update vim for $SUBDIR
 
 vim --version:
 
-$("$ROOT/deps/$TARGET/vim" --version | indent)
+$("$DEPS/$TARGET/vim" --version | indent)
 $COMMIT_MESSAGE_FOOTER"

@@ -13,10 +13,10 @@ make
 cd ../..
 mv .git ../.git-command-t
 cd ..
-tar czf $ROOT/deps/${TARGET}.tar.gz command-t
+tar czf "$DEPS/${TARGET}.tar.gz" command-t
 mv .git-command-t command-t/.git
 
-cd $ROOT/deps
+cd "$DEPS"
 git add ${TARGET}.tar.gz
 git commit -m "Update Command-T
 $COMMIT_MESSAGE_FOOTER"

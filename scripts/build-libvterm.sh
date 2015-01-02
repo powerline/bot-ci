@@ -8,8 +8,8 @@ cd "$BUILD_DIRECTORY"
 make
 make test
 
-cp -L .libs/libvterm.so "$ROOT/deps/${TARGET}"
-cd "$ROOT"/deps
+cp -L .libs/libvterm.so "$DEPS/$TARGET"
+cd "$DEPS"
 git add "${TARGET}"/libvterm.so
 git commit -m "Update libvterm.so
 $COMMIT_MESSAGE_FOOTER"
