@@ -12,4 +12,4 @@ cp -L .libs/libvterm.so "$DDIR/$TARGET"
 cd "$DDIR"
 git add "${TARGET}"/libvterm.so
 git commit -m "Update libvterm.so
-$COMMIT_MESSAGE_FOOTER"
+$COMMIT_MESSAGE_FOOTER" || true
