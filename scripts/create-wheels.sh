@@ -44,6 +44,11 @@ if test -z "$HAS_NEW_FILES" ; then
 fi
 
 cd "$DDIR/wheels"
+if test -d "$PYTHON_SUFFIX" ; then
+	cd "$PYTHON_SUFFIX"
+	export OLD_LIST="$(dir -1 .)"
+	cd ..
+fi
 PY_SUF_PART="${PREF}${PYTHON_IMPLEMENTATION}-${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}"
 for dir in $PY_SUF_PART $PY_SUF_PART* ; do
 	git rm -r --ignore-unmatch --cached "$dir"
@@ -51,7 +56,6 @@ for dir in $PY_SUF_PART $PY_SUF_PART* ; do
 done
 mkdir "$PYTHON_SUFFIX"
 cd "$PYTHON_SUFFIX"
-export OLD_LIST="$(dir -1 .)"
 cp --target=. "$BDIR/wheels/$PYTHON_SUFFIX"/*.whl
 export NEW_LIST="$(dir -1 .)"
 
