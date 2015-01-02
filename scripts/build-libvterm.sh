@@ -4,7 +4,7 @@
 
 prepare_build libvterm bzr http://bazaar.leonerd.org.uk/c/libvterm/
 
-cd "$BDIR_DIRECTORY"
+cd "$BUILD_DIRECTORY"
 make
 make test
 

@@ -76,7 +76,7 @@ prepare_build() {
 			mkdir -p "$DDIR/$dir"
 			cd "$DDIR"
 			git add "$version_file"
-			mkdir -p "$BDIR_DIRECTORY"
+			mkdir -p "$BUILD_DIRECTORY"
 			case $vcs in
 				(git)
 					local branch_arg=

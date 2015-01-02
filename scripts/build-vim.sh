@@ -29,7 +29,7 @@ fi
 # PYTHON_CFLAGS contains -Werror=format-security. Old vim cannot be built with 
 # this.
 unset PYTHON_CFLAGS
-cd "$BDIR_DIRECTORY"
+cd "$BUILD_DIRECTORY"
 
 CFGARGS="--with-features=normal --without-x --disable-gui"
 if test -z "$PYTHON1" ; then

@@ -4,7 +4,7 @@
 
 prepare_build vim-plugins/command-t git https://github.com/wincent/Command-T
 
-cd "$BDIR_DIRECTORY"
+cd "$BUILD_DIRECTORY"
 
 cd command-t/ruby/command-t
 ruby extconf.rb
