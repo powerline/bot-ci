@@ -3,7 +3,7 @@ REV=$1
 . scripts/common/main.sh
 . scripts/common/build.sh
 
-prepare_build cpython-ucs2/$REV mercurial http://hg.python.org/cpython $REV
+prepare_build cpython-ucs2/cpython-ucs2-$REV mercurial http://hg.python.org/cpython $REV
 
 # List from http://askubuntu.com/questions/21547:
 # sudo apt-get install -qq build-essential libz-dev libreadline-dev \
