@@ -44,7 +44,7 @@ make
 ldd libzpython.so
 ctest -VV
 sudo make install
-create_opt_archive "$ZSH_OPT" "$ZSH_TGT" \
+commit_opt_archive "$ZSH_OPT" "$ZSH_TGT" \
 "Update zsh and zpython for $LIBPYTHON_NAME
 
 zsh --version:

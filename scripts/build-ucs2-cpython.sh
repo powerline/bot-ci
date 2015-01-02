@@ -22,7 +22,7 @@ sudo make install
 # Sanity check: run python --version, fail build if it fails
 "${OPT_DIRECTORY}"/bin/python$REV --version
 cd "$DDIR"
-create_opt_archive "$OPT_DIRECTORY" "$TARGET" \
+commit_opt_archive "$OPT_DIRECTORY" "$TARGET" \
 "Update ucs2 cpython-$REV build
 
 python --version:

@@ -11,6 +11,6 @@ make
 ./fish --version
 sudo make install
 
-create_opt_archive "$OPT_DIRECTORY" "$TARGET" \
+commit_opt_archive "$OPT_DIRECTORY" "$TARGET" \
 "Update fish
 $COMMIT_MESSAGE_FOOTER"
