@@ -11,7 +11,7 @@ ctrlp     https://github.com/kien/ctrlp.vim
 " | while read name url ; do
 	(
 		prepare_build vim-plugins/"$name" git "$url"
-		cd "$name"
+		cd "$BUILD_DIRECTORY"
 		mv .git "../.git-${name}"
 		cd ..
 		echo ">>> $name"
