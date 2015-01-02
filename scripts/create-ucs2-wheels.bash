@@ -11,7 +11,7 @@ pip install virtualenvwrapper
 PREFIX=/opt/cpython-ucs2-$REV
 
 export PATH=$PREFIX/bin:$PATH
-export LD_LIBRARY_PATH=$PREFIX/lib
+export LD_LIBRARY_PATH=$PREFIX/lib:$LD_LIBRARY_PATH
 mkvirtualenv -p $PREFIX/bin/python$REV python-ucs2-$REV
 
 pip install wheel
