@@ -51,11 +51,11 @@ prepare_build() {
 			new_version="$(git ls-remote "$url" ${rev:-HEAD} | cut -f1)"
 			;;
 		mercurial)
-			if ! test -d "$ROOT"/build/empty_hg_repository ; then
-				mkdir -p "$ROOT"/build
-				hg init "$ROOT"/build/empty_hg_repository
+			if ! test -d "$BUILD/empty_hg_repository" ; then
+				mkdir -p "$BUILD"
+				hg init "$BUILD/empty_hg_repository"
 			fi
-			new_version="$(hg -R "$ROOT/build/empty_hg_repository" incoming --limit=1 --newest-first --template='{node}' --quiet --rev=${rev:-default} "$url")"
+			new_version="$(hg -R "$BUILD/empty_hg_repository" incoming --limit=1 --newest-first --template='{node}' --quiet --rev=${rev:-default} "$url")"
 			;;
 		bzr)
 			new_version="$(bzr log --limit=1 --show-ids "$url" | grep '^revision-id:' | cut -d' ' -f2)"
@@ -71,7 +71,7 @@ prepare_build() {
 		echo "$new_version" > "$version_file"
 		export TARGET="$dir"
 		export OPT_DIRECTORY="/opt/$(basename "$dir")"
-		export BUILD_DIRECTORY="$ROOT/build/$dir"
+		export BUILD_DIRECTORY="$BUILD/$dir"
 		(
 			mkdir -p "$DEPS/$dir"
 			cd "$DEPS"
@@ -83,17 +83,17 @@ prepare_build() {
 					if test -n "$rev" ; then
 						branch_arg="--branch=$rev"
 					fi
-					git clone --depth=1 $branch_arg "$url" "$ROOT/build/$dir"
+					git clone --depth=1 $branch_arg "$url" "$BUILD/$dir"
 					;;
 				(mercurial)
-					hg clone --rev=$new_version --updaterev=$new_version "$url" "$ROOT/build/$dir"
+					hg clone --rev=$new_version --updaterev=$new_version "$url" "$BUILD/$dir"
 					;;
 				(bzr)
-					bzr checkout --lightweight --revision="$new_version" "$url" "$ROOT/build/$dir"
+					bzr checkout --lightweight --revision="$new_version" "$url" "$BUILD/$dir"
 					;;
 			esac
 		)
-		COMMIT_MESSAGE_FOOTER="$COMMIT_MESSAGE_FOOTER$NL$dir tip:$NL$NL$(get_${vcs}_tip "$ROOT/build/$dir" | indent)$NL"
+		COMMIT_MESSAGE_FOOTER="$COMMIT_MESSAGE_FOOTER$NL$dir tip:$NL$NL$(get_${vcs}_tip "$BUILD/$dir" | indent)$NL"
 	else
 		exit 0
 	fi

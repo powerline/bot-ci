@@ -2,10 +2,6 @@
 . scripts/common/main.sh
 . scripts/common/build.sh
 
-mkdir -p build/vim-plugins
-
-cd build/vim-plugins
-
 echo -n "\
 capslock  https://github.com/tpope/vim-capslock
 syntastic https://github.com/scrooloose/syntastic
