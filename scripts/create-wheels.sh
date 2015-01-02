@@ -5,9 +5,9 @@ PREF=${1}${1+-}
 
 PYTHON_SUFFIX=${PREF}${PYTHON_SUFFIX}
 
-mkdir -p build/wheels/$PYTHON_SUFFIX
-mkdir -p deps/wheels/$PYTHON_SUFFIX
-cd build/wheels/$PYTHON_SUFFIX
+mkdir -p build/wheels/"$PYTHON_SUFFIX"
+mkdir -p "$DEPS/wheels/$PYTHON_SUFFIX"
+cd build/wheels/"$PYTHON_SUFFIX"
 sudo pip install wheel
 WHEEL_ARGS="psutil netifaces pyuv"
 if test "$PYTHON_VERSION_MAJOR" -eq 2 ; then
@@ -49,10 +49,10 @@ for dir in $PY_SUF_PART $PY_SUF_PART* ; do
 	git rm -r --ignore-unmatch --cached "$dir"
 	rm -rf "$dir"
 done
-mkdir $PYTHON_SUFFIX
-cd $PYTHON_SUFFIX
+mkdir "$PYTHON_SUFFIX"
+cd "$PYTHON_SUFFIX"
 export OLD_LIST="$(dir -1 .)"
-cp --target=. $ROOT/build/wheels/$PYTHON_SUFFIX/*.whl
+cp --target=. "$ROOT/build/wheels/$PYTHON_SUFFIX"/*.whl
 export NEW_LIST="$(dir -1 .)"
 
 DIFF="$(python "$ROOT"/scripts/ndiff-strings.py "$OLD_LIST" "$NEW_LIST" | indent)"

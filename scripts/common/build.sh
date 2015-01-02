@@ -51,9 +51,9 @@ prepare_build() {
 			new_version="$(git ls-remote "$url" ${rev:-HEAD} | cut -f1)"
 			;;
 		mercurial)
-			if ! test -d $ROOT/build/empty_hg_repository ; then
-				mkdir -p $ROOT/build
-				hg init $ROOT/build/empty_hg_repository
+			if ! test -d "$ROOT"/build/empty_hg_repository ; then
+				mkdir -p "$ROOT"/build
+				hg init "$ROOT"/build/empty_hg_repository
 			fi
 			new_version="$(hg -R "$ROOT/build/empty_hg_repository" incoming --limit=1 --newest-first --template='{node}' --quiet --rev=${rev:-default} "$url")"
 			;;
