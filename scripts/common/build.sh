@@ -70,10 +70,13 @@ prepare_build() {
 	fi
 	if test "$new_version" != "$old_version" || test -n "$always" ; then
 		echo "$new_version" > "$version_file"
+		export TARGET="$dir"
+		export OPT_DIRECTORY="/opt/$(basename "$dir")"
+		export BUILD_DIRECTORY="$ROOT/build/$dir"
 		(
 			cd "$ROOT/deps"
 			git add "$version_file"
-			mkdir -p "$ROOT/build/$dir"
+			mkdir -p "$BUILD_DIRECTORY"
 			case $vcs in
 				(git)
 					local branch_arg=
@@ -99,10 +102,23 @@ prepare_build() {
 ensure_opt() {
 	local ddir="$1"
 	local name="$2"
-	if ! test -d /opt/$name ; then
+	export OPT_DIRECTORY="/opt/$name"
+	if ! test -d "$OPT_DIRECTORY" ; then
 		(
 			cd /opt
 			sudo tar xzf "$ROOT"/deps/$ddir/${name}.tar.gz
 		)
 	fi
+}
+
+commit_opt_archive() {
+	local opt_dir="$1"
+	local target="$2"
+	local message="$3"
+	(
+		cd "$ROOT"/deps
+		tar czf ${target}.tar.gz -C "$(dirname "$opt_dir")" "$(basename "$opt_dir")"
+		git add ${target}.tar.gz
+		git commit -m "$message"
+	)
 }

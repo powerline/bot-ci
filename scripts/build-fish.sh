@@ -2,17 +2,15 @@
 . scripts/common/main.sh
 . scripts/common/build.sh
 
-prepare_build fish git https://github.com/fish-shell/fish-shell
+prepare_build fish/fish git https://github.com/fish-shell/fish-shell
 
-cd build/fish
+cd "${BUILD_DIRECTORY}"
 autoconf
-./configure --prefix=/opt/fish
+./configure --prefix="$OPT_DIRECTORY"
 make
 ./fish --version
 sudo make install
 
-tar czf "$ROOT/deps/fish/fish.tar.gz" -C /opt fish
-cd "$ROOT/deps"
-git add fish/fish.tar.gz
-git commit -m "Update fish
+create_opt_archive "$OPT_DIRECTORY" "$TARGET" \
+"Update fish
 $COMMIT_MESSAGE_FOOTER"

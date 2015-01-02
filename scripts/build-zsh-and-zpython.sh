@@ -3,17 +3,21 @@
 . scripts/common/build.sh
 
 UPDATES=0
-prepare_build --always zpython/zsh-${PYTHON_VERSION}  git git://git.code.sf.net/p/zsh/code
+prepare_build --always zpython/zsh-$PYTHON_VERSION git git://git.code.sf.net/p/zsh/code
+ZSH_TGT="$TARGET"
+ZSH_OPT="$OPT_DIRECTORY"
+ZSH_BDIR="$BUILD_DIRECTORY"
 UPDATES="$(( $VERSION_UPDATED + $UPDATES ))"
-prepare_build --always zpython/zpython-${PYTHON_VERSION} mercurial https://bitbucket.org/ZyX_I/zpython
+prepare_build --always zpython/zpython-$PYTHON_VERSION mercurial https://bitbucket.org/ZyX_I/zpython
+ZPYTHON_BDIR="$BUILD_DIRECTORY"
 UPDATES="$(( $VERSION_UPDATED + $UPDATES ))"
 if test $UPDATES -eq 0 ; then
 	exit 0
 fi
 
-cd build/zpython/zsh-${PYTHON_VERSION}
+cd "$ZSH_BDIR"
 ./.preconfig
-./configure --prefix=/opt/zsh-${PYTHON_VERSION}
+./configure --prefix="$ZSH_OPT"
 # Zsh make may fail due to missing yodl
 make || true
 # Simple sanity check in case the above command failed in an unexpected way, do 
@@ -21,7 +25,7 @@ make || true
 make TESTNUM=A01 test
 sudo make install || true
 
-cd ../zpython-${PYTHON_VERSION}
+cd "$ZPYTHON_BDIR"
 mkdir build
 cd build
 LIBRARY_PATH="$(ldd "$(which python)" | grep libpython | sed 's/^.* => //;s/ .*$//')"
@@ -32,25 +36,22 @@ PYTHON_INCLUDE_DIR="$(dirname "${LIBRARY_DIR}")/include/python$PYTHON_SUFFIX"
 
 export LD_LIBRARY_PATH="${LIBRARY_DIR}:$LD_LIBRARY_PATH"
 
-cmake .. -DZSH_REPOSITORY="${ROOT}/build/zpython/zsh-${PYTHON_VERSION}" \
+cmake .. -DZSH_REPOSITORY="$ZSH_BDIR" \
          -DPYTHON_LIBRARY="$LIBRARY_PATH" \
          -DPYTHON_INCLUDE_DIR="${PYTHON_INCLUDE_DIR}" \
-         -DCMAKE_INSTALL_PREFIX="/opt/zsh-${PYTHON_VERSION}"
+         -DCMAKE_INSTALL_PREFIX="$ZSH_OPT"
 make
 ldd libzpython.so
 ctest -VV
 sudo make install
-tar czf ${ROOT}/deps/zpython/zsh-${PYTHON_VERSION}.tar.gz -C /opt zsh-${PYTHON_VERSION}
-cd ${ROOT}/deps
-
-git add zpython/zsh-${PYTHON_VERSION}.tar.gz
-git commit -m "Update zsh and zpython for $LIBPYTHON_NAME
+create_opt_archive "$ZSH_OPT" "$ZSH_TGT" \
+"Update zsh and zpython for $LIBPYTHON_NAME
 
 zsh --version:
 
-$(/opt/zsh-${PYTHON_VERSION}/bin/zsh --version | indent)
+$($ZSH_OPT/bin/zsh --version | indent)
 
 python version:
 
-$(/opt/zsh-${PYTHON_VERSION}/bin/zsh -c 'zmodload libzpython; zpython "import sys; print(sys.version)"' | indent)
+$($ZSH_OPT/bin/zsh -c 'zmodload libzpython; zpython "import sys; print(sys.version)"' | indent)
 $COMMIT_MESSAGE_FOOTER"

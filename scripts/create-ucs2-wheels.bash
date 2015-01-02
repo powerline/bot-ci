@@ -10,7 +10,7 @@ set +e
 . virtualenvwrapper.sh || exit 1
 set -e
 
-PREFIX=/opt/cpython-ucs2-$REV
+PREFIX="$OPT_DIRECTORY"
 
 sudo apt-get install -qq zlib1g libssl1.0.0
 

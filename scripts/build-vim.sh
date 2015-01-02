@@ -23,12 +23,13 @@ else
 		exit 0
 	fi
 	ensure_opt cpython-ucs2 cpython-ucs2-$PYTHON1
+	PY1PATH="$OPT_DIRECTORY"
 fi
 
 # PYTHON_CFLAGS contains -Werror=format-security. Old vim cannot be built with 
 # this.
 unset PYTHON_CFLAGS
-cd build/vim/$SUBDIR
+cd "$BUILD_DIRECTORY"
 
 CFGARGS="--with-features=normal --without-x --disable-gui"
 if test -z "$PYTHON1" ; then
@@ -38,7 +39,6 @@ if test -z "$PYTHON1" ; then
 		CFGARGS="$CFGARGS --enable-pythoninterp"
 	fi
 else
-	PY1PATH=/opt/cpython-ucs2-$PYTHON1
 	export LD_LIBRARY_PATH=$PY1PATH/lib:$LD_LIBRARY_PATH
 	export PATH="$PY1PATH/bin:$PATH"
 	CFGARGS="$CFGARGS --enable-python3interp=dynamic"
@@ -54,14 +54,14 @@ fi
 ./configure $CFGARGS
 make
 
-cp src/vim $ROOT/deps/vim/$SUBDIR/vim
+cp src/vim $ROOT/deps/${TARGET}/vim
 cd $ROOT/deps
 # Try running vim --version, fail build if it fails
-vim/$SUBDIR/vim --version
-git add vim/$SUBDIR/vim
+$TARGET/vim --version
+git add $TARGET/vim
 git commit -m "Update vim for $SUBDIR
 
 vim --version:
 
-$("$ROOT/deps/vim/$SUBDIR/vim" --version | indent)
+$("$ROOT/deps/$TARGET/vim" --version | indent)
 $COMMIT_MESSAGE_FOOTER"

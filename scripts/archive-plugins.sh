@@ -13,17 +13,16 @@ tagbar    https://github.com/majutsushi/tagbar
 nerdtree  https://github.com/scrooloose/nerdtree
 ctrlp     https://github.com/kien/ctrlp.vim
 " | while read name url ; do
-	prepare_build vim-plugins/"$name" git "$url"
-	cd "$name"
-	mv .git "../.git-${name}"
-	cd ..
-	echo ">>> $name"
-	tar cvf "$ROOT/deps/vim-plugins/${name}.tar.gz" "${name}"
-	mv ".git-${name}" "${name}/.git"
 	(
+		prepare_build vim-plugins/"$name" git "$url"
+		cd "$name"
+		mv .git "../.git-${name}"
+		cd ..
+		echo ">>> $name"
+		tar cvf "$ROOT/deps/${TARGET}.tar.gz" "${name}"
+		mv ".git-${name}" "${name}/.git"
 		cd $ROOT/deps
-		git add "vim-plugins/${name}.tar.gz"
+		git add "${TARGET}.tar.gz"
 		git commit -m "Update vim plugin $name$NL$COMMIT_MESSAGE_FOOTER"
 	)
-	COMMIT_MESSAGE_FOOTER=
 done
