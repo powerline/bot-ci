@@ -33,8 +33,10 @@ prepare_build() {
 	local url="$3"
 	local rev="$4"
 
+	export VERSION_UPDATED="$(test -n "$ALWAYS_BUILD" && echo 1 || echo 0)"
 	if echo "$ALWAYS_BUILD_DEP" | grep -q ":${dir}:" ; then
 		always=1
+		export VERSION_UPDATED=1
 	fi
 
 	local old_version=
@@ -60,7 +62,6 @@ prepare_build() {
 			new_version="$(bzr log --limit=1 --show-ids "$url" | grep '^revision-id:' | cut -d' ' -f2)"
 			;;
 	esac
-	export VERSION_UPDATED=0
 	if test "$new_version" != "$old_version" ; then
 		export VERSION_UPDATED=1
 	fi
