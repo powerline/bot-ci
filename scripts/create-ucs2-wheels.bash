@@ -21,4 +21,6 @@ mkvirtualenv -p $PREFIX/bin/python$REV python-ucs2-$REV || exit 1
 set -e
 
 pip install wheel
+pwd
+cd "$ROOT"
 "$ROOT"/scripts/create-wheels.sh ucs2
