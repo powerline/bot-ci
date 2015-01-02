@@ -21,7 +21,7 @@ make
 sudo make install
 # Sanity check: run python --version, fail build if it fails
 "${OPT_DIRECTORY}"/bin/python$REV --version
-cd "$DEPS"
+cd "$DDIR"
 create_opt_archive "$OPT_DIRECTORY" "$TARGET" \
 "Update ucs2 cpython-$REV build
 

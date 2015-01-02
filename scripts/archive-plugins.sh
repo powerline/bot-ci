@@ -15,9 +15,9 @@ ctrlp     https://github.com/kien/ctrlp.vim
 		mv .git "../.git-${name}"
 		cd ..
 		echo ">>> $name"
-		tar cvf "$DEPS/${TARGET}.tar.gz" "${name}"
+		tar cvf "$DDIR/${TARGET}.tar.gz" "${name}"
 		mv ".git-${name}" "${name}/.git"
-		cd "$DEPS"
+		cd "$DDIR"
 		git add "${TARGET}.tar.gz"
 		git commit -m "Update vim plugin $name$NL$COMMIT_MESSAGE_FOOTER"
 	)

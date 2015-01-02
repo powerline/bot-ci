@@ -29,7 +29,7 @@ fi
 # PYTHON_CFLAGS contains -Werror=format-security. Old vim cannot be built with 
 # this.
 unset PYTHON_CFLAGS
-cd "$BUILD_DIRECTORY"
+cd "$BDIR_DIRECTORY"
 
 CFGARGS="--with-features=normal --without-x --disable-gui"
 if test -z "$PYTHON1" ; then
@@ -54,8 +54,8 @@ fi
 ./configure $CFGARGS
 make
 
-cp src/vim "$DEPS/${TARGET}/vim"
-cd "$DEPS"
+cp src/vim "$DDIR/${TARGET}/vim"
+cd "$DDIR"
 # Try running vim --version, fail build if it fails
 $TARGET/vim --version
 git add $TARGET/vim
@@ -63,5 +63,5 @@ git commit -m "Update vim for $SUBDIR
 
 vim --version:
 
-$("$DEPS/$TARGET/vim" --version | indent)
+$("$DDIR/$TARGET/vim" --version | indent)
 $COMMIT_MESSAGE_FOOTER"

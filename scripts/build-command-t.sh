@@ -4,7 +4,7 @@
 
 prepare_build vim-plugins/command-t git https://github.com/wincent/Command-T
 
-cd "$BUILD_DIRECTORY"
+cd "$BDIR_DIRECTORY"
 
 cd command-t/ruby/command-t
 ruby extconf.rb
@@ -13,10 +13,10 @@ make
 cd ../..
 mv .git ../.git-command-t
 cd ..
-tar czf "$DEPS/${TARGET}.tar.gz" command-t
+tar czf "$DDIR/${TARGET}.tar.gz" command-t
 mv .git-command-t command-t/.git
 
-cd "$DEPS"
+cd "$DDIR"
 git add ${TARGET}.tar.gz
 git commit -m "Update Command-T
 $COMMIT_MESSAGE_FOOTER"
