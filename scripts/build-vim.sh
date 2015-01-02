@@ -15,7 +15,7 @@ if test -z "$PYTHON1" ; then
 	prepare_build vim/$SUBDIR mercurial https://vim.googlecode.com/hg "$REV"
 else
 	UPDATES=0
-	prepare_build --onlycheck cpython-ucs2/$REV mercurial http://hg.python.org/cpython $PYTHON1
+	prepare_build --onlycheck cpython-ucs2/$PYTHON1 mercurial http://hg.python.org/cpython $PYTHON1
 	UPDATES="$(( $VERSION_UPDATED + $UPDATES ))"
 	prepare_build --always vim/$SUBDIR mercurial https://vim.googlecode.com/hg "$REV"
 	UPDATES="$(( $VERSION_UPDATED + $UPDATES ))"
