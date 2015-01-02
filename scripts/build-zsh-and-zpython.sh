@@ -34,7 +34,8 @@ export LD_LIBRARY_PATH="${LIBRARY_DIR}:$LD_LIBRARY_PATH"
 
 cmake .. -DZSH_REPOSITORY="${ROOT}/build/zpython/zsh" \
          -DPYTHON_LIBRARY="$LIBRARY_PATH" \
-         -DPYTHON_INCLUDE_DIR="${PYTHON_INCLUDE_DIR}"
+         -DPYTHON_INCLUDE_DIR="${PYTHON_INCLUDE_DIR}" \
+         -DCMAKE_INSTALL_PREFIX="/opt/zsh-${PYTHON_VERSION}"
 make
 ldd libzpython.so
 ctest -VV
