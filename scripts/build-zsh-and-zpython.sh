@@ -3,15 +3,15 @@
 . scripts/common/build.sh
 
 UPDATES=0
-prepare_build --always zpython/zsh git git://git.code.sf.net/p/zsh/code
+prepare_build --always zpython/zsh-${PYTHON_VERSION}  git git://git.code.sf.net/p/zsh/code
 UPDATES="$(( $VERSION_UPDATED + $UPDATES ))"
-prepare_build --always zpython/zpython mercurial https://bitbucket.org/ZyX_I/zpython
+prepare_build --always zpython/zpython-${PYTHON_VERSION} mercurial https://bitbucket.org/ZyX_I/zpython
 UPDATES="$(( $VERSION_UPDATED + $UPDATES ))"
 if test $UPDATES -eq 0 ; then
 	exit 0
 fi
 
-cd build/zpython/zsh
+cd build/zpython/zsh-${PYTHON_VERSION}
 ./.preconfig
 ./configure --prefix=/opt/zsh-${PYTHON_VERSION}
 # Zsh make may fail due to missing yodl
@@ -21,7 +21,7 @@ make || true
 make TESTNUM=A01 test
 sudo make install || true
 
-cd ../zpython
+cd ../zpython-${PYTHON_VERSION}
 mkdir build
 cd build
 LIBRARY_PATH="$(ldd "$(which python)" | grep libpython | sed 's/^.* => //;s/ .*$//')"
@@ -32,7 +32,7 @@ PYTHON_INCLUDE_DIR="$(dirname "${LIBRARY_DIR}")/include/python$PYTHON_SUFFIX"
 
 export LD_LIBRARY_PATH="${LIBRARY_DIR}:$LD_LIBRARY_PATH"
 
-cmake .. -DZSH_REPOSITORY="${ROOT}/build/zpython/zsh" \
+cmake .. -DZSH_REPOSITORY="${ROOT}/build/zpython/zsh-${PYTHON_VERSION}" \
          -DPYTHON_LIBRARY="$LIBRARY_PATH" \
          -DPYTHON_INCLUDE_DIR="${PYTHON_INCLUDE_DIR}" \
          -DCMAKE_INSTALL_PREFIX="/opt/zsh-${PYTHON_VERSION}"
