@@ -46,7 +46,8 @@ fi
 cd $ROOT/deps/wheels
 PY_SUF_PART="${PREF}${PYTHON_IMPLEMENTATION}-${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}"
 for dir in $PY_SUF_PART $PY_SUF_PART* ; do
-	git rm -r "$dir" || true
+	git rm -r --ignore-unmatch --cached "$dir"
+	rm -rf "$dir"
 done
 mkdir $PYTHON_SUFFIX
 cd $PYTHON_SUFFIX
