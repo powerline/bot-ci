@@ -16,8 +16,12 @@ def str_to_lines(s):
 		ret.append(line)
 	return ret
 
-def main(a, b):
-	sys.stdout.write((''.join(ndiff(str_to_lines(a), str_to_lines(b)))).encode('utf-8'))
+if sys.version_info < (3,):
+	def main(a, b):
+		sys.stdout.write((''.join(ndiff(str_to_lines(a), str_to_lines(b)))).encode('utf-8'))
+else:
+	def main(a, b):
+		sys.stdout.write(''.join(ndiff(str_to_lines(a), str_to_lines(b))))
 
 if __name__ == '__main__':
 	main(sys.argv[1], sys.argv[2])
