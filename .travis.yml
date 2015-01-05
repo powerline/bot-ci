@@ -50,7 +50,7 @@ matrix:
               SCRIPT2="./scripts/build-libvterm.sh"
               SCRIPT3="./scripts/build-command-t.sh"
               SCRIPT4="./scripts/archive-plugins.sh"
-        - python: "2.6"
+        - python: "2.7"
           env: >-
               SCRIPT1="./scripts/build-ucs2-cpython.sh 2.6"
               SCRIPT2="./scripts/build-vim.sh tip 2.6"
