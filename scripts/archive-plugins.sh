@@ -15,7 +15,7 @@ ctrlp     https://github.com/kien/ctrlp.vim
 		mv .git "../.git-${name}"
 		cd ..
 		echo ">>> $name"
-		tar cvf "$DDIR/${TARGET}.tar.gz" "${name}"
+		tar czvf "$DDIR/${TARGET}.tar.gz" "${name}"
 		mv ".git-${name}" "${name}/.git"
 		cd "$DDIR"
 		git add "${TARGET}.tar.gz"
