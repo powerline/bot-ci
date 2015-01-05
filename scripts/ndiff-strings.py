@@ -9,13 +9,15 @@ from difflib import ndiff
 def str_to_lines(s):
 	ret = []
 	for line in s.splitlines(1):
+		if isinstance(line, bytes):
+			line = line.decode('utf-8')
 		if not line.endswith('\n'):
 			line = line + '\n'
 		ret.append(line)
 	return ret
 
 def main(a, b):
-	sys.stdout.write(''.join(ndiff(str_to_lines(a), str_to_lines(b))))
+	sys.stdout.write((''.join(ndiff(str_to_lines(a), str_to_lines(b)))).encode('utf-8'))
 
 if __name__ == '__main__':
 	main(sys.argv[1], sys.argv[2])
