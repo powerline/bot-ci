@@ -16,5 +16,15 @@ use-virtual-env() {
 		set +e
 		mkvirtualenv -p "$prefix/bin/python$pysuf" "$name" || return 1
 		set -e
+	else
+		set +e
+		workon "$name"
+		set -e
 	fi
+	main_path="$prefix/lib/python$pysuf"
+	site_path="$main_path/site-packages"
+	export PYTHONPATH="${main_path}:${site_path}${PYTHONPATH:+:}$PYTHONPATH"
+	venv_main_path="$VIRTUAL_ENV/lib/python$pysuf"
+	venv_site_path="$venv_main_path/site-packages"
+	export PYTHONPATH="${venv_main_path}:${venv_site_path}:$PYTHONPATH"
 }

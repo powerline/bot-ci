@@ -41,14 +41,6 @@ if test -z "$PYTHON1" ; then
 	fi
 else
 	use-virtual-env cpython-ucs2-$PYTHON1 "$PY1PATH" $PYTHON1
-	main_path="$PY1PATH/lib/python$UCS2_PYTHON_VARIANT"
-	site_path="$main_path/site-packages"
-	venv_main_path="$VIRTUAL_ENV/lib/python$UCS2_PYTHON_VARIANT"
-	venv_site_path="$venv_main_path/site-packages"
-	new_paths="${main_path}:${site_path}:${venv_main_path}:${venv_site_path}"
-	export LD_LIBRARY_PATH=$PY1PATH/lib:$LD_LIBRARY_PATH
-	export PYTHONPATH="$NEW_PATHS${PYTHONPATH:+:}$PYTHONPATH"
-	export PATH="$PY1PATH/bin:$PATH"
 	CFGARGS="$CFGARGS --enable-python3interp=dynamic"
 	CFGARGS="$CFGARGS --enable-pythoninterp=dynamic"
 fi
