@@ -2,6 +2,7 @@ use-virtual-env() {
 	local name="$1"
 	local prefix="$2"
 	local pysuf="$3"
+	local addpypath="$4"
 
 	pip install virtualenvwrapper
 	set +e
@@ -21,10 +22,12 @@ use-virtual-env() {
 		workon "$name"
 		set -e
 	fi
-	main_path="$prefix/lib/python$pysuf"
-	site_path="$main_path/site-packages"
-	export PYTHONPATH="${main_path}:${site_path}${PYTHONPATH:+:}$PYTHONPATH"
-	venv_main_path="$VIRTUAL_ENV/lib/python$pysuf"
-	venv_site_path="$venv_main_path/site-packages"
-	export PYTHONPATH="${venv_main_path}:${venv_site_path}:$PYTHONPATH"
+	if test -n "$addpypath" ; then
+		main_path="$prefix/lib/python$pysuf"
+		site_path="$main_path/site-packages"
+		export PYTHONPATH="${main_path}:${site_path}${PYTHONPATH:+:}$PYTHONPATH"
+		venv_main_path="$VIRTUAL_ENV/lib/python$pysuf"
+		venv_site_path="$venv_main_path/site-packages"
+		export PYTHONPATH="${venv_main_path}:${venv_site_path}:$PYTHONPATH"
+	fi
 }
