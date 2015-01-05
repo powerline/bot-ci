@@ -27,6 +27,10 @@ use-virtual-env() {
 	#     variant (without question mark) does not filter out the very first 
 	#     path.
 	export PATH="$(echo "$PATH" | sed -r -e 's@:([^:]*python/?2[^:]|2\.[67]|pypy)*:?@:@g; s/:+/:/g; s/^://; s/:$//;')"
+	(
+		cd "$VIRTUAL_ENV/bin"
+		ln -s python python2
+	)
 	if test -n "$addpypath" ; then
 		main_path="$prefix/lib/python$pysuf"
 		site_path="$main_path/site-packages"
