@@ -26,7 +26,7 @@ use-virtual-env() {
 	# XXX To filter all paths containing python `s/:?` needs to be used. This
 	#     variant (without question mark) does not filter out the very first 
 	#     path.
-	export PATH="$(echo "$PATH" | sed -r -e 's/:([^:]*python/?2[^:]|2\.[67])*:?/:/g; s/:+/:/g; s/^://; s/:$//;')"
+	export PATH="$(echo "$PATH" | sed -r -e 's@:([^:]*python/?2[^:]|2\.[67]|pypy)*:?@:@g; s/:+/:/g; s/^://; s/:$//;')"
 	if test -n "$addpypath" ; then
 		main_path="$prefix/lib/python$pysuf"
 		site_path="$main_path/site-packages"
