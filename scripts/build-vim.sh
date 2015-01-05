@@ -15,7 +15,12 @@ fi
 if test -z "$PYTHON1" ; then
 	prepare_build vim/$SUBDIR mercurial https://vim.googlecode.com/hg "$REV"
 else
-	prepare_build vim/$SUBDIR mercurial https://vim.googlecode.com/hg "$REV"
+	version_file="$(get_version_file_name cpython-ucs2/cpython-ucs2-$PYTHON1)"
+	always_arg=
+	if (cd "$DDIR" && git diff --exit-code HEAD..master "$version_file") ; then
+		always_arg=--always
+	fi
+	prepare_build $always_arg vim/$SUBDIR mercurial https://vim.googlecode.com/hg "$REV"
 	ensure_opt cpython-ucs2 cpython-ucs2-$PYTHON1
 	PY1PATH="$OPT_DIRECTORY"
 fi

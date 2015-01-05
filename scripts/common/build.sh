@@ -17,6 +17,11 @@ get_bzr_tip() {
 	bzr log --limit=1 --show-ids "$1"
 }
 
+get_version_file_name() {
+	local dir="$1"
+	echo "$DDIR/versions/$(echo "$dir" | sed -r 's/[^A-Za-z0-9-]+/-/g')"
+}
+
 prepare_build() {
 	local always="$ALWAYS_BUILD"
 	if test "x$1" = "x--always" ; then
@@ -42,7 +47,7 @@ prepare_build() {
 	local old_version=
 	local new_version=
 	mkdir -p "$DDIR"/versions
-	local version_file="$DDIR/versions/$(echo "$dir" | sed -r 's/[^A-Za-z0-9-]+/-/g')"
+	local version_file="$(get_version_file_name "$dir")"
 	if test -e $version_file ; then
 		old_version="$(cat "$version_file")"
 	fi
