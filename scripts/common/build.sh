@@ -154,18 +154,19 @@ prepare_build() {
 		esac
 	fi
 
-	local old_version=
-	mkdir -p "$DDIR"/versions
-	local version_file="$(get_version_file_name "$dir")"
-	if test -e $version_file ; then
-		old_version="$(cat "$version_file")"
-	fi
 	local new_version=
 	get_version new_version "$vcs" "$url" "$rev" "$embedded_python" $deps -- $other
 
 	if test -n "$only_print_version" ; then
 		echo "$new_version"
 		return 0
+	fi
+
+	local old_version=
+	mkdir -p "$DDIR"/versions
+	local version_file="$(get_version_file_name "$dir")"
+	if test -e $version_file ; then
+		old_version="$(cat "$version_file")"
 	fi
 
 	local always="$ALWAYS_BUILD"
