@@ -49,14 +49,16 @@ matrix:
           env: >-
               SCRIPT1="./scripts/build-ucs2-cpython.sh 2.6"
               SCRIPT2="./scripts/build-vim.sh tip 2.6"
-              SCRIPT3="./scripts/build-zsh-and-zpython.sh 2.6"
-              SCRIPT4="./scripts/create-ucs2-wheels.bash 2.6"
+              SCRIPT3="./scripts/build-vim.sh v7-0-112 2.6"
+              SCRIPT4="./scripts/build-zsh-and-zpython.sh 2.6"
+              SCRIPT5="./scripts/create-ucs2-wheels.bash 2.6"
         - python: "2.7"
           env: >-
               SCRIPT1="./scripts/build-ucs2-cpython.sh 2.7"
               SCRIPT2="./scripts/build-vim.sh tip 2.7"
-              SCRIPT3="./scripts/build-zsh-and-zpython.sh 2.7"
-              SCRIPT4="./scripts/create-ucs2-wheels.bash 2.7"
+              SCRIPT3="./scripts/build-vim.sh v7-0-112 2.7"
+              SCRIPT4="./scripts/build-zsh-and-zpython.sh 2.7"
+              SCRIPT5="./scripts/create-ucs2-wheels.bash 2.7"
         - env: >-
               SCRIPT1="./scripts/build-tmux.sh 1.6"
               SCRIPT2="./scripts/build-tmux.sh 1.7"

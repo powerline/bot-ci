@@ -6,10 +6,19 @@ PYTHON1=$2
 . scripts/common/build.sh
 . scripts/common/use-virtual-env.bash
 
+OLD=
+if echo "$REV" | grep -q v7-0 ; then
+	OLD=1
+fi
+
+DOUBLE=
 if test -z "$PYTHON1" ; then
 	SUBDIR="${REV}-$PYTHON_MM"
+elif test -n "$OLD" ; then
+	SUBDIR="${REV}-$PYTHON1-ucs2"
 else
-	SUBDIR="${REV}-$PYTHON1-double"
+	DOUBLE=1
+	SUBDIR="${REV}-$PYTHON1-double-ucs2"
 fi
 
 if test -z "$PYTHON1" ; then
@@ -18,6 +27,8 @@ if test -z "$PYTHON1" ; then
 		--url https://vim.googlecode.com/hg \
 		--rev "$REV"
 else
+	ensure_opt cpython-ucs2 cpython-ucs2-$PYTHON1
+	use-virtual-env cpython-ucs2-$PYTHON1 "$PY1PATH" $PYTHON1
 	version_file="$(get_version_file_name cpython-ucs2/cpython-ucs2-$PYTHON1)"
 	archive_file="cpython-ucs2/cpython-ucs2-${PYTHON1}.tar.gz"
 	prepare_build vim/$SUBDIR \
@@ -25,7 +36,6 @@ else
 		--url https://vim.googlecode.com/hg \
 		--rev "$REV" \
 		--depends cpython-ucs2/cpython-ucs2-$PYTHON1
-	ensure_opt cpython-ucs2 cpython-ucs2-$PYTHON1
 	PY1PATH="$OPT_DIRECTORY"
 fi
 
@@ -35,18 +45,17 @@ unset PYTHON_CFLAGS
 cd "$BUILD_DIRECTORY"
 
 CFGARGS="--with-features=normal --without-x --disable-gui"
-if test -z "$PYTHON1" ; then
+if test -z "$DOUBLE" ; then
 	if test "$PYTHON_VERSION_MAJOR" -ge 3 ; then
 		CFGARGS="$CFGARGS --enable-python3interp"
 	else
 		CFGARGS="$CFGARGS --enable-pythoninterp"
 	fi
 else
-	use-virtual-env cpython-ucs2-$PYTHON1 "$PY1PATH" $PYTHON1
 	CFGARGS="$CFGARGS --enable-python3interp=dynamic"
 	CFGARGS="$CFGARGS --enable-pythoninterp=dynamic"
 fi
-if echo "$REV" | grep -q v7-0 ; then
+if test -n "$OLD" ; then
 	# With -O2 Vim is crashing
 	export CFLAGS='-O0 -g'
 else
