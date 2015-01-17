@@ -154,9 +154,11 @@ prepare_build() {
 	fi
 
 	local always="$ALWAYS_BUILD"
-	if echo "$ALWAYS_BUILD_DEP" | grep -q ":${dir}:" ; then
-		always=1
-	fi
+	for dep in $deps $dir ; do
+		if echo "$ALWAYS_BUILD_DEP" | grep -q ":${dep}:" ; then
+			always=1
+		fi
+	done
 
 	if test "$new_version" != "$old_version" || test -n "$always" ; then
 		echo "$new_version" > "$version_file"
