@@ -8,12 +8,15 @@ UCS2_REV="$1"
 if test -n "$UCS2_REV" ; then
 	ensure_opt cpython-ucs2 cpython-ucs2-$UCS2_REV
 	use-virtual-env cpython-ucs2-$UCS2_REV "$OPT_DIRECTORY" $UCS2_REV
+	DEPENDS_ARGS="--depends cpython-ucs2/cpython-ucs2-$UCS2_REV"
+else
+	DEPENDS_ARGS="--embedded-python"
 fi
 
 prepare_build zpython/zsh-$PYTHON_MM${UCS2_REV:+-ucs2} \
 	--url git://git.code.sf.net/p/zsh/code \
 	--also-build "zpython/zpython-$PYTHON_MM${UCS2_REV:+-ucs2}
-	              --embedded-python
+	              $DEPENDS_ARGS
 	              --url https://bitbucket.org/ZyX_I/zpython"
 ZSH_TGT="$FIRST_TARGET"
 ZSH_OPT="$FIRST_OPT_DIRECTORY"
