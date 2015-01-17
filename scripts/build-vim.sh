@@ -18,7 +18,7 @@ elif test -n "$OLD" ; then
 	SUBDIR="${REV}-$PYTHON1-ucs2"
 else
 	DOUBLE=1
-	SUBDIR="${REV}-$PYTHON1-double-ucs2"
+	SUBDIR="${REV}-$PYTHON1-ucs2-double"
 fi
 
 if test -z "$PYTHON1" ; then
