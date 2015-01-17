@@ -35,7 +35,7 @@ _get_version() {
 				cut -f1
 			;;
 		mercurial)
-			hg identify --rev="$rev"
+			hg identify --rev="$rev" "$url"
 			;;
 		bzr)
 			bzr log --limit=1 --show-ids "$url" | \
