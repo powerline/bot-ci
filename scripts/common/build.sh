@@ -154,7 +154,8 @@ prepare_build() {
 	fi
 
 	local always="$ALWAYS_BUILD"
-	for dep in $deps $dir ; do
+	local other_dep="$(echo "$other" | cut -d' ' -f1)"
+	for dep in $deps $dir $other_dep ; do
 		if echo "$ALWAYS_BUILD_DEP" | grep -q ":${dep}:" ; then
 			always=1
 		fi
