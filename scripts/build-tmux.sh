@@ -20,7 +20,7 @@ cd "$DDIR"
 $TARGET/tmux -V
 
 git add $TARGET/tmux
-git commit -m "Update tmux for $SUBDIR
+git commit -m "Update tmux $REV
 
 tmux -V:
 
