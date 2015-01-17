@@ -156,7 +156,7 @@ prepare_build() {
 	local always="$ALWAYS_BUILD"
 	local other_dep="$(echo "$other" | cut -d' ' -f1)"
 	for dep in $deps $dir $other_dep ; do
-		if echo "$ALWAYS_BUILD_DEP" | grep -q ":${dep}:" ; then
+		if test "${ALWAYS_BUILD_DEP#*:${dep}:}" != "$ALWAYS_BUILD_DEP" ; then
 			always=1
 		fi
 	done
