@@ -4,7 +4,9 @@ REV=$1
 . scripts/common/main.sh
 . scripts/common/build.sh
 
-prepare_build tmux/tmux-$REV git git://git.code.sf.net/p/tmux/tmux-code $REV
+prepare_build tmux/tmux-$REV \
+	--url git://git.code.sf.net/p/tmux/tmux-code \
+	--rev $REV
 
 cd "$BUILD_DIRECTORY"
 sh autogen.sh

@@ -3,12 +3,15 @@
 . scripts/common/build.sh
 
 UPDATES=0
-prepare_build --always zpython/zsh-$PYTHON_VERSION git git://git.code.sf.net/p/zsh/code
+prepare_build --always zpython/zsh-$PYTHON_MM \
+	--url git://git.code.sf.net/p/zsh/code
 ZSH_TGT="$TARGET"
 ZSH_OPT="$OPT_DIRECTORY"
 ZSH_BDIR="$BUILD_DIRECTORY"
 UPDATES="$(( $VERSION_UPDATED + $UPDATES ))"
-prepare_build --always zpython/zpython-$PYTHON_VERSION mercurial https://bitbucket.org/ZyX_I/zpython
+prepare_build --always zpython/zpython-$PYTHON_MM \
+	--embedded-python \
+	--url https://bitbucket.org/ZyX_I/zpython
 ZPYTHON_BDIR="$BUILD_DIRECTORY"
 UPDATES="$(( $VERSION_UPDATED + $UPDATES ))"
 if test $UPDATES -eq 0 ; then

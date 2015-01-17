@@ -22,6 +22,62 @@ get_version_file_name() {
 	echo "$DDIR/versions/$(echo "$dir" | sed -r 's/[^A-Za-z0-9-]+/-/g')"
 }
 
+_get_version() {
+	local vcs="$1"
+	local url="$2"
+	local rev="$3"
+	local embedded_python="$4"
+	shift 4
+	local deps="$@"
+
+	case "$vcs" in
+		git)
+			git ls-remote "$url" "$rev" | \
+				cut -f1
+			;;
+		mercurial)
+			if ! test -d "$BDIR/empty_hg_repository" ; then
+				mkdir -p "$BDIR"
+				hg init "$BDIR/empty_hg_repository" >&2
+			fi
+			hg -R "$BDIR/empty_hg_repository" incoming \
+				--limit=1 \
+				--newest-first \
+				--template='{node}' \
+				--quiet \
+				--rev="$rev" \
+				"$url"
+			;;
+		bzr)
+			bzr log --limit=1 --show-ids "$url" | \
+				grep '^revision-id:' | cut -d' ' -f2
+			;;
+	esac
+	local dep
+	for dep in $deps ; do
+		local dep_file="$(get_version_file_name $dep)"
+		if ! test -e "$dep_file" ; then
+			echo "File $dep_file was not found" >&2
+			return 1
+		fi
+		echo "${dep}:"
+		cat $dep_file | sed 's/^/    /'
+	done
+	if test "$embedded_python" -ne 0 ; then
+		echo "Python: $PYTHON_VERSION"
+	fi
+}
+
+get_version() {
+	local var="$1"
+	shift
+	local ret="$(_get_version "$@" || echo "--FAIL--")"
+	if test "${ret%--FAIL--}" != "${ret}" ; then
+		return 1
+	fi
+	eval $var='"$ret"'
+}
+
 prepare_build() {
 	local always="$ALWAYS_BUILD"
 	if test "x$1" = "x--always" ; then
@@ -33,10 +89,36 @@ prepare_build() {
 		onlycheck=1
 		shift
 	fi
+
 	local dir="$1"
-	local vcs="$2"
-	local url="$3"
-	local rev="$4"
+	shift
+	local vcs=
+	local url=
+	local rev=
+	local deps=
+	local embedded_python=0
+	while test "$#" -gt 0 ; do
+		case "$1" in
+			(--vcs) vcs="$2" ; shift ; shift ;;
+			(--url) url="$2" ; shift ; shift ;;
+			(--rev) rev="$2" ; shift ; shift ;;
+			(--depends) deps="$deps $2" ; shift ; shift ;;
+			(--embedded-python) ; embedded_python=1 ; shift ;;
+		esac
+	done
+	if test -z "$vcs" ; then
+		case "$url" in
+			(git://*)     vcs=git ;;
+			(*)           vcs=mercurial ;;
+		esac
+	fi
+	if test -z "$rev" ; then
+		case "$vcs" in
+			(git)       rev=HEAD ;;
+			(mercurial) rev=default ;;
+			(bzr)       rev= ;;
+		esac
+	fi
 
 	export VERSION_UPDATED="$(test -n "$ALWAYS_BUILD" && echo 1 || echo 0)"
 	if echo "$ALWAYS_BUILD_DEP" | grep -q ":${dir}:" ; then
@@ -45,27 +127,13 @@ prepare_build() {
 	fi
 
 	local old_version=
-	local new_version=
 	mkdir -p "$DDIR"/versions
 	local version_file="$(get_version_file_name "$dir")"
 	if test -e $version_file ; then
 		old_version="$(cat "$version_file")"
 	fi
-	case $vcs in
-		git)
-			new_version="$(git ls-remote "$url" ${rev:-HEAD} | cut -f1)"
-			;;
-		mercurial)
-			if ! test -d "$BDIR/empty_hg_repository" ; then
-				mkdir -p "$BDIR"
-				hg init "$BDIR/empty_hg_repository"
-			fi
-			new_version="$(hg -R "$BDIR/empty_hg_repository" incoming --limit=1 --newest-first --template='{node}' --quiet --rev=${rev:-default} "$url")"
-			;;
-		bzr)
-			new_version="$(bzr log --limit=1 --show-ids "$url" | grep '^revision-id:' | cut -d' ' -f2)"
-			;;
-	esac
+	local new_version=
+	get_version new_version "$vcs" "$url" "$rev" "$embedded_python" $deps
 	if test "$new_version" != "$old_version" ; then
 		export VERSION_UPDATED=1
 	fi
@@ -85,7 +153,7 @@ prepare_build() {
 			case $vcs in
 				(git)
 					local branch_arg=
-					if test -n "$rev" ; then
+					if test "$rev" != "HEAD" ; then
 						branch_arg="--branch=$rev"
 					fi
 					git clone --depth=1 $branch_arg "$url" "$BDIR/$dir"

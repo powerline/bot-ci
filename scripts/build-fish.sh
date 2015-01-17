@@ -2,7 +2,7 @@
 . scripts/common/main.sh
 . scripts/common/build.sh
 
-prepare_build fish/fish git https://github.com/fish-shell/fish-shell
+prepare_build fish/fish --url git://github.com/fish-shell/fish-shell
 
 cd "${BUILD_DIRECTORY}"
 autoconf

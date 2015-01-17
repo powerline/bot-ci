@@ -2,7 +2,9 @@
 . scripts/common/main.sh
 . scripts/common/build.sh
 
-prepare_build libvterm bzr http://bazaar.leonerd.org.uk/c/libvterm/
+prepare_build libvterm \
+	--vcs bzr \
+	--url http://bazaar.leonerd.org.uk/c/libvterm/
 
 cd "$BUILD_DIRECTORY"
 make

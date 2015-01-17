@@ -7,21 +7,24 @@ PYTHON1=$2
 . scripts/common/use-virtual-env.bash
 
 if test -z "$PYTHON1" ; then
-	SUBDIR="${REV}-$PYTHON_VERSION"
+	SUBDIR="${REV}-$PYTHON_MM"
 else
 	SUBDIR="${REV}-$PYTHON1-double"
 fi
 
 if test -z "$PYTHON1" ; then
-	prepare_build vim/$SUBDIR mercurial https://vim.googlecode.com/hg "$REV"
+	prepare_build vim/$SUBDIR \
+		--vcs mercurial \
+		--url https://vim.googlecode.com/hg \
+		--rev "$REV"
 else
 	version_file="$(get_version_file_name cpython-ucs2/cpython-ucs2-$PYTHON1)"
 	archive_file="cpython-ucs2/cpython-ucs2-${PYTHON1}.tar.gz"
-	always_arg=
-	if (cd "$DDIR" && git diff --exit-code HEAD..master "$version_file" "$archive_file") ; then
-		always_arg=--always
-	fi
-	prepare_build $always_arg vim/$SUBDIR mercurial https://vim.googlecode.com/hg "$REV"
+	prepare_build vim/$SUBDIR \
+		--embedded-python \
+		--url https://vim.googlecode.com/hg \
+		--rev "$REV" \
+		--depends cpython-ucs2/cpython-ucs2-$PYTHON1
 	ensure_opt cpython-ucs2 cpython-ucs2-$PYTHON1
 	PY1PATH="$OPT_DIRECTORY"
 fi

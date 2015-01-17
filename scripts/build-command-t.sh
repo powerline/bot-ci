@@ -2,7 +2,7 @@
 . scripts/common/main.sh
 . scripts/common/build.sh
 
-prepare_build vim-plugins/command-t git https://github.com/wincent/Command-T
+prepare_build vim-plugins/command-t --url git://github.com/wincent/Command-T
 
 cd "$BUILD_DIRECTORY"
 

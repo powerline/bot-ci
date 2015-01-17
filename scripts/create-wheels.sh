@@ -49,7 +49,7 @@ if test -d "$PYTHON_SUFFIX" ; then
 	export OLD_LIST="$(dir -1 .)"
 	cd ..
 fi
-PY_SUF_PART="${PREF}${PYTHON_IMPLEMENTATION}-${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}"
+PY_SUF_PART="${PREF}${PYTHON_IMPLEMENTATION}-${PYTHON_MM}"
 for dir in $PY_SUF_PART $PY_SUF_PART* ; do
 	git rm -r --ignore-unmatch --cached "$dir"
 	rm -rf "$dir"
