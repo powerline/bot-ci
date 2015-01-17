@@ -25,4 +25,4 @@ git commit -m "Update tmux $REV
 tmux -V:
 
 $("$DDIR/$TARGET/tmux" -V | indent)
-$COMMIT_MESSAGE_FOOTER"
+$COMMIT_MESSAGE_FOOTER" || true
