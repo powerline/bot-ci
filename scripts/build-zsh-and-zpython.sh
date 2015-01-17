@@ -1,9 +1,17 @@
-#!/bin/sh
+#!/bin/bash
+UCS2_REV="$1"
+
 . scripts/common/main.sh
 . scripts/common/build.sh
+. scripts/common/use-virtual-env.bash
+
+if test -n "$UCS2_REV" ; then
+	ensure_opt cpython-ucs2 cpython-ucs2-$UCS2_REV
+	use-virtual-env cpython-ucs2-$UCS2_REV "$OPT_DIRECTORY" $UCS2_REV
+fi
 
 UPDATES=0
-prepare_build --always zpython/zsh-$PYTHON_MM \
+prepare_build --always zpython/zsh${UCS2_REV:+-}${UCS2_REV}-$PYTHON_MM \
 	--url git://git.code.sf.net/p/zsh/code
 ZSH_TGT="$TARGET"
 ZSH_OPT="$OPT_DIRECTORY"

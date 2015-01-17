@@ -35,4 +35,6 @@ use-virtual-env() {
 		venv_site_path="$venv_main_path/site-packages"
 		export PYTHONPATH="${venv_main_path}:${venv_site_path}:$PYTHONPATH"
 	fi
+
+	. "$(dirname ${BASH_SOURCE})"/main.sh
 }
