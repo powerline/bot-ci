@@ -56,6 +56,11 @@ matrix:
               SCRIPT2="./scripts/build-vim.sh tip 2.7"
               SCRIPT3="./scripts/create-ucs2-wheels.bash 2.7"
         - env: >-
+              SCRIPT1="./scripts/build-tmux.sh 1.6"
+              SCRIPT1="./scripts/build-tmux.sh 1.7"
+              SCRIPT1="./scripts/build-tmux.sh 1.8"
+              SCRIPT1="./scripts/build-tmux.sh 1.9"
+        - env: >-
               SCRIPT1="./scripts/build-fish.sh"
               SCRIPT2="./scripts/build-libvterm.sh"
               SCRIPT3="./scripts/build-command-t.sh"
