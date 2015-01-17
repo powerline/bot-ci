@@ -7,7 +7,7 @@ PYTHON1=$2
 . scripts/common/use-virtual-env.bash
 
 OLD=
-if echo "$REV" | grep -q v7-0 ; then
+if test "${REV#v7-0}" != "$REV" ; then
 	OLD=1
 fi
 
