@@ -133,7 +133,7 @@ prepare_build() {
 			(--rev) rev="$2" ; shift ; shift ;;
 			(--depends) deps="$deps $2" ; shift ; shift ;;
 			(--also-build) other="$2" ; shift ; shift ;;
-			(--embedded-python) ; embedded_python=1 ; shift ;;
+			(--embedded-python) embedded_python=1 ; shift ;;
 		esac
 	done
 	if test -z "$vcs" ; then
