@@ -42,7 +42,7 @@ _get_version() {
 			hg -R "$BDIR/empty_hg_repository" incoming \
 				--limit=1 \
 				--newest-first \
-				--template='{node}' \
+				--template='{node}\n' \
 				--quiet \
 				--rev="$rev" \
 				"$url"
@@ -68,7 +68,7 @@ _get_version() {
 	done
 	if test $# -gt 0 ; then
 		echo "$@:"
-		prepare_build --version "$@"
+		prepare_build --version "$@" | sed 's/^/    /'
 	fi
 	if test "$embedded_python" -ne 0 ; then
 		echo "Python: $PYTHON_VERSION"
