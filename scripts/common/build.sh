@@ -180,7 +180,7 @@ prepare_build() {
 			git add "$version_file"
 		)
 		vcs_checkout $vcs "$new_version" "$rev" "$url" "$BUILD_DIRECTORY"
-		COMMIT_MESSAGE_FOOTER="$COMMIT_MESSAGE_FOOTER$NL$dir tip:$NL$NL$(get_${vcs}_tip "$BDIR/$dir" | indent)$NL"
+		COMMIT_MESSAGE_FOOTER="$COMMIT_MESSAGE_FOOTER$NL$dir tip:$NL$NL$(get_${vcs}_tip "$BUILD_DIRECTORY" | indent)$NL"
 	else
 		exit 0
 	fi
