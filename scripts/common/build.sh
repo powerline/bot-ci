@@ -134,6 +134,11 @@ prepare_build() {
 			(--depends) deps="$deps $2" ; shift ; shift ;;
 			(--also-build) other="$2" ; shift ; shift ;;
 			(--embedded-python) embedded_python=1 ; shift ;;
+			(*)
+				echo "Unknown argument: $1"
+				echo "Remaining args: $@"
+				return 1
+				;;
 		esac
 	done
 	if test -z "$vcs" ; then
