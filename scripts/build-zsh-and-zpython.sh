@@ -10,21 +10,15 @@ if test -n "$UCS2_REV" ; then
 	use-virtual-env cpython-ucs2-$UCS2_REV "$OPT_DIRECTORY" $UCS2_REV
 fi
 
-UPDATES=0
-prepare_build --always zpython/zsh${UCS2_REV:+-}${UCS2_REV}-$PYTHON_MM \
-	--url git://git.code.sf.net/p/zsh/code
-ZSH_TGT="$TARGET"
-ZSH_OPT="$OPT_DIRECTORY"
-ZSH_BDIR="$BUILD_DIRECTORY"
-UPDATES="$(( $VERSION_UPDATED + $UPDATES ))"
-prepare_build --always zpython/zpython-$PYTHON_MM \
-	--embedded-python \
-	--url https://bitbucket.org/ZyX_I/zpython
-ZPYTHON_BDIR="$BUILD_DIRECTORY"
-UPDATES="$(( $VERSION_UPDATED + $UPDATES ))"
-if test $UPDATES -eq 0 ; then
-	exit 0
-fi
+prepare_build zpython/zsh${UCS2_REV:+-}${UCS2_REV}-$PYTHON_MM \
+	--url git://git.code.sf.net/p/zsh/code \
+	--also-build "zpython/zpython-$PYTHON_MM
+	              --embeded-python
+	              --url https://bitbucket.org/ZyX_I/zpython"
+ZSH_TGT="$FIRST_TARGET"
+ZSH_OPT="$FIRST_OPT_DIRECTORY"
+ZSH_BDIR="$FIRST_BUILD_DIRECTORY"
+ZPYTHON_BDIR="$SECOND_BUILD_DIRECTORY"
 
 cd "$ZSH_BDIR"
 ./.preconfig

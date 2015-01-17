@@ -28,7 +28,6 @@ _get_version() {
 	local rev="$3"
 	local embedded_python="$4"
 	shift 4
-	local deps="$@"
 
 	case "$vcs" in
 		git)
@@ -54,7 +53,11 @@ _get_version() {
 			;;
 	esac
 	local dep
-	for dep in $deps ; do
+	for dep in "$@" ; do
+		shift
+		if test "x$dep" = "x--" ; then
+			break
+		fi
 		local dep_file="$(get_version_file_name $dep)"
 		if ! test -e "$dep_file" ; then
 			echo "File $dep_file was not found" >&2
@@ -63,6 +66,10 @@ _get_version() {
 		echo "${dep}:"
 		cat $dep_file | sed 's/^/    /'
 	done
+	if test $# -gt 0 ; then
+		echo "$@:"
+		prepare_build --version $@
+	fi
 	if test "$embedded_python" -ne 0 ; then
 		echo "Python: $PYTHON_VERSION"
 	fi
@@ -78,16 +85,37 @@ get_version() {
 	eval $var='"$ret"'
 }
 
+vcs_checkout() {
+	local vcs=$1
+	local new_version="$2"
+	local rev="$3"
+	local url="$4"
+	local target="$5"
+
+	mkdir -p "$BUILD_DIRECTORY"
+
+	case $vcs in
+		(git)
+			local branch_arg=
+			if test "$rev" != "HEAD" ; then
+				branch_arg="--branch=$rev"
+			fi
+			git clone --depth=1 $branch_arg "$url" "$target"
+			;;
+		(mercurial)
+			hg clone --rev=$new_version --updaterev=$new_version "$url" "$target"
+			;;
+		(bzr)
+			bzr checkout --lightweight --revision="$new_version" "$url" "$target"
+			;;
+	esac
+}
+
 prepare_build() {
-	local always="$ALWAYS_BUILD"
-	if test "x$1" = "x--always" ; then
-		always=1
+	local only_print_version=
+	if test "x$1" = "x--version" ; then
 		shift
-	fi
-	local onlycheck=""
-	if test "x$1" = "x--onlycheck" ; then
-		onlycheck=1
-		shift
+		only_print_version=1
 	fi
 
 	local dir="$1"
@@ -96,6 +124,7 @@ prepare_build() {
 	local url=
 	local rev=
 	local deps=
+	local other=
 	local embedded_python=0
 	while test "$#" -gt 0 ; do
 		case "$1" in
@@ -103,6 +132,7 @@ prepare_build() {
 			(--url) url="$2" ; shift ; shift ;;
 			(--rev) rev="$2" ; shift ; shift ;;
 			(--depends) deps="$deps $2" ; shift ; shift ;;
+			(--also-build) other="$2" ; shift ; shift ;;
 			(--embedded-python) ; embedded_python=1 ; shift ;;
 		esac
 	done
@@ -120,12 +150,6 @@ prepare_build() {
 		esac
 	fi
 
-	export VERSION_UPDATED="$(test -n "$ALWAYS_BUILD" && echo 1 || echo 0)"
-	if echo "$ALWAYS_BUILD_DEP" | grep -q ":${dir}:" ; then
-		always=1
-		export VERSION_UPDATED=1
-	fi
-
 	local old_version=
 	mkdir -p "$DDIR"/versions
 	local version_file="$(get_version_file_name "$dir")"
@@ -133,13 +157,18 @@ prepare_build() {
 		old_version="$(cat "$version_file")"
 	fi
 	local new_version=
-	get_version new_version "$vcs" "$url" "$rev" "$embedded_python" $deps
-	if test "$new_version" != "$old_version" ; then
-		export VERSION_UPDATED=1
-	fi
-	if test -n "$onlycheck" ; then
+	get_version new_version "$vcs" "$url" "$rev" "$embedded_python" $deps -- $other
+
+	if test -n "$only_print_version" ; then
+		echo "$new_version"
 		return 0
 	fi
+
+	local always="$ALWAYS_BUILD"
+	if echo "$ALWAYS_BUILD_DEP" | grep -q ":${dir}:" ; then
+		always=1
+	fi
+
 	if test "$new_version" != "$old_version" || test -n "$always" ; then
 		echo "$new_version" > "$version_file"
 		export TARGET="$dir"
@@ -149,26 +178,21 @@ prepare_build() {
 			mkdir -p "$DDIR/$dir"
 			cd "$DDIR"
 			git add "$version_file"
-			mkdir -p "$BUILD_DIRECTORY"
-			case $vcs in
-				(git)
-					local branch_arg=
-					if test "$rev" != "HEAD" ; then
-						branch_arg="--branch=$rev"
-					fi
-					git clone --depth=1 $branch_arg "$url" "$BDIR/$dir"
-					;;
-				(mercurial)
-					hg clone --rev=$new_version --updaterev=$new_version "$url" "$BDIR/$dir"
-					;;
-				(bzr)
-					bzr checkout --lightweight --revision="$new_version" "$url" "$BDIR/$dir"
-					;;
-			esac
 		)
+		vcs_checkout $vcs "$new_version" "$rev" "$url" "$BUILD_DIRECTORY"
 		COMMIT_MESSAGE_FOOTER="$COMMIT_MESSAGE_FOOTER$NL$dir tip:$NL$NL$(get_${vcs}_tip "$BDIR/$dir" | indent)$NL"
 	else
 		exit 0
+	fi
+
+	if test -n "$other" ; then
+		export FIRST_TARGET="$TARGET"
+		export FIRST_OPT_DIRECTORY="$OPT_DIRECTORY"
+		export FIRST_BUILD_DIRECTORY="$BUILD_DIRECTORY"
+		prepare_build $other --depends $dir
+		export SECOND_TARGET="$TARGET"
+		export SECOND_OPT_DIRECTORY="$OPT_DIRECTORY"
+		export SECOND_BUILD_DIRECTORY="$BUILD_DIRECTORY"
 	fi
 }
 
