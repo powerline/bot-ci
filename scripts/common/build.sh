@@ -68,7 +68,7 @@ _get_version() {
 	done
 	if test $# -gt 0 ; then
 		echo "$@:"
-		prepare_build --version $@
+		prepare_build --version "$@"
 	fi
 	if test "$embedded_python" -ne 0 ; then
 		echo "Python: $PYTHON_VERSION"
