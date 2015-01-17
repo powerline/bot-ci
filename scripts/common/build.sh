@@ -19,7 +19,7 @@ get_bzr_tip() {
 
 get_version_file_name() {
 	local dir="$1"
-	echo "$DDIR/versions/$(echo "$dir" | sed -r 's/[^A-Za-z0-9-]+/-/g')"
+	echo "$DDIR/versions/$(echo "$dir" | sed -r 's/[^A-Za-z0-9.-]+/-/g')"
 }
 
 _get_version() {
