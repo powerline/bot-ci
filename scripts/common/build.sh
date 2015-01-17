@@ -30,14 +30,14 @@ _get_version() {
 	shift 4
 
 	case "$vcs" in
-		git)
+		(git)
 			git ls-remote "$url" "$rev" | \
 				cut -f1
 			;;
-		mercurial)
+		(mercurial)
 			hg identify --rev="$rev" "$url"
 			;;
-		bzr)
+		(bzr)
 			bzr log --limit=1 --show-ids "$url" | \
 				grep '^revision-id:' | cut -d' ' -f2
 			;;
