@@ -87,10 +87,9 @@ get_version() {
 
 vcs_checkout() {
 	local vcs=$1
-	local new_version="$2"
-	local rev="$3"
-	local url="$4"
-	local target="$5"
+	local rev="$2"
+	local url="$3"
+	local target="$4"
 
 	mkdir -p "$BUILD_DIRECTORY"
 
@@ -103,10 +102,10 @@ vcs_checkout() {
 			git clone --depth=1 $branch_arg "$url" "$target"
 			;;
 		(mercurial)
-			hg clone --rev=$new_version --updaterev=$new_version "$url" "$target"
+			hg clone --rev="$rev" --updaterev="$rev" "$url" "$target"
 			;;
 		(bzr)
-			bzr checkout --lightweight --revision="$new_version" "$url" "$target"
+			bzr checkout --lightweight --revision="$rev" "$url" "$target"
 			;;
 	esac
 }
@@ -184,7 +183,7 @@ prepare_build() {
 			cd "$DDIR"
 			git add "$version_file"
 		)
-		vcs_checkout $vcs "$new_version" "$rev" "$url" "$BUILD_DIRECTORY"
+		vcs_checkout $vcs "$rev" "$url" "$BUILD_DIRECTORY"
 		COMMIT_MESSAGE_FOOTER="$COMMIT_MESSAGE_FOOTER$NL$dir tip:$NL$NL$(get_${vcs}_tip "$BUILD_DIRECTORY" | indent)$NL"
 	else
 		exit 0
