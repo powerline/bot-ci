@@ -45,19 +45,19 @@ matrix:
         - python: "pypy3"
           env: >-
               SCRIPT1="./scripts/create-wheels.sh"
+        - python: "2.6"
+          env: >-
+              SCRIPT1="./scripts/build-ucs2-cpython.sh 2.6"
+              SCRIPT2="./scripts/build-vim.sh tip 2.6"
+              SCRIPT3="./scripts/create-ucs2-wheels.bash 2.6"
+        - python: "2.7"
+          env: >-
+              SCRIPT1="./scripts/build-ucs2-cpython.sh 2.7"
+              SCRIPT2="./scripts/build-vim.sh tip 2.7"
+              SCRIPT3="./scripts/create-ucs2-wheels.bash 2.7"
         - env: >-
               SCRIPT1="./scripts/build-fish.sh"
               SCRIPT2="./scripts/build-libvterm.sh"
               SCRIPT3="./scripts/build-command-t.sh"
               SCRIPT4="./scripts/archive-plugins.sh"
-        - python: "pypy"
-          env: >-
-              SCRIPT1="./scripts/build-ucs2-cpython.sh 2.6"
-              SCRIPT2="./scripts/build-vim.sh tip 2.6"
-              SCRIPT3="./scripts/create-ucs2-wheels.bash 2.6"
-        - python: "pypy"
-          env: >-
-              SCRIPT1="./scripts/build-ucs2-cpython.sh 2.7"
-              SCRIPT2="./scripts/build-vim.sh tip 2.7"
-              SCRIPT3="./scripts/create-ucs2-wheels.bash 2.7"
 # vim: noet ts=4 sts=4 sw=4 ft=yaml
