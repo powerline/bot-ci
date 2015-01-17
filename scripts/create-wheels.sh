@@ -46,7 +46,7 @@ fi
 cd "$DDIR/wheels"
 if test -d "$PYTHON_SUFFIX" ; then
 	cd "$PYTHON_SUFFIX"
-	export OLD_LIST="$(dir -1 .)"
+	OLD_LIST="$(dir -1 .)"
 	cd ..
 fi
 PY_SUF_PART="${PREF}${PYTHON_IMPLEMENTATION}-${PYTHON_MM}"
@@ -57,7 +57,7 @@ done
 mkdir "$PYTHON_SUFFIX"
 cd "$PYTHON_SUFFIX"
 cp --target=. "$BDIR/wheels/$PYTHON_SUFFIX"/*.whl
-export NEW_LIST="$(dir -1 .)"
+NEW_LIST="$(dir -1 .)"
 
 DIFF="$(python "$ROOT"/scripts/ndiff-strings.py "$OLD_LIST" "$NEW_LIST" | indent)"
 

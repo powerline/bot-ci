@@ -170,9 +170,9 @@ prepare_build() {
 
 	if test "$new_version" != "$old_version" || test -n "$always" ; then
 		echo "$new_version" > "$version_file"
-		export TARGET="$dir"
-		export OPT_DIRECTORY="/opt/$(basename "$dir")"
-		export BUILD_DIRECTORY="$BDIR/$dir"
+		TARGET="$dir"
+		OPT_DIRECTORY="/opt/$(basename "$dir")"
+		BUILD_DIRECTORY="$BDIR/$dir"
 		(
 			mkdir -p "$DDIR/$dir"
 			cd "$DDIR"
@@ -185,20 +185,20 @@ prepare_build() {
 	fi
 
 	if test -n "$other" ; then
-		export FIRST_TARGET="$TARGET"
-		export FIRST_OPT_DIRECTORY="$OPT_DIRECTORY"
-		export FIRST_BUILD_DIRECTORY="$BUILD_DIRECTORY"
+		FIRST_TARGET="$TARGET"
+		FIRST_OPT_DIRECTORY="$OPT_DIRECTORY"
+		FIRST_BUILD_DIRECTORY="$BUILD_DIRECTORY"
 		prepare_build $other --depends $dir
-		export SECOND_TARGET="$TARGET"
-		export SECOND_OPT_DIRECTORY="$OPT_DIRECTORY"
-		export SECOND_BUILD_DIRECTORY="$BUILD_DIRECTORY"
+		SECOND_TARGET="$TARGET"
+		SECOND_OPT_DIRECTORY="$OPT_DIRECTORY"
+		SECOND_BUILD_DIRECTORY="$BUILD_DIRECTORY"
 	fi
 }
 
 ensure_opt() {
 	local ddir="$1"
 	local name="$2"
-	export OPT_DIRECTORY="/opt/$name"
+	OPT_DIRECTORY="/opt/$name"
 	if ! test -d "$OPT_DIRECTORY" ; then
 		(
 			cd /opt
