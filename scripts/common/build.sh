@@ -35,17 +35,7 @@ _get_version() {
 				cut -f1
 			;;
 		mercurial)
-			if ! test -d "$BDIR/empty_hg_repository" ; then
-				mkdir -p "$BDIR"
-				hg init "$BDIR/empty_hg_repository" >&2
-			fi
-			hg -R "$BDIR/empty_hg_repository" incoming \
-				--limit=1 \
-				--newest-first \
-				--template='{node}\n' \
-				--quiet \
-				--rev="$rev" \
-				"$url"
+			hg identify --rev="$rev"
 			;;
 		bzr)
 			bzr log --limit=1 --show-ids "$url" | \
