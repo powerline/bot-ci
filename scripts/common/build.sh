@@ -117,21 +117,15 @@ prepare_build() {
 		only_print_version=1
 	fi
 
-	local dir="$1"
+	local dir="$1" vcs= url= rev= deps= other= embedded_python=0
 	shift
-	local vcs=
-	local url=
-	local rev=
-	local deps=
-	local other=
-	local embedded_python=0
 	while test "$#" -gt 0 ; do
 		case "$1" in
-			(--vcs) vcs="$2" ; shift ; shift ;;
-			(--url) url="$2" ; shift ; shift ;;
-			(--rev) rev="$2" ; shift ; shift ;;
-			(--depends) deps="$deps $2" ; shift ; shift ;;
-			(--also-build) other="$2" ; shift ; shift ;;
+			(--vcs) vcs="$2" ; shift 2 ;;
+			(--url) url="$2" ; shift 2 ;;
+			(--rev) rev="$2" ; shift 2 ;;
+			(--depends) deps="$deps $2" ; shift 2 ;;
+			(--also-build) other="$2" ; shift 2 ;;
 			(--embedded-python) embedded_python=1 ; shift ;;
 			(*)
 				echo "Unknown argument: $1"
