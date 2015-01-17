@@ -10,7 +10,7 @@ if test -n "$UCS2_REV" ; then
 	use-virtual-env cpython-ucs2-$UCS2_REV "$OPT_DIRECTORY" $UCS2_REV
 fi
 
-prepare_build zpython/zsh${UCS2_REV:+-}${UCS2_REV}-$PYTHON_MM \
+prepare_build zpython/zsh-$PYTHON_MM${UCS2_REV:+-ucs2} \
 	--url git://git.code.sf.net/p/zsh/code \
 	--also-build "zpython/zpython-$PYTHON_MM
 	              --embedded-python
