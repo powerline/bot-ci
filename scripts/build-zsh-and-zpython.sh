@@ -12,7 +12,7 @@ fi
 
 prepare_build zpython/zsh-$PYTHON_MM${UCS2_REV:+-ucs2} \
 	--url git://git.code.sf.net/p/zsh/code \
-	--also-build "zpython/zpython-$PYTHON_MM
+	--also-build "zpython/zpython-$PYTHON_MM${UCS2_REV:+-ucs2}
 	              --embedded-python
 	              --url https://bitbucket.org/ZyX_I/zpython"
 ZSH_TGT="$FIRST_TARGET"
