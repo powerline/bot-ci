@@ -28,7 +28,7 @@ if test -z "$PYTHON1" ; then
 		--rev "$REV"
 else
 	ensure_opt cpython-ucs2 cpython-ucs2-$PYTHON1
-	use-virtual-env cpython-ucs2-$PYTHON1 "$PY1PATH" $PYTHON1
+	use-virtual-env cpython-ucs2-$PYTHON1 "$OPT_DIRECTORY" $PYTHON1
 	version_file="$(get_version_file_name cpython-ucs2/cpython-ucs2-$PYTHON1)"
 	archive_file="cpython-ucs2/cpython-ucs2-${PYTHON1}.tar.gz"
 	prepare_build vim/$SUBDIR \
@@ -36,7 +36,6 @@ else
 		--url https://vim.googlecode.com/hg \
 		--rev "$REV" \
 		--depends cpython-ucs2/cpython-ucs2-$PYTHON1
-	PY1PATH="$OPT_DIRECTORY"
 fi
 
 # PYTHON_CFLAGS contains -Werror=format-security. Old vim cannot be built with 
