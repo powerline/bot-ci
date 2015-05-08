@@ -50,7 +50,7 @@ cmake .. -DZSH_REPOSITORY="$ZSH_BDIR" \
          -DCMAKE_INSTALL_PREFIX="$ZSH_OPT"
 make
 ldd libzpython.so
-ctest -VV
+ZTST_verbose=1 ctest -VV
 sudo make install
 commit_opt_archive "$ZSH_OPT" "$ZSH_TGT" \
 "Update zsh and zpython for $LIBPYTHON_NAME
