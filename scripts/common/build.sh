@@ -51,6 +51,9 @@ _get_version() {
 				fi
 			done
 			;;
+		(curl)
+			echo "${rev%%|*}"
+			;;
 	esac
 	local dep
 	for dep in "$@" ; do
@@ -108,10 +111,14 @@ vcs_checkout() {
 		(bzr)
 			bzr checkout --lightweight --revision="$rev" "$url" "$target"
 			;;
-		(ftp)
-			local unpack_command="${rev##*|}"
+		(ftp|curl)
 			mkdir -p "$target"
-			curl -o "$target/archive" "$url/$new_version"
+			if test "$vcs" = curl ; then
+				curl -o "$target/archive" "$url"
+			else
+				curl -o "$target/archive" "$url/$new_version"
+			fi
+			local unpack_command="${rev##*|}"
 			$unpack_command "$target/archive"
 			rm "$target/archive"
 			if test $(dir -1 "$target" | wc -l) -eq 1 ; then
