@@ -25,7 +25,7 @@ else
 	fi
 fi
 if test "$PYTHON_IMPLEMENTATION" = "CPython" ; then
-	WHEEL_ARGS="${WHELL_ARGS} pyuv"
+	WHEEL_ARGS="${WHEEL_ARGS} pyuv"
 fi
 pip wheel --wheel-dir . $WHEEL_ARGS
 
