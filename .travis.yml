@@ -97,4 +97,5 @@ matrix:
               SCRIPT6="./scripts/build-busybox.sh"
               SCRIPT7="./scripts/build-mksh.sh"
               SCRIPT8="./scripts/build-rc.sh"
+              SCRIPT9="./scripts/build-socat.sh"
 # vim: noet ts=4 sts=4 sw=4 ft=yaml

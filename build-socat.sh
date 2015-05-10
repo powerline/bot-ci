@@ -1,0 +1,25 @@
+#!/bin/sh
+. scripts/common/main.sh
+. scripts/common/build.sh
+
+prepare_build socat \
+	--url 'http://mirror.yandex.ru/gentoo-distfiles/distfiles/socat-1.7.3.0.tar.bz2' \
+	--vcs curl \
+	--rev '1.7.3.0|tar xjvf'
+
+./configure
+make
+
+cp ./socat "$DDIR/$TARGET/socat"
+cd "$DDIR"
+
+# Check that socat works
+$TARGET/socat -V
+
+git add $TARGET/socat
+git commit -m "Update socat
+
+socat -V:
+
+$("$DDIR/$TARGET/socat" -V | indent)
+$COMMIT_MESSAGE_FOOTER" || true
