@@ -164,7 +164,7 @@ prepare_build() {
 	if test "$new_version" != "$old_version" || test -n "$always" ; then
 		echo "$new_version" > "$version_file"
 		TARGET="$dir"
-		OPT_DIRECTORY="/opt/$(basename "$dir")"
+		OPT_DIRECTORY="$HOME/opt/$(basename "$dir")"
 		BUILD_DIRECTORY="$BDIR/$dir"
 		(
 			mkdir -p "$DDIR/$dir"
@@ -191,11 +191,11 @@ prepare_build() {
 ensure_opt() {
 	local ddir="$1"
 	local name="$2"
-	OPT_DIRECTORY="/opt/$name"
+	OPT_DIRECTORY="$HOME/opt/$name"
 	if ! test -d "$OPT_DIRECTORY" ; then
 		(
-			cd /opt
-			sudo tar xzf "$DDIR/$ddir/${name}.tar.gz"
+			cd $HOME/opt
+			tar xzf "$DDIR/$ddir/${name}.tar.gz"
 		)
 	fi
 }

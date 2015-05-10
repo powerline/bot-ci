@@ -8,7 +8,7 @@ PYTHON_SUFFIX=${PREF}${PYTHON_SUFFIX}
 mkdir -p "$BDIR/wheels/$PYTHON_SUFFIX"
 mkdir -p "$DDIR/wheels/$PYTHON_SUFFIX"
 cd "$BDIR/wheels/$PYTHON_SUFFIX"
-sudo pip install wheel
+pip install wheel
 WHEEL_ARGS="psutil netifaces pexpect"
 if test "$PYTHON_VERSION_MAJOR" -eq 2 ; then
 	if test "$PYTHON_IMPLEMENTATION" = "CPython" ; then

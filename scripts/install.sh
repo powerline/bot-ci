@@ -1,8 +1,6 @@
 #!/bin/sh
 . scripts/common/main.sh
 
-sudo apt-get install -qq bzr
-
 chmod 0600 keys/id_rsa
 cp keys/id_rsa ~/.ssh
 git clone ssh://git@github.com/powerline/deps

@@ -9,7 +9,7 @@ autoconf
 ./configure --prefix="$OPT_DIRECTORY"
 make
 ./fish --version
-sudo make install
+make install
 
 commit_opt_archive "$OPT_DIRECTORY" "$TARGET" \
 "Update fish

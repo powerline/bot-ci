@@ -31,7 +31,7 @@ make || true
 # Simple sanity check in case the above command failed in an unexpected way, do 
 # not run all tests
 make TESTNUM=A01 test
-sudo make install || true
+make install || true
 
 cd "$ZPYTHON_BDIR"
 mkdir build
@@ -51,7 +51,7 @@ cmake .. -DZSH_REPOSITORY="$ZSH_BDIR" \
 make
 ldd libzpython.so
 ZTST_verbose=1 ctest -VV
-sudo make install
+make install
 commit_opt_archive "$ZSH_OPT" "$ZSH_TGT" \
 "Update zsh and zpython for $LIBPYTHON_NAME
 

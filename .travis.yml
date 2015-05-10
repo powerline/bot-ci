@@ -1,3 +1,25 @@
+sudo: false
+addons:
+    apt:
+        packages:
+            # Build dependencies for Python: {
+            - build-essential
+            - zlib1g-dev
+            - libreadline-dev
+            - libncursesw5-dev
+            - libssl-dev
+            - libgdbm-dev
+            - libsqlite3-dev
+            - liblzma-dev
+            - libc6-dev
+            - tk-dev
+            # - libdb-dev
+            # }
+            - bzr
+            # Runtime dependencies for Python: {
+            - zlib1g
+            - libssl
+            # }
 os:
     - linux
 language:
