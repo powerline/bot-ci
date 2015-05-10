@@ -119,7 +119,10 @@ vcs_checkout() {
 				curl -o "$target/archive" "$url/$new_version"
 			fi
 			local unpack_command="${rev##*|}"
-			$unpack_command "$target/archive"
+			(
+				cd "$target"
+				$unpack_command archive
+			)
 			rm "$target/archive"
 			if test $(dir -1 "$target" | wc -l) -eq 1 ; then
 				local dirname d
