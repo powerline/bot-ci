@@ -227,7 +227,10 @@ ensure_opt() {
 	OPT_DIRECTORY="$HOME/opt/$name"
 	if ! test -d "$OPT_DIRECTORY" ; then
 		(
-			cd $HOME/opt
+			if ! test -d "$HOME/opt" ; then
+				mkdir "$HOME/opt"
+			fi
+			cd "$HOME/opt"
 			tar xzf "$DDIR/$ddir/${name}.tar.gz"
 		)
 	fi
