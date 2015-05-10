@@ -7,6 +7,8 @@ prepare_build socat \
 	--vcs curl \
 	--rev '1.7.3.0|tar xjvf'
 
+cd "${BUILD_DIRECTORY}"
+
 ./configure
 make
 

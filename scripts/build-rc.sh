@@ -7,6 +7,8 @@ prepare_build rc \
 	--vcs curl \
 	--rev '1.7.2|tar xjvf'
 
+cd "${BUILD_DIRECTORY}"
+
 ./configure --with-history --with-readline
 make
 

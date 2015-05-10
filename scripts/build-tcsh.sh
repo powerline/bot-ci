@@ -6,6 +6,8 @@ prepare_build tcsh \
 	--url ftp://ftp.astron.com/pub/tcsh \
 	--rev 'tcsh-|.tar.gz|tar xzvf'
 
+cd "${BUILD_DIRECTORY}"
+
 ./configure --prefix="$HOME/opt/tcsh"
 make
 

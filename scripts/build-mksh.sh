@@ -5,6 +5,8 @@
 prepare_build mksh \
 	--url git://github.com/MirBSD/mksh
 
+cd "${BUILD_DIRECTORY}"
+
 make
 
 cp ./mksh "$DDIR/$TARGET/mksh"

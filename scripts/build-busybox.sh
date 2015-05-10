@@ -5,6 +5,8 @@
 prepare_build busybox \
 	--url git://git.busybox.net/busybox
 
+cd "${BUILD_DIRECTORY}"
+
 make defconfig
 make
 
