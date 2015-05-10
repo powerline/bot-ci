@@ -14,12 +14,12 @@ hg diff
 make
 make install
 # Sanity check: run python --version, fail build if it fails
-"${OPT_DIRECTORY}"/bin/python$REV --version
+env LD_LIBRARY_PATH="$OPT_DIRECTORY"/lib "$OPT_DIRECTORY"/bin/python$REV --version
 cd "$DDIR"
 commit_opt_archive "$OPT_DIRECTORY" "$TARGET" \
 "Update ucs2 cpython-$REV build
 
 python --version:
 
-$(env LD_LIBRARY_PATH=$OPT_DIRECTORY/lib $OPT_DIRECTORY/bin/python$REV --version 2>&1 | indent)
+$(env LD_LIBRARY_PATH="$OPT_DIRECTORY"/lib "$OPT_DIRECTORY"/bin/python$REV --version 2>&1 | indent)
 $COMMIT_MESSAGE_FOOTER"
