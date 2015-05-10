@@ -7,7 +7,7 @@ prepare_build mksh \
 
 cd "${BUILD_DIRECTORY}"
 
-make
+sh Build.sh
 
 cp ./mksh "$DDIR/$TARGET/mksh"
 cd "$DDIR"
