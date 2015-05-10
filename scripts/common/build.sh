@@ -41,6 +41,16 @@ _get_version() {
 			bzr log --limit=1 --show-ids "$url" | \
 				grep '^revision-id:' | cut -d' ' -f2
 			;;
+		(ftp)
+			local prefix="${rev%%|*}"
+			local suffix="${rev#*|}"
+			suffix="${rev%%|*}"
+			curl --list-only "$url" | while read fname ; do
+				if test "$fname" != "${fname#$prefix}" && test "$fname" != "${fname%$suffix}" ; then
+					echo "$fname"
+				fi
+			done
+			;;
 	esac
 	local dep
 	for dep in "$@" ; do
@@ -80,6 +90,7 @@ vcs_checkout() {
 	local rev="$2"
 	local url="$3"
 	local target="$4"
+	local new_version="$5"
 
 	mkdir -p "$BUILD_DIRECTORY"
 
@@ -96,6 +107,21 @@ vcs_checkout() {
 			;;
 		(bzr)
 			bzr checkout --lightweight --revision="$rev" "$url" "$target"
+			;;
+		(ftp)
+			local unpack_command="${rev##*|}"
+			mkdir -p "$target"
+			curl -o "$target/archive" "$url/$new_version"
+			$unpack_command "$target/archive"
+			rm "$target/archive"
+			if test $(dir -1 "$target" | wc -l) -eq 1 ; then
+				local dirname d
+				for d in "$target"/* ; do
+					dirname="$d"
+				done
+				mv "$dirname"/* "$target"
+				rmdir "$dirname"
+			fi
 			;;
 	esac
 }
@@ -126,15 +152,15 @@ prepare_build() {
 	done
 	if test -z "$vcs" ; then
 		case "$url" in
-			(git://*)     vcs=git ;;
-			(*)           vcs=mercurial ;;
+			(git://*) vcs=git ;;
+			(ftp://*) vcs=ftp ;;
+			(*)       vcs=mercurial ;;
 		esac
 	fi
 	if test -z "$rev" ; then
 		case "$vcs" in
 			(git)       rev=HEAD ;;
 			(mercurial) rev=default ;;
-			(bzr)       rev= ;;
 		esac
 	fi
 
@@ -171,7 +197,7 @@ prepare_build() {
 			cd "$DDIR"
 			git add "$version_file"
 		)
-		vcs_checkout $vcs "$rev" "$url" "$BUILD_DIRECTORY"
+		vcs_checkout $vcs "$rev" "$url" "$BUILD_DIRECTORY" "$new_version"
 		COMMIT_MESSAGE_FOOTER="$COMMIT_MESSAGE_FOOTER$NL$dir tip:$NL$NL$(get_${vcs}_tip "$BUILD_DIRECTORY" | indent)$NL"
 	else
 		exit 0

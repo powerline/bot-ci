@@ -20,6 +20,7 @@ addons:
             - zlib1g
             - libssl1.0.0
             # }
+            - curl
 os:
     - linux
 language:
@@ -86,10 +87,13 @@ matrix:
               SCRIPT2="./scripts/build-tmux.sh 1.7"
               SCRIPT3="./scripts/build-tmux.sh 1.8"
               SCRIPT4="./scripts/build-tmux.sh 1.9"
-              SCRIPT4="./scripts/build-tmux.sh 2.0"
+              SCRIPT5="./scripts/build-tmux.sh 2.0"
         - env: >-
               SCRIPT1="./scripts/build-fish.sh"
               SCRIPT2="./scripts/build-libvterm.sh"
               SCRIPT3="./scripts/build-command-t.sh"
               SCRIPT4="./scripts/archive-plugins.sh"
+              SCRIPT5="./scripts/build-tcsh.sh"
+              SCRIPT6="./scripts/build-busybox.sh"
+              SCRIPT7="./scripts/build-mksh.sh"
 # vim: noet ts=4 sts=4 sw=4 ft=yaml
