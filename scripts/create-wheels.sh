@@ -9,7 +9,7 @@ mkdir -p "$BDIR/wheels/$PYTHON_SUFFIX"
 mkdir -p "$DDIR/wheels/$PYTHON_SUFFIX"
 cd "$BDIR/wheels/$PYTHON_SUFFIX"
 sudo pip install wheel
-WHEEL_ARGS="psutil netifaces pyuv pexpect"
+WHEEL_ARGS="psutil netifaces pexpect"
 if test "$PYTHON_VERSION_MAJOR" -eq 2 ; then
 	if test "$PYTHON_IMPLEMENTATION" = "CPython" ; then
 		WHEEL_ARGS="${WHEEL_ARGS} mercurial --allow-external bzr --allow-unverified bzr bzr"
@@ -23,6 +23,9 @@ else
 	if test "$PYTHON_VERSION_MINOR" -ge 3 ; then
 		WHEEL_ARGS="${WHEEL_ARGS} ipython"
 	fi
+fi
+if test "$PYTHON_IMPLEMENTATION" = "CPython" ; then
+	WHEEL_ARGS="${WHELL_ARGS} pyuv"
 fi
 pip wheel --wheel-dir . $WHEEL_ARGS
 
