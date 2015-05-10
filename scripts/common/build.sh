@@ -45,7 +45,7 @@ _get_version() {
 			local prefix="${rev%%|*}"
 			local suffix="${rev#*|}"
 			suffix="${rev%%|*}"
-			curl --list-only "$url" | while read fname ; do
+			curl --list-only "$url/" | while read fname ; do
 				if test "$fname" != "${fname#$prefix}" && test "$fname" != "${fname%$suffix}" ; then
 					echo "$fname"
 				fi
