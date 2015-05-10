@@ -44,7 +44,7 @@ _get_version() {
 		(ftp)
 			local prefix="${rev%%|*}"
 			local suffix="${rev#*|}"
-			suffix="${rev%%|*}"
+			suffix="${suffix%%|*}"
 			curl --list-only "$url/" | while read fname ; do
 				if test "$fname" != "${fname#$prefix}" && test "$fname" != "${fname%$suffix}" ; then
 					echo "$fname"
