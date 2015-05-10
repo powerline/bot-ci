@@ -7,6 +7,7 @@ prepare_build cpython-ucs2/cpython-ucs2-$REV \
 	--url http://hg.python.org/cpython \
 	--rev $REV
 
+sudo apt-get update
 # List from http://askubuntu.com/questions/21547:
 # sudo apt-get install -qq build-essential libz-dev libreadline-dev \
 #                      libncursesw5-dev libssl-dev libgdbm-dev libsqlite3-dev \
