@@ -130,6 +130,7 @@ vcs_checkout() {
 					dirname="$d"
 				done
 				mv "$dirname"/* "$target"
+				mv "$dirname"/.* "$target" || true
 				rmdir "$dirname"
 			fi
 			;;
