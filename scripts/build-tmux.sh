@@ -5,7 +5,7 @@ REV=$1
 . scripts/common/build.sh
 
 prepare_build tmux/tmux-$REV \
-	--url git://git.code.sf.net/p/tmux/tmux-code \
+	--url git://github.com/tmux/tmux \
 	--rev $REV
 
 cd "$BUILD_DIRECTORY"
