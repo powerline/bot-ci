@@ -13,7 +13,7 @@ addons:
             - liblzma-dev
             - libc6-dev
             - tk-dev
-            # - libdb-dev
+            - libdb-dev
             # }
             - bzr
             # Runtime dependencies for Python: {
