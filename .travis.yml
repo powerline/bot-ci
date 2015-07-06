@@ -93,7 +93,6 @@ matrix:
               SCRIPT2="./scripts/build-libvterm.sh"
               SCRIPT3="./scripts/build-command-t.sh"
               SCRIPT4="./scripts/archive-plugins.sh"
-              SCRIPT5="./scripts/build-tcsh.sh"
               SCRIPT6="./scripts/build-busybox.sh"
               SCRIPT7="./scripts/build-mksh.sh"
               SCRIPT8="./scripts/build-rc.sh"
