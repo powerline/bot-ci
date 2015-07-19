@@ -14,7 +14,7 @@ else
 fi
 
 prepare_build zpython/zsh-$PYTHON_MM${UCS2_REV:+-ucs2} \
-	--url git://git.code.sf.net/p/zsh/code \
+	--url git://repo.or.cz/zsh/mirror.git \
 	--also-build "zpython/zpython-$PYTHON_MM${UCS2_REV:+-ucs2}
 	              $DEPENDS_ARGS
 	              --url https://bitbucket.org/ZyX_I/zpython"
