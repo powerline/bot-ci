@@ -7,7 +7,7 @@ PYTHON1=$2
 . scripts/common/use-virtual-env.bash
 
 OLD=
-if test "${REV#v7-0}" != "$REV" ; then
+if test "${REV#v7.0}" != "$REV" ; then
 	OLD=1
 fi
 
@@ -23,8 +23,7 @@ fi
 
 if test -z "$PYTHON1" ; then
 	prepare_build vim/$SUBDIR \
-		--vcs mercurial \
-		--url https://vim.googlecode.com/hg \
+		--url git://github.com/vim/vim \
 		--rev "$REV"
 else
 	ensure_opt cpython-ucs2 cpython-ucs2-$PYTHON1
@@ -33,7 +32,7 @@ else
 	archive_file="cpython-ucs2/cpython-ucs2-${PYTHON1}.tar.gz"
 	prepare_build vim/$SUBDIR \
 		--embedded-python \
-		--url https://vim.googlecode.com/hg \
+		--url git://github.com/vim/vim \
 		--rev "$REV" \
 		--depends cpython-ucs2/cpython-ucs2-$PYTHON1
 fi
