@@ -24,10 +24,10 @@ else
 		WHEEL_ARGS="${WHEEL_ARGS} ipython"
 	fi
 fi
-if test "$PYTHON_IMPLEMENTATION" = "CPython" ; then
-	WHEEL_ARGS="${WHEEL_ARGS} pyuv"
-fi
 pip wheel --wheel-dir . $WHEEL_ARGS
+if test "$PYTHON_IMPLEMENTATION" = "CPython" ; then
+	pip wheel --wheel-dir . pyuv || true
+fi
 
 HAS_NEW_FILES=
 
