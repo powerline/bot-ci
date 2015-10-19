@@ -11,14 +11,21 @@ cd "$BDIR/wheels/$PYTHON_SUFFIX"
 pip install wheel
 WHEEL_ARGS="psutil netifaces"
 OLD_PEXPECT="pexpect==3.3"
+
 if test "$PYTHON_VERSION_MAJOR" -eq 2 ; then
 	if test "$PYTHON_IMPLEMENTATION" = "CPython" ; then
 		WHEEL_ARGS="${WHEEL_ARGS} mercurial --allow-external bzr --allow-unverified bzr bzr"
 	fi
 	if test "$PYTHON_VERSION_MINOR" -ge 7 ; then
 		WHEEL_ARGS="${WHEEL_ARGS} pexpect ipython"
+		if test "x${PREF}" '!=' "x" ; then
+			WHEEL_ARGS="${WHEEL_ARGS} virtualenvwrapper"
+		fi
 	elif test "$PYTHON_VERSION_MINOR" -lt 7 ; then
 		WHEEL_ARGS="${WHEEL_ARGS} ${OLD_PEXPECT} unittest2 argparse"
+		if test "x${PREF}" '!=' "x" ; then
+			WHEEL_ARGS="${WHEEL_ARGS} virtualenvwrapper==4.6.0"
+		fi
 	fi
 else
 	if test "$PYTHON_VERSION_MINOR" -ge 3 ; then
