@@ -5,6 +5,10 @@
 prepare_build fish/fish --url git://github.com/fish-shell/fish-shell
 
 cd "${BUILD_DIRECTORY}"
+if cd pcre2* ; then
+	autoreconf
+	cd ..
+fi
 autoconf
 ./configure --prefix="$OPT_DIRECTORY"
 make
