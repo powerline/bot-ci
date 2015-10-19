@@ -4,7 +4,12 @@ use-virtual-env() {
 	local pysuf="$3"
 	local addpypath="$4"
 
-	pip install virtualenvwrapper
+	local piparg="virtualenvwrapper"
+	if test "$pysuf" = "2.6" ; then
+		piparg="virtualenvwrapper==4.6.0"
+	fi
+
+	pip install $piparg
 	set +e
 	. virtualenvwrapper.sh || exit 1
 	set -e
@@ -20,7 +25,7 @@ use-virtual-env() {
 		workon "$name"
 		set -e
 	fi
-	pip install virtualenvwrapper
+	pip install $piparg
 	# XXX To filter all paths containing python `s/:?` needs to be used. This
 	#     variant (without question mark) does not filter out the very first 
 	#     path.
