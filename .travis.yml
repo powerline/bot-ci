@@ -88,6 +88,7 @@ matrix:
               SCRIPT3="./scripts/build-tmux.sh 1.8"
               SCRIPT4="./scripts/build-tmux.sh 1.9"
               SCRIPT5="./scripts/build-tmux.sh 2.0"
+              SCRIPT5="./scripts/build-tmux.sh 2.1"
         - env: >-
               SCRIPT1="./scripts/build-fish.sh"
               SCRIPT2="./scripts/build-libvterm.sh"
