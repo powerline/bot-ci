@@ -73,13 +73,6 @@ matrix:
         - python: "pypy3"
           env: >-
               SCRIPT1="./scripts/create-wheels.sh"
-        - python: "2.6"
-          env: >-
-              SCRIPT1="./scripts/build-ucs2-cpython.sh 2.6"
-              SCRIPT2="./scripts/build-vim.sh master 2.6"
-              SCRIPT3="./scripts/build-vim.sh v7.0.112 2.6"
-              SCRIPT4="./scripts/build-zsh-and-zpython.sh 2.6"
-              SCRIPT5="./scripts/create-ucs2-wheels.bash 2.6"
         - python: "2.7"
           env: >-
               SCRIPT1="./scripts/build-ucs2-cpython.sh 2.7"
