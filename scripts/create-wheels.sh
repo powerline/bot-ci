@@ -9,7 +9,7 @@ mkdir -p "$BDIR/wheels/$PYTHON_SUFFIX"
 mkdir -p "$DDIR/wheels/$PYTHON_SUFFIX"
 cd "$BDIR/wheels/$PYTHON_SUFFIX"
 pip install wheel
-WHEEL_ARGS="psutil netifaces hglib"
+WHEEL_ARGS="psutil netifaces python-hglib"
 OLD_PEXPECT="pexpect==3.3"
 
 if test "$PYTHON_VERSION_MAJOR" -eq 2 ; then
