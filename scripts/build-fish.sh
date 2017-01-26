@@ -13,6 +13,8 @@ sed -r -i -e '/AC_CONFIG_MACRO_DIRS/d' ./configure.ac
 for f in m4/*.m4 ; do
 	sed -r -i -e "1i m4_include($f)" ./configure.ac
 done
+$CC --version
+$CXX --version
 autoreconf --version
 autoreconf --no-recursive
 ./configure --prefix="$OPT_DIRECTORY"

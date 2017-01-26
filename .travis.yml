@@ -88,7 +88,7 @@ matrix:
               SCRIPT5="./scripts/build-tmux.sh 2.0"
               SCRIPT6="./scripts/build-tmux.sh 2.1"
         - language: cpp
-          compiler: gcc-5
+          compiler: gcc-6
           env: >-
               SCRIPT1="./scripts/build-fish.sh"
               SCRIPT2="./scripts/build-libvterm.sh"
@@ -101,5 +101,5 @@ matrix:
                       - llvm-toolchain-precise
                       - ubuntu-toolchain-r-test
                   packages:
-                      - gcc-5
+                      - gcc-6
 # vim: noet ts=4 sts=4 sw=4 ft=yaml
