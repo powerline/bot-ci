@@ -97,6 +97,9 @@ matrix:
               SCRIPT5="./scripts/build-rc.sh"
           addons:
               apt:
+                  sources:
+                      - llvm-toolchain-precise
+                      - ubuntu-toolchain-r-test
                   packages:
                       - clang-3.9
 # vim: noet ts=4 sts=4 sw=4 ft=yaml
