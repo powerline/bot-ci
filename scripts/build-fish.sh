@@ -16,7 +16,7 @@ for f in m4/*.m4 ; do
 	sed -r -i -e "1i m4_include($f)" ./configure.ac
 done
 $CC --version
-$CXX --versioN
+$CXX --version
 autoreconf --version
 autoreconf --no-recursive
 ./configure --prefix="$OPT_DIRECTORY"
