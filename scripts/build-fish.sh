@@ -5,7 +5,7 @@
 prepare_build fish/fish --url git://github.com/fish-shell/fish-shell
 
 export CC=gcc-6
-export CXX=gcc-6
+export CXX=g++-6
 cd "${BUILD_DIRECTORY}"
 if cd pcre2* ; then
 	autoreconf
@@ -16,7 +16,7 @@ for f in m4/*.m4 ; do
 	sed -r -i -e "1i m4_include($f)" ./configure.ac
 done
 $CC --version
-$CXX --version
+$CXX --versioN
 autoreconf --version
 autoreconf --no-recursive
 ./configure --prefix="$OPT_DIRECTORY"

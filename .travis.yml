@@ -102,4 +102,5 @@ matrix:
                       - ubuntu-toolchain-r-test
                   packages:
                       - gcc-6
+                      - g++-6
 # vim: noet ts=4 sts=4 sw=4 ft=yaml
