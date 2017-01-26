@@ -9,7 +9,7 @@ if cd pcre2* ; then
 	autoreconf
 	cd ..
 fi
-autoconf
+autoreconf --no-recursive
 ./configure --prefix="$OPT_DIRECTORY"
 make
 ./fish --version
