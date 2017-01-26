@@ -10,6 +10,7 @@ if cd pcre2* ; then
 	cd ..
 fi
 sed -r -i -e '1i m4_pattern_allow(AC_CONFIG_MACRO_DIRS)' ./configure.ac
+autoreconf --version
 autoreconf --no-recursive
 ./configure --prefix="$OPT_DIRECTORY"
 make
