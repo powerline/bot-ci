@@ -4,6 +4,8 @@
 
 prepare_build fish/fish --url git://github.com/fish-shell/fish-shell
 
+export CC=gcc-6
+export CXX=gcc-6
 cd "${BUILD_DIRECTORY}"
 if cd pcre2* ; then
 	autoreconf
