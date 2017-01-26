@@ -9,7 +9,8 @@ if cd pcre2* ; then
 	autoreconf
 	cd ..
 fi
-autoreconf --no-recursive --warnings=none
+sed -r -i -e '1i m4_pattern_allow(AC_CONFIG_MACRO_DIRS)' ./configure.ac
+autoreconf --no-recursive
 ./configure --prefix="$OPT_DIRECTORY"
 make
 ./fish --version
