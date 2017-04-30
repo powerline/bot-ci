@@ -17,7 +17,7 @@ if test "$PYTHON_VERSION_MAJOR" -eq 2 ; then
 		WHEEL_ARGS="${WHEEL_ARGS} mercurial --allow-external bzr --allow-unverified bzr bzr"
 	fi
 	if test "$PYTHON_VERSION_MINOR" -ge 7 ; then
-		WHEEL_ARGS="${WHEEL_ARGS} pexpect ipython"
+		WHEEL_ARGS="${WHEEL_ARGS} pexpect ipython==5.3.0"
 		if test "x${PREF}" '!=' "x" ; then
 			WHEEL_ARGS="${WHEEL_ARGS} virtualenvwrapper"
 		fi
