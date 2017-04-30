@@ -87,6 +87,9 @@ matrix:
               SCRIPT4="./scripts/build-tmux.sh 1.9"
               SCRIPT5="./scripts/build-tmux.sh 2.0"
               SCRIPT6="./scripts/build-tmux.sh 2.1"
+              SCRIPT7="./scripts/build-tmux.sh 2.2"
+              SCRIPT8="./scripts/build-tmux.sh 2.3"
+              SCRIPT9="./scripts/build-tmux.sh 2.4"
         - language: cpp
           compiler: gcc-6
           env: >-
