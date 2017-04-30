@@ -1,5 +1,5 @@
 set -e
-set -x
+test "${1:-${PYTHON_IMPLEMENTATION:+silent}}" = "silent" || set -x
 
 : ${PYTHON:=python}
 
