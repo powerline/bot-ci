@@ -31,6 +31,7 @@ before_install: |
             -in keys/id_rsa.enc \
             -out keys/id_rsa \
             -d
+    rvm reset
 install: ./scripts/install.sh
 script: ./scripts/build.sh
 after_success: ./scripts/deploy.sh
