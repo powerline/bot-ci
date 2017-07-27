@@ -254,6 +254,7 @@ commit_opt_archive() {
 
 add_libs() {
 	local exe="$1"
+	ldd "$exe"
 	ldd "$exe" | (
 		cd "$DDIR"
 		test -d lib || mkdir lib
