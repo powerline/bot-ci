@@ -262,7 +262,7 @@ add_libs() {
 			| sed -e '/^[^\t]/ d; s/^\t\(.* => \)\?\([^ ]*\) (.*/\2/g' \
 			| while read -r lib ; do
 				local tail="$(basename "$lib")"
-				if test -z "$tail" || ! test -x "$lib" ; then
+				if test -z "$tail" || ! test -e "$lib" ; then
 					continue
 				fi
 				local tgt="lib/$tail"
