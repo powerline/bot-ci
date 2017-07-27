@@ -10,13 +10,12 @@ cd "${BUILD_DIRECTORY}"
 make defconfig
 make
 
-cp ./busybox "$DDIR/$TARGET/busybox"
-cd "$DDIR"
-
 # Check that busybox works
-$TARGET/busybox --help
+./busybox --help
 
-git add $TARGET/busybox
+save_exe ./busybox "$DDIR/$TARGET/busybox"
+
+cd "$DDIR"
 git commit -m "Update busybox
 
 busybox --help:

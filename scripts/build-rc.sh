@@ -12,13 +12,12 @@ cd "${BUILD_DIRECTORY}"
 ./configure --with-history --with-readline
 make
 
-cp ./rc "$DDIR/$TARGET/rc"
-cd "$DDIR"
-
 # Check that rc works
-$TARGET/rc -c 'echo $version'
+./rc -c 'echo $version'
 
-git add $TARGET/rc
+save_exe ./rc "$DDIR/$TARGET/rc"
+
+cd "$DDIR"
 git commit -m "Update rc
 
 rc -c 'echo \$version':

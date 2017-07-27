@@ -9,13 +9,12 @@ cd "${BUILD_DIRECTORY}"
 
 sh Build.sh
 
-cp ./mksh "$DDIR/$TARGET/mksh"
-cd "$DDIR"
-
 # Check that mksh works
-$TARGET/mksh -c 'echo $KSH_VERSION'
+./mksh -c 'echo $KSH_VERSION'
 
-git add $TARGET/mksh
+save_exe ./mksh "$DDIR/$TARGET/mksh"
+
+cd "$DDIR"
 git commit -m "Update mksh
 
 mksh -c 'echo \$KSH_VERSION':

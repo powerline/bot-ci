@@ -24,6 +24,8 @@ make
 ./fish --version
 make install
 
+save_exe ./fish
+
 commit_opt_archive "$OPT_DIRECTORY" "$TARGET" \
 "Update fish
 $COMMIT_MESSAGE_FOOTER"

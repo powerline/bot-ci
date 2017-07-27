@@ -251,3 +251,48 @@ commit_opt_archive() {
 		git commit -m "$message"
 	)
 }
+
+add_libs() {
+	local exe="$1"
+	ldd "$exe" | (
+		cd "$DDIR"
+		test -d lib || mkdir lib
+
+		cat \
+			| sed -e '/^[^\t]/ d; s/^\t\(.* => \)\?\([^ ]*\) (.*/\2/g' \
+			| while read -r lib ; do
+				local tail="$(basename "$lib")"
+				local tgt="lib/$tail"
+				if test -e "$tgt" && diff -q "$tgt" "$lib" ; then
+					continue
+				fi
+				cp -L "$lib" "$tgt"
+				git add "$tgt"
+				add_libs "$tgt"
+			done
+		if git status --porcelain lib | grep / ; then
+			git commit lib -m 'Add/update libraries'
+		fi
+	)
+}
+
+save_exe() {
+	local source="$1"
+	local target="$2"
+
+	add_libs "$source"
+
+	if ! test -z "$target" ; then
+		local target_dir="$(dirname "$target")"
+
+		test -d "$target_dir" || mkdir -p "$target_dir"
+		if test -e "$target" ; then
+			rm "$target"
+		fi
+		cp -L "$source" "$target"
+		(
+			cd "$DDIR"
+			git add "$target"
+		)
+	fi
+}

@@ -63,11 +63,10 @@ fi
 ./configure $CFGARGS
 make
 
-cp src/vim "$DDIR/${TARGET}/vim"
+save_exe src/vim "$DDIR/$TARGET/vim"
 cd "$DDIR"
 # Try running vim --version, fail build if it fails
 $TARGET/vim --version
-git add $TARGET/vim
 git commit -m "Update vim for $SUBDIR
 
 vim --version:

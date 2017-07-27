@@ -52,14 +52,18 @@ make
 ldd libzpython.so
 ZTST_verbose=1 ctest -VV
 make install
+
+save_exe "$ZSH_OPT/bin/zsh"
+save_exe libzpython.so
+
 commit_opt_archive "$ZSH_OPT" "$ZSH_TGT" \
 "Update zsh and zpython for $LIBPYTHON_NAME
 
 zsh --version:
 
-$($ZSH_OPT/bin/zsh --version | indent)
+$("$ZSH_OPT/bin/zsh" --version | indent)
 
 python version:
 
-$($ZSH_OPT/bin/zsh -c 'zmodload libzpython; zpython "import sys; print(sys.version)"' | indent)
+$("$ZSH_OPT/bin/zsh" -c 'zmodload libzpython; zpython "import sys; print(sys.version)"' | indent)
 $COMMIT_MESSAGE_FOOTER"

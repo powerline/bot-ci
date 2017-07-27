@@ -12,13 +12,12 @@ cd "${BUILD_DIRECTORY}"
 ./configure
 make
 
-cp ./socat "$DDIR/$TARGET/socat"
-cd "$DDIR"
-
 # Check that socat works
-$TARGET/socat -V
+./socat -V
 
-git add $TARGET/socat
+save_exe ./socat "$DDIR/$TARGET/socat"
+
+cd "$DDIR"
 git commit -m "Update socat
 
 socat -V:

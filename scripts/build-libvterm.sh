@@ -10,8 +10,8 @@ cd "$BUILD_DIRECTORY"
 make
 make test
 
-cp -L .libs/libvterm.so "$DDIR/$TARGET"
+save_exe .libs/libvterm.so "$DDIR/$TARGET/libvterm.so"
+
 cd "$DDIR"
-git add "${TARGET}"/libvterm.so
 git commit -m "Update libvterm.so
 $COMMIT_MESSAGE_FOOTER" || true

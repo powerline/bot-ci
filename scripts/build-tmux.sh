@@ -13,13 +13,12 @@ sh autogen.sh
 ./configure
 make
 
-cp ./tmux "$DDIR/$TARGET/tmux"
-cd "$DDIR"
-
 # Check that tmux works
-$TARGET/tmux -V
+./tmux -V
 
-git add $TARGET/tmux
+save_exe ./tmux "$DDIR/$TARGET/tmux"
+
+cd "$DDIR"
 git commit -m "Update tmux $REV
 
 tmux -V:

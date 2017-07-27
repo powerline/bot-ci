@@ -16,6 +16,12 @@ make install
 # Sanity check: run python --version, fail build if it fails
 env LD_LIBRARY_PATH="$OPT_DIRECTORY"/lib "$OPT_DIRECTORY"/bin/python$REV --version
 cd "$DDIR"
+
+(
+	export LD_LIBRARY_PATH="$OPT_DIRECTORY/lib"
+	save_exe "$OPT_DIRECTORY/bin/python$REV"
+)
+
 commit_opt_archive "$OPT_DIRECTORY" "$TARGET" \
 "Update ucs2 cpython-$REV build
 

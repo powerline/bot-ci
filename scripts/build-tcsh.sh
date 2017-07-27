@@ -11,13 +11,12 @@ cd "${BUILD_DIRECTORY}"
 ./configure --prefix="$HOME/opt/tcsh"
 make
 
-cp ./tcsh "$DDIR/$TARGET/tcsh"
-cd "$DDIR"
-
 # Check that tcsh works
-$TARGET/tcsh --version
+./tcsh --version
 
-git add $TARGET/tcsh
+save_exe ./tcsh "$DDIR/$TARGET/tcsh"
+
+cd "$DDIR"
 git commit -m "Update tcsh
 
 tcsh --version:
