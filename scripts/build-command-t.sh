@@ -4,11 +4,11 @@
 
 prepare_build vim-plugins/command-t --url git://github.com/wincent/Command-T
 
-cd "$BUILD_DIRECTORY/ruby/command-t"
+cd "$BUILD_DIRECTORY/ruby/command-t/ext/command-t"
 ruby extconf.rb
 make
 
-cd ../..
+cd ../../../..
 mv .git ../.git-command-t
 cd ..
 tar czf "$DDIR/${TARGET}.tar.gz" command-t
