@@ -284,7 +284,8 @@ save_exe() {
 	local source="$1"
 	local target="$2"
 
-	add_libs "$source"
+	# # Is not actually useful, with travis libraries it crashes locally
+	# add_libs "$source"
 
 	if ! test -z "$target" ; then
 		local target_dir="$(dirname "$target")"
