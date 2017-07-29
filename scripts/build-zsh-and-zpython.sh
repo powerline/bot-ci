@@ -42,7 +42,7 @@ LIBPYTHON_NAME="$(basename "${LIBRARY_PATH}")"
 PYTHON_SUFFIX="$(echo "${LIBPYTHON_NAME}" | sed -r 's/^libpython(.*)\.so.*$/\1/')"
 PYTHON_INCLUDE_DIR="$(dirname "${LIBRARY_DIR}")/include/python$PYTHON_SUFFIX"
 
-export LD_LIBRARY_PATH="${LIBRARY_DIR}:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="${LIBRARY_DIR}${LD_LIBRARY_PATH:+:}$LD_LIBRARY_PATH"
 
 cmake .. -DZSH_REPOSITORY="$ZSH_BDIR" \
          -DPYTHON_LIBRARY="$LIBRARY_PATH" \
