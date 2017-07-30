@@ -24,6 +24,7 @@ addons:
             - ruby
             - ruby-all-dev
             - bzr
+            - libevent-dev
 os: linux
 language: python
 before_install: |
