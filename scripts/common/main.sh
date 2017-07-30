@@ -1,7 +1,9 @@
 set -e
 test "${1:-${PYTHON_IMPLEMENTATION:+silent}}" = "silent" || set -x
 
-: ${PYTHON:=python}
+if test "${PYTHON#/}" = "${PYTHON}" ; then
+	PYTHON="$(which ${PYTHON:-python})"
+fi
 
 PYTHON_VERSION="$("$PYTHON" -c 'import platform; print(platform.python_version())')"
 PYTHON_IMPLEMENTATION="$("$PYTHON" -c 'import platform; print(platform.python_implementation())')"

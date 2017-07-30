@@ -36,8 +36,24 @@ make install || true
 cd "$ZPYTHON_BDIR"
 mkdir build
 cd build
-LIBRARY_PATH="$(ldd "$(which python)" | grep libpython | sed 's/^.* => //;s/ .*$//')"
-LIBRARY_DIR="$(dirname "${LIBRARY_PATH}")"
+LIBRARY_PATH="$(ldd "$PYTHON" | grep libpython | sed 's/^.* => //;s/ .*$//')"
+if test -z "$LIBRARY_PATH" ; then
+	ldd "$PYTHON"
+	if test "$(cat "$PYTHON" | head -c2)" = "#!" ; then
+		PYTHON_PREFIX="$(env -i "$PYTHON" -c 'import sys ; print(sys.prefix)')"
+		if test -z "$PYTHON_PREFIX" ; then
+			exit 1
+		fi
+		for lib in "$PYTHON_PREFIX"/lib/libpython* ; do
+			LIBRARY_PATH="${lib}"
+		done
+		LIBRARY_DIR="$PYTHON_PREFIX"
+	else
+		exit 1
+	fi
+else
+	LIBRARY_DIR="$(dirname "${LIBRARY_PATH}")"
+fi
 LIBPYTHON_NAME="$(basename "${LIBRARY_PATH}")"
 PYTHON_SUFFIX="$(echo "${LIBPYTHON_NAME}" | sed -r 's/^libpython(.*)\.so.*$/\1/')"
 PYTHON_INCLUDE_DIR="$(dirname "${LIBRARY_DIR}")/include/python$PYTHON_SUFFIX"
