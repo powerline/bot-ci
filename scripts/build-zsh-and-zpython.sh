@@ -39,18 +39,14 @@ cd build
 LIBRARY_PATH="$(ldd "$PYTHON" | grep libpython | sed 's/^.* => //;s/ .*$//')"
 if test -z "$LIBRARY_PATH" ; then
 	ldd "$PYTHON"
-	if test "$(cat "$PYTHON" | head -c2)" = "#!" ; then
-		PYTHON_PREFIX="$(env -i "$PYTHON" -c 'import sys ; print(sys.prefix)')"
-		if test -z "$PYTHON_PREFIX" ; then
-			exit 1
-		fi
-		for lib in "$PYTHON_PREFIX"/lib/libpython* ; do
-			LIBRARY_PATH="${lib}"
-		done
-		LIBRARY_DIR="$PYTHON_PREFIX"
-	else
+	PYTHON_PREFIX="$(env -i "$PYTHON" -c 'import sys ; print(sys.prefix)')"
+	if test -z "$PYTHON_PREFIX" ; then
 		exit 1
 	fi
+	for lib in "$PYTHON_PREFIX"/lib/libpython* ; do
+		LIBRARY_PATH="${lib}"
+	done
+	LIBRARY_DIR="$PYTHON_PREFIX"
 else
 	LIBRARY_DIR="$(dirname "${LIBRARY_PATH}")"
 fi
