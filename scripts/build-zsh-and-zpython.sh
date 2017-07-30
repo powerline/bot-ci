@@ -44,9 +44,12 @@ if test -z "$LIBRARY_PATH" ; then
 		exit 1
 	fi
 	for lib in "$PYTHON_PREFIX"/lib/libpython* ; do
-		LIBRARY_PATH="${lib}"
+		if ! test -e "$lib" ; then
+			exit 1
+		fi
+		LIBRARY_PATH="$lib"
 	done
-	LIBRARY_DIR="$PYTHON_PREFIX"
+	LIBRARY_DIR="$PYTHON_PREFIX/lib"
 else
 	LIBRARY_DIR="$(dirname "${LIBRARY_PATH}")"
 fi
