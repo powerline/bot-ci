@@ -4,6 +4,8 @@
 
 prepare_build vim-plugins/command-t --url git://github.com/wincent/Command-T
 
+rvm reset
+
 cd "$BUILD_DIRECTORY/ruby/command-t/ext/command-t"
 ruby extconf.rb
 make
