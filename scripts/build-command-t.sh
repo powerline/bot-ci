@@ -1,10 +1,11 @@
 #!/bin/sh
 . scripts/common/main.sh
 . scripts/common/build.sh
+. scripts/common/ruby.sh
+
+ruby_setup
 
 prepare_build vim-plugins/command-t --url git://github.com/wincent/Command-T
-
-rvm reset
 
 cd "$BUILD_DIRECTORY/ruby/command-t/ext/command-t"
 ruby extconf.rb
