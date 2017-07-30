@@ -1,10 +1,8 @@
 #!/bin/sh
 . scripts/common/main.sh
 set -x
-i=1
-while eval test -n "\"\$SCRIPT$i\"" ; do
-	eval \$SCRIPT$i
-	i=$(( i + 1 ))
+printf '%s' "$SCRIPTS" | while read -r script ; do
+	eval "$script"
 done
 
 cd deps
