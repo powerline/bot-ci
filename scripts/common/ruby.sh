@@ -1,3 +1,5 @@
+source ~/.rvm/scripts/rvm
+
 ruby_setup() {
 	rvm system
 	export PATH="$( \
