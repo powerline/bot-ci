@@ -15,9 +15,9 @@ addons:
             - libc6-dev
             - tk-dev
             - libdb-dev
+            # }
             - ruby
             - ruby-all-dev
-            # }
             - bzr
             # Runtime dependencies for Python: {
             - zlib1g
