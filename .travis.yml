@@ -16,14 +16,14 @@ addons:
             - tk-dev
             - libdb-dev
             # }
-            - ruby
-            - ruby-all-dev
-            - bzr
             # Runtime dependencies for Python: {
             - zlib1g
             - libssl1.0.0
             # }
             - curl
+            - ruby
+            - ruby-all-dev
+            - bzr
 os: linux
 language: python
 before_install: |
