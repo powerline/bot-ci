@@ -5,7 +5,7 @@ PYTHON1=$2
 . scripts/common/main.sh
 . scripts/common/build.sh
 . scripts/common/use-virtual-env.bash
-. scripts/common/ruby.sh
+. scripts/common/ruby.bash
 
 ruby_setup
 

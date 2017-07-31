@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 . scripts/common/main.sh
 . scripts/common/build.sh
-. scripts/common/ruby.sh
+. scripts/common/ruby.bash
 
 ruby_setup
 
