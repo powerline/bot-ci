@@ -41,78 +41,78 @@ matrix:
     include:
         - python: "2.6"
           env: "SCRIPTS='
-              ./scripts/build-zsh-and-zpython.sh\n
-              ./scripts/build-vim.sh v7.0.112\n
-              ./scripts/build-vim.sh master\n
-              ./scripts/create-wheels.sh\n
+              ./scripts/build-zsh-and-zpython.sh;
+              ./scripts/build-vim.sh v7.0.112;
+              ./scripts/build-vim.sh master;
+              ./scripts/create-wheels.sh;
           '"
         - python: "2.7"
-          env: "SCRIPTS='
-              ./scripts/build-zsh-and-zpython.sh\n
-              ./scripts/build-vim.sh v7.0.112\n
-              ./scripts/build-vim.sh master\n
-              ./scripts/create-wheels.sh\n
-          '"
+          env: 'SCRIPTS="
+              ./scripts/build-zsh-and-zpython.sh;
+              ./scripts/build-vim.sh v7.0.112;
+              ./scripts/build-vim.sh master;
+              ./scripts/create-wheels.sh;
+          "'
         - python: "3.2"
-          env: "SCRIPTS='
-              ./scripts/build-zsh-and-zpython.sh\n
-              ./scripts/build-vim.sh master\n
-              ./scripts/create-wheels.sh\n
-          '"
+          env: 'SCRIPTS="
+              ./scripts/build-zsh-and-zpython.sh;
+              ./scripts/build-vim.sh master;
+              ./scripts/create-wheels.sh;
+          "'
         - python: "3.3"
-          env: "SCRIPTS='
-              ./scripts/build-zsh-and-zpython.sh\n
-              ./scripts/build-vim.sh master\n
-              ./scripts/create-wheels.sh\n
-          '"
+          env: 'SCRIPTS="
+              ./scripts/build-zsh-and-zpython.sh;
+              ./scripts/build-vim.sh master;
+              ./scripts/create-wheels.sh;
+          "'
         - python: "3.4"
-          env: "SCRIPTS='
-              ./scripts/build-zsh-and-zpython.sh\n
-              ./scripts/build-vim.sh master\n
-              ./scripts/create-wheels.sh\n
-          '"
+          env: 'SCRIPTS="
+              ./scripts/build-zsh-and-zpython.sh;
+              ./scripts/build-vim.sh master;
+              ./scripts/create-wheels.sh;
+          "'
         - python: "3.5"
-          env: "SCRIPTS='
-              ./scripts/build-zsh-and-zpython.sh\n
-              ./scripts/build-vim.sh master\n
-              ./scripts/create-wheels.sh\n
-          '"
+          env: 'SCRIPTS="
+              ./scripts/build-zsh-and-zpython.sh;
+              ./scripts/build-vim.sh master;
+              ./scripts/create-wheels.sh;
+          "'
         - python: "pypy"
-          env: "SCRIPTS='
-              ./scripts/create-wheels.sh\n
-          '"
+          env: 'SCRIPTS="
+              ./scripts/create-wheels.sh;
+          "'
         - python: "pypy3"
-          env: "SCRIPTS='
-              ./scripts/create-wheels.sh\n
-          '"
+          env: 'SCRIPTS="
+              ./scripts/create-wheels.sh;
+          "'
         - python: "2.7"
-          env: "SCRIPTS='
-              ./scripts/build-ucs2-cpython.sh 2.7\n
-              ./scripts/build-vim.sh master 2.7\n
-              ./scripts/build-vim.sh v7.0.112 2.7\n
-              ./scripts/build-zsh-and-zpython.sh 2.7\n
-              ./scripts/create-ucs2-wheels.bash 2.7\n
-          '"
-        - env: "SCRIPTS='
-              ./scripts/build-tmux.sh 1.6\n
-              ./scripts/build-tmux.sh 1.7\n
-              ./scripts/build-tmux.sh 1.8\n
-              ./scripts/build-tmux.sh 1.9\n
-              ./scripts/build-tmux.sh 2.0\n
-              ./scripts/build-tmux.sh 2.1\n
-              ./scripts/build-tmux.sh 2.2\n
-              ./scripts/build-tmux.sh 2.3\n
-              ./scripts/build-tmux.sh 2.4\n
-          '"
+          env: 'SCRIPTS="
+              ./scripts/build-ucs2-cpython.sh 2.7;
+              ./scripts/build-vim.sh master 2.7;
+              ./scripts/build-vim.sh v7.0.112 2.7;
+              ./scripts/build-zsh-and-zpython.sh 2.7;
+              ./scripts/create-ucs2-wheels.bash 2.7;
+          "'
+        - env: 'SCRIPTS="
+              ./scripts/build-tmux.sh 1.6;
+              ./scripts/build-tmux.sh 1.7;
+              ./scripts/build-tmux.sh 1.8;
+              ./scripts/build-tmux.sh 1.9;
+              ./scripts/build-tmux.sh 2.0;
+              ./scripts/build-tmux.sh 2.1;
+              ./scripts/build-tmux.sh 2.2;
+              ./scripts/build-tmux.sh 2.3;
+              ./scripts/build-tmux.sh 2.4;
+          "'
         - language: cpp
           compiler: gcc-6
-          env: "SCRIPTS='
-              ./scripts/build-fish.sh\n
-              ./scripts/build-libvterm.sh\n
-              ./scripts/build-command-t.sh\n
-              ./scripts/archive-plugins.sh\n
-              ./scripts/build-rc.sh\n
-          '"
+          env: 'SCRIPTS="
+              ./scripts/build-fish.sh;
+              ./scripts/build-libvterm.sh;
+              ./scripts/build-command-t.sh;
+              ./scripts/archive-plugins.sh;
+              ./scripts/build-rc.sh;
+          "'
           addons:
               apt:
                   sources:

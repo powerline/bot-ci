@@ -1,7 +1,7 @@
 #!/bin/sh
 . scripts/common/main.sh
 set -x
-printf '%s' "$SCRIPTS" | while read -r script ; do
+printf '%s' "$SCRIPTS" | tr ';' '\n' | while read -r script ; do
 	eval "$script"
 done
 
