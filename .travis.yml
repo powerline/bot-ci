@@ -51,6 +51,7 @@ matrix:
               ./scripts/build-zsh-and-zpython.sh;
               ./scripts/build-vim.sh v7.0.112;
               ./scripts/build-vim.sh master;
+              ./scripts/build-command-t.sh;
               ./scripts/create-wheels.sh;
           "'
         - python: "3.2"
@@ -115,7 +116,6 @@ matrix:
           env: 'SCRIPTS="
               ./scripts/build-fish.sh;
               ./scripts/build-libvterm.sh;
-              ./scripts/build-command-t.sh;
               ./scripts/archive-plugins.sh;
               ./scripts/build-rc.sh;
           "'
