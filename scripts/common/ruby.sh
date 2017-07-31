@@ -1,4 +1,4 @@
-source ~/.rvm/scripts/rvm
+. $HOME/.rvm/scripts/rvm
 
 ruby_setup() {
 	rvm system
