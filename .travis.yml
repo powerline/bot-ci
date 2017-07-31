@@ -77,6 +77,12 @@ matrix:
               ./scripts/build-vim.sh master;
               ./scripts/create-wheels.sh;
           "'
+        - python: "3.6"
+          env: 'SCRIPTS="
+              ./scripts/build-zsh-and-zpython.sh;
+              ./scripts/build-vim.sh master;
+              ./scripts/create-wheels.sh;
+          "'
         - python: "pypy"
           env: 'SCRIPTS="
               ./scripts/create-wheels.sh;
