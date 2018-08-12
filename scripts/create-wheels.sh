@@ -14,7 +14,13 @@ OLD_PEXPECT="pexpect==3.3"
 
 if test "$PYTHON_VERSION_MAJOR" -eq 2 ; then
 	if test "$PYTHON_IMPLEMENTATION" = "CPython" ; then
-		WHEEL_ARGS="${WHEEL_ARGS} --allow-external bzr --allow-unverified bzr bzr"
+		if pip help wheel | grep -F -- '--allow-external' ; then
+			WHEEL_ARGS="${WHEEL_ARGS} --allow-external bzr"
+		fi
+		if pip help wheel | grep -F -- '--allow-unverified' ; then
+			WHEEL_ARGS="${WHEEL_ARGS} --allow-unverified bzr"
+		fi
+		WHEEL_ARGS="${WHEEL_ARGS} bzr"
 	fi
 	if test "$PYTHON_VERSION_MINOR" -ge 7 ; then
 		WHEEL_ARGS="${WHEEL_ARGS} mercurial pexpect ipython==5.3.0"
